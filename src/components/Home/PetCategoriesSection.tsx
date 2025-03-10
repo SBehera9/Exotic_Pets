@@ -12,25 +12,25 @@ const petCategories: PetCategory[] = [
   {
     title: 'Dogs',
     description: 'Our goal is to find a puppy as enjoyable as owning one. Take your pick from the large collection of puppies & dogs in our store.',
-    imageSrc: '/images/dog.png',
+    imageSrc: '/images1.jpeg',
     imageAlt: 'Cute Pug Puppy',
   },
   {
     title: 'Cats',
     description: 'Cats are huge in size, rich colouring, double boned, with perfect looks. We offer a perfect platform to purchase cats.',
-    imageSrc: '/images/cat.png',
+    imageSrc: '/cat.png',
     imageAlt: 'Grey Tabby Cat',
   },
   {
     title: 'Birds',
     description: 'Let the mornings start with their beautiful chirping. We offer all size and type of exotic birds for sale, which surely will your life incredible.',
-    imageSrc: '/images/birds.png',
+    imageSrc: '/images2.jpeg',
     imageAlt: 'Two Bluebirds',
   },
   {
     title: 'Small Pets',
     description: 'Cute, cuddly and furry friends from our small animal collection will warm your heart! They\'re smart, interactive and fun to watch!',
-    imageSrc: '/images/rabbit.png',
+    imageSrc: '/images3.jpeg',
     imageAlt: 'White Rabbit',
   },
 ];
@@ -43,7 +43,6 @@ const PetCategoriesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {petCategories.map((category, index) => (
             <div key={index} className="relative">
-              {/* Heart Background (Placeholder) */}
               <div className="absolute inset-0 z-0">
                 <Image
                   src="/images/heart.png"  // Replace with your heart image

@@ -6,7 +6,7 @@ const HeroSection = () => {
     <div className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/image.png"
+          src="/images.jpeg"
           alt="Pet Shop Background"
           layout="fill"
           objectFit="cover"
