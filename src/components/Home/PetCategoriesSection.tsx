@@ -1,76 +1,77 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface PetCategory {
-  title: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
+    title: string;
+    description: string;
+    imageSrc: string;
+    imageAlt: string;
+    link: string;
 }
 
 const petCategories: PetCategory[] = [
-  {
-    title: 'Dogs',
-    description: 'Our goal is to find a puppy as enjoyable as owning one. Take your pick from the large collection of puppies & dogs in our store.',
-    imageSrc: '/images1.jpeg',
-    imageAlt: 'Cute Pug Puppy',
-  },
-  {
-    title: 'Cats',
-    description: 'Cats are huge in size, rich colouring, double boned, with perfect looks. We offer a perfect platform to purchase cats.',
-    imageSrc: '/cat.png',
-    imageAlt: 'Grey Tabby Cat',
-  },
-  {
-    title: 'Birds',
-    description: 'Let the mornings start with their beautiful chirping. We offer all size and type of exotic birds for sale, which surely will your life incredible.',
-    imageSrc: '/images2.jpeg',
-    imageAlt: 'Two Bluebirds',
-  },
-  {
-    title: 'Small Pets',
-    description: 'Cute, cuddly and furry friends from our small animal collection will warm your heart! They\'re smart, interactive and fun to watch!',
-    imageSrc: '/images3.jpeg',
-    imageAlt: 'White Rabbit',
-  },
+    {
+        title: 'Dogs',
+        description: 'Find the perfect canine companion! We offer a variety of dog breeds, from playful puppies to loyal adult dogs.',
+        imageSrc: '/Dog.jpeg',
+        imageAlt: 'Dogs',
+        link: '/dogs',
+    },
+    {
+        title: 'Birds',
+        description: 'Add a touch of color and song to your life! Explore our range of beautiful birds, from finches to parrots.',
+        imageSrc: '/Birds.jpeg',
+        imageAlt: 'Birds',
+        link: '/birds',
+    },
+    {
+        title: 'Cats',
+        description: 'Discover your purrfect feline friend! Our selection includes cuddly kittens and graceful adult cats, all ready for a loving home.',
+        imageSrc: '/Cat.jpeg',
+        imageAlt: 'Cats',
+        link: '/cats',
+    },
+    {
+        title: 'Small Fish',
+        description: 'Create a mesmerizing underwater world! We have a diverse collection of colorful freshwater and saltwater fish.',
+        imageSrc: '/Fish.jpeg',
+        imageAlt: 'Small Fish',
+        link: '/fish',
+    },
 ];
 
 const PetCategoriesSection = () => {
-  return (
-    <div className="bg-white py-16">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-green-600 mb-8">Pets</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {petCategories.map((category, index) => (
-            <div key={index} className="relative">
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src="/images/heart.png"  // Replace with your heart image
-                  alt=""
-                  layout="fill"
-                  objectFit="contain"
-                  quality={75}
-                />
-              </div>
+    const imageSize = 250; 
 
-              <div className="relative z-10 p-4">
-                <Image
-                  src={category.imageSrc}
-                  alt={category.imageAlt}
-                  width={200}  // Adjust as needed
-                  height={200} // Adjust as needed
-                  objectFit="contain"
-                  className="mx-auto mb-4"
-                />
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{category.title}</h3>
-                <p className="text-gray-600">{category.description}</p>
-              </div>
+    return (
+        <div className="bg-white py-16" id="pet-categories">
+            <div className="container mx-auto text-center">
+                <h2 className="text-3xl font-semibold text-green-600 mb-8">Pets</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {petCategories.map((category, index) => (
+                        <div key={index} className="relative flex flex-col items-center transform transition-transform hover:scale-110">
+                            <div className="w-[250px] h-[250px] bg-gray-100 shadow-md rounded-lg overflow-hidden relative">
+                                <Image
+                                    src={category.imageSrc}
+                                    alt={category.imageAlt}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="rounded-lg"
+                                />
+                            </div>
+                            <h3 className="text-xl font-semibold text-gray-800 mt-4 text-center">{category.title}</h3>
+                            <p className="text-gray-600 text-center">{category.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <Link href="/all-pets" className="mt-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block">
+                    Explore All Pets
+                </Link>
             </div>
-          ))}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default PetCategoriesSection;
