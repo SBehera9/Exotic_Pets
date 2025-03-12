@@ -7,21 +7,18 @@ import { motion } from 'framer-motion';
 const HeroSection = () => {
     return (
         <div className="relative h-screen w-full overflow-hidden">
-            {/* Background Image */}
             <div className="absolute inset-0">
                 <Image
-                    src="/images.jpeg"
+                    src="/Main_Image.jpg"
                     alt="Pet Shop Background"
                     layout="fill"
                     objectFit="cover"
                     quality={100}
                     className="brightness-75"
                 />
-                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60"></div>
             </div>
 
-            {/* Content Section */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -35,16 +32,8 @@ const HeroSection = () => {
                     <p className="mt-4 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
-                    <motion.h2
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                        className="mt-4 text-6xl font-bold text-white sm:text-7xl lg:text-8xl"
-                    >
-                        Exotic
-                    </motion.h2>
+                   
                     
-                    {/* Animated Button */}
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
