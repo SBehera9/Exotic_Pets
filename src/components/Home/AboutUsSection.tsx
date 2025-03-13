@@ -24,7 +24,7 @@ const AboutUsSection = () => {
                     transition={{ duration: 1 }}
                 >
                     <Image
-                        src="/images/dog_and_cat.png"
+                        src="/About_Image.jpg"
                         alt="Dog and Cat"
                         width={600}
                         height={400}

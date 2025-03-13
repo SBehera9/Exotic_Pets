@@ -3,7 +3,6 @@
 import {
     PhoneIcon,
     MapPinIcon,
-    UserIcon,
 } from '@heroicons/react/24/outline';
 import {
     EnvelopeIcon
@@ -11,47 +10,42 @@ import {
 import {
     FacebookShareButton,
     FacebookIcon,
-    LinkedinShareButton,
-    LinkedinIcon,
-    TwitterShareButton,
-    TwitterIcon,
+    WhatsappShareButton,
+    WhatsappIcon,
 } from 'react-share';
+import { FaInstagram } from 'react-icons/fa';
 
 const TopBar = () => {
     return (
-        <div className="bg-gray-100 py-2 text-gray-600">
-            <div className="container mx-auto flex justify-between items-center">
+        <div className="hidden md:block bg-gray-100 py-2 text-gray-600 w-full z-50">
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-0">
+                {/* Left Section for Icons and Number */}
                 <div className="flex items-center space-x-2 sm:space-x-4">
                     <FacebookShareButton url="#">
                         <FacebookIcon size={24} round />
                     </FacebookShareButton>
-                    <LinkedinShareButton url="#">
-                        <LinkedinIcon size={24} round />
-                    </LinkedinShareButton>
-                    <TwitterShareButton url="#">
-                        <TwitterIcon size={24} round />
-                    </TwitterShareButton>
-
-                    <div className="hidden md:flex items-center space-x-2">
+                    <a href="#" target="_blank" rel="noopener noreferrer">
+                        <FaInstagram size={24} className="text-pink-500" />
+                    </a>
+                    <WhatsappShareButton url="#">
+                        <WhatsappIcon size={24} round />
+                    </WhatsappShareButton>
+                    <div className="flex items-center space-x-2">
                         <PhoneIcon className="h-5 w-5" />
-                        <span>+91-8888888888</span>
-                    </div>
-
-                    <div className="hidden md:flex items-center space-x-2">
-                        <EnvelopeIcon className="h-5 w-5" />
-                        <span>websupport@justdial.com</span>
+                        <a href="tel:+918888888888" className="hover:underline">+91-8888888888</a>
                     </div>
                 </div>
 
-                <div className="flex items-center space-x-2 sm:space-x-4">
+                {/* Right Section for Email and Address */}
+                <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4 space-y-2 md:space-y-0 mt-2 md:mt-0">
                     <div className="flex items-center space-x-2">
-                        <MapPinIcon className="h-5 w-5" />
-                        <span>Malad West</span>
+                        <EnvelopeIcon className="h-5 w-5" />
+                        <a href="mailto:websupport@justdial.com" className="hover:underline">websupport@justdial.com</a>
                     </div>
 
                     <div className="flex items-center space-x-2">
-                        <UserIcon className="h-5 w-5" />
-                        <span>Log In | Sign Up</span>
+                        <MapPinIcon className="h-5 w-5" />
+                        <span>Brahmapur, Ganjam, Odisha</span>
                     </div>
                 </div>
             </div>

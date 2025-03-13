@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <TopBar />
-      <Navbar logoSrc="" logoAlt="Exotic Birds" />
+      <Navbar />
       <HeroSection />
       <PetCategoriesSection />
       <PetFoodSection /> 
