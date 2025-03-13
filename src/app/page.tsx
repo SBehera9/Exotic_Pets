@@ -9,12 +9,10 @@ import ProductCarousel from "@/components/Home/ProductCarousel";
 import TestimonialsSection from "@/components/Home/TestimonialsSection";
 import VideosSection from "@/components/Home/VideosSection";
 import Navbar from "@/components/NavigationBar/Navbar";
-import TopBar from "@/components/NavigationBar/TopBar";
 
 function App() {
   return (
     <div>
-      <TopBar />
       <Navbar />
       <HeroSection />
       <PetCategoriesSection />

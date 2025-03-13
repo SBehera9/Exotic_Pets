@@ -42,7 +42,7 @@ const GallerySection = () => {
 
                 <button 
                     onClick={handleViewMore} 
-                    className="mt-8 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                    className="mt-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                     View More
                 </button>

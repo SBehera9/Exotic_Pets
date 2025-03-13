@@ -48,7 +48,7 @@ const TestimonialsSection = () => {
             <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
                 <div className="md:w-1/3 relative">
                     <Image
-                        src="/FeedBack.jpg"
+                        src="/Cat2.jpg"
                         alt="Stacked Animals"
                         width={400}
                         height={500}

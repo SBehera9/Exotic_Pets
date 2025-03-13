@@ -54,7 +54,7 @@ const ProductCarousel = () => {
                                         className="mx-auto rounded-lg mb-4"
                                     />
                                     <h3 className="text-lg font-semibold text-gray-800 mb-3">{product.name}</h3>
-                                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg flex items-center justify-center w-full transition-all duration-300 shadow-md hover:shadow-lg">
+                                    <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center justify-center w-full transition-all duration-300 shadow-md hover:shadow-lg">
                                         Buy Now
                                     </button>
                                 </div>
@@ -64,7 +64,7 @@ const ProductCarousel = () => {
                 </div>
                 <button 
                     onClick={handleViewMore} 
-                    className="mt-8 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                    className="mt-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                     View More
                 </button>
