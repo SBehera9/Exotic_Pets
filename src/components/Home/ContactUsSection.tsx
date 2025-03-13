@@ -29,11 +29,11 @@ const ContactUsSection = () => {
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Get in Touch</h3>
                         <div className="flex items-center mb-3">
                             <FontAwesomeIcon icon="map-marker-alt" className="text-green-500 mr-3 w-5 h-5" />
-                            <span className="text-gray-700">123 Main Street, Anytown, USA</span>
+                            <span className="text-gray-700">Berhampur</span>
                         </div>
                         <div className="flex items-center mb-3">
                             <FontAwesomeIcon icon="phone" className="text-green-500 mr-3 w-5 h-5" />
-                            <span className="text-gray-700">(123) 456-7890</span>
+                            <span className="text-gray-700">+918917214241</span>
                         </div>
                         <div className="flex items-center mb-3">
                             <FontAwesomeIcon icon="envelope" className="text-green-500 mr-3 w-5 h-5" />

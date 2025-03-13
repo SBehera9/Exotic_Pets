@@ -17,12 +17,11 @@ const FooterSection = () => {
     return (
         <footer className="bg-black text-white py-8">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {/* Company Logo */}
+
                 <div className="flex items-center">
                     <Image src="/logo.png" alt="Company Logo" width={150} height={50} />
                 </div>
 
-                {/* Quick Links */}
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul className="text-sm">
@@ -33,7 +32,6 @@ const FooterSection = () => {
                     </ul>
                 </div>
 
-                {/* Social Media & Contact */}
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
                     <div className="flex items-center gap-4">
@@ -52,11 +50,10 @@ const FooterSection = () => {
                     </div>
                     <div className="mt-4 text-sm">
                         <p>Email: info@fortunepetshops.com</p>
-                        <p>Address: 123 Pet Street, Mumbai, India</p>
+                        <p>Address: Berhampur</p>
                     </div>
                 </div>
 
-                {/* Google Maps */}
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Our Location</h3>
                     <iframe
@@ -74,7 +71,7 @@ const FooterSection = () => {
 
             <div className="text-center mt-8">
                 <p className="text-sm text-gray-400">
-                    © {new Date().getFullYear()} Fortune Pet Shops. All rights reserved.
+                    © {new Date().getFullYear()} Exotic Birds. All rights reserved.
                 </p>
             </div>
         </footer>
@@ -82,3 +79,4 @@ const FooterSection = () => {
 };
 
 export default FooterSection;
+    

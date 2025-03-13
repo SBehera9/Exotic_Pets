@@ -5,14 +5,11 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const AboutUsSection = () => {
-    const aboutUsText = `We, Fortune Pet Shops, situated at Malad West, Mumbai, Maharashtra are
-    recognised as a home to a massive range of globally renowned pets like Cats,
-    Dogs, Birds, and Rabbits. Our aim is to provide a user-friendly, fun, and
-    relaxing shopping experience while giving the best service available for
-    our customers and their pets. We also provide the highest and assured
-    quality of different breeds of pets. We also assist in buying puppies and
-    kittens of pure breeds. We strive to bring joy to you and your pet on a daily
-    basis.`;
+    const aboutUsText = `Welcome to Exotic Birds, your ultimate destination for discovering and caring for exotic pets! We are passionate about unique and extraordinary animals, from vibrant reptiles and rare amphibians to fascinating small mammals and tropical birds.
+
+    At Exotic Birds, we aim to provide pet lovers with expert advice, high-quality pet supplies, and a community dedicated to responsible exotic pet care. Whether you're a seasoned pet owner or just beginning your journey with an exotic companion, we're here to guide you every step of the way.
+    
+    Join us in celebrating the beauty and wonder of exotic pets—because every creature deserves a loving home!`;
 
     return (
         <div className="bg-white py-16" id="about">

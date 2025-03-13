@@ -12,7 +12,7 @@ import Navbar from "@/components/NavigationBar/Navbar";
 
 function App() {
   return (
-    <div>
+    <div className="bg-white">
       <Navbar />
       <HeroSection />
       <PetCategoriesSection />
