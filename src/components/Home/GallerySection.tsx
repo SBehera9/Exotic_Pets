@@ -9,17 +9,17 @@ interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
-    { src: '/images/rabbits.png', alt: 'Two Rabbits' },
-    { src: '/images/birds3.png', alt: 'Three Budgies' },
-    { src: '/images/cat3.png', alt: 'Cat with Sunglasses' },
-    { src: '/images/cat3.png', alt: 'Cat with Sunglasses' },
-    { src: '/images/cat3.png', alt: 'Cat with Sunglasses' },
-    { src: '/images/cat3.png', alt: 'Cat with Sunglasses' },
+    { src: '/Bird1.png', alt: 'Two Rabbits' },
+    { src: '/Dog2.png', alt: 'Three Budgies' },
+    { src: '/Fish2.png', alt: 'Cat with Sunglasses' },
+    { src: '/Fish3.png', alt: 'Cat with Sunglasses' },
+    { src: '/Bird2.jpg', alt: 'Cat with Sunglasses' },
+    { src: '/Bird3.jpg', alt: 'Cat with Sunglasses' },
 ];
 
 const GallerySection = () => {
     const handleViewMore = () => {
-        window.location.href = '/gallery';
+        window.location.href = '/';
     };
 
     return (
