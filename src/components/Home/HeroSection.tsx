@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const images = [
     "/Main_Image.jpg",
@@ -13,6 +14,7 @@ const images = [
 
 const HeroSection = () => {
     const [currentImage, setCurrentImage] = useState(0);
+    const router = useRouter(); // Initialize router
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,6 +23,10 @@ const HeroSection = () => {
 
         return () => clearInterval(interval);
     }, []);
+
+    const handleEnquireClick = () => {
+        router.push('/ContactUsSection'); // Redirects to the Contact page
+    };
 
     return (
         <div className="relative h-screen w-full overflow-hidden">
@@ -50,14 +56,6 @@ const HeroSection = () => {
                     <p className="mt-4 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
-                    
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="mt-8 rounded-full bg-transparent px-8 py-3 text-lg font-medium text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-400 sm:py-4 sm:px-12 sm:text-xl"
-                    >
-                        Enquire Now
-                    </motion.button>
                 </motion.div>
             </div>
         </div>

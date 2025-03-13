@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -44,22 +43,24 @@ const TestimonialsSection = () => {
     };
 
     return (
-        <div className="bg-white py-16" id="testimonials">
-            <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
-                <div className="md:w-1/3 relative">
-                    <Image
-                        src="/Cat2.jpg"
-                        alt="Stacked Animals"
-                        width={400}
-                        height={500}
-                        objectFit="contain"
-                        className="mx-auto"
-                    />
-                </div>
+        <div className="py-16">
+            {/* Heading Outside the Section */}
+            <h2 className="text-3xl font-semibold text-green-600 text-center mb-8">
+                Customer Testimonials
+            </h2>
 
-                <div className="md:w-2/3 relative">
-                    <div className="text-center md:text-left">
-                        <div className="flex items-center justify-center gap-4">
+            {/* Testimonials Section with Background Image */}
+            <div
+                className="bg-cover bg-center py-16"
+                id="testimonials"
+                style={{ backgroundImage: 'url("/your-background-image.jpg")' }} // Change to your image path
+            >
+                {/* Overlay for better readability */}
+                <div className="bg-black/50 py-16 flex flex-col items-center">
+                    {/* Testimonial Content Centered */}
+                    <div className="container mx-auto flex flex-col items-center text-center">
+                        <div className="flex items-center gap-4">
+                            {/* Previous Button */}
                             <button
                                 onClick={handlePrev}
                                 className="bg-gray-100 hover:bg-gray-200 rounded-full p-2"
@@ -67,15 +68,17 @@ const TestimonialsSection = () => {
                                 <FontAwesomeIcon icon="chevron-left" className="text-gray-600" />
                             </button>
 
-                            <div className="relative">
+                            {/* Transparent Testimonial Box */}
+                            <div className="relative w-[500px] min-h-[150px] flex flex-col justify-center p-6 bg-white/20 backdrop-blur-md text-white rounded-lg">
                                 <FontAwesomeIcon
                                     icon="quote-left"
-                                    className="absolute -top-5 left-0 text-green-500 text-2xl"
+                                    className="absolute -top-5 left-0 text-green-300 text-2xl"
                                 />
-                                <p className="text-gray-700 pl-6">{testimonials[currentIndex].text}</p>
-                                <p className="text-gray-800 font-semibold mt-2 pl-6">- {testimonials[currentIndex].name}</p>
+                                <p className="text-white">{testimonials[currentIndex].text}</p>
+                                <p className="font-semibold mt-2 text-gray-200">- {testimonials[currentIndex].name}</p>
                             </div>
 
+                            {/* Next Button */}
                             <button
                                 onClick={handleNext}
                                 className="bg-gray-100 hover:bg-gray-200 rounded-full p-2"
