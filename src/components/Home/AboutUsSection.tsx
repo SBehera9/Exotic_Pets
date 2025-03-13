@@ -24,11 +24,11 @@ const AboutUsSection = () => {
                     transition={{ duration: 1 }}
                 >
                     <Image
-                        src="/About_Image.jpg"
+                        src="/Pet.png"
                         alt="Dog and Cat"
                         width={600}
                         height={400}
-                        className="mx-auto rounded-lg shadow-lg"
+                        className="mx-auto"
                     />
                 </motion.div>
 
