@@ -1,6 +1,7 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface PetFood {
     title: string;
@@ -42,6 +43,10 @@ const petFoods: PetFood[] = [
 ];
 
 const PetFoodSection = () => {
+    const handleViewMore = () => {
+        window.location.href = '/all-pet-food';
+    };
+
     return (
         <div className="bg-white mt-0 pt-0 pb-16">
             <div className="container mx-auto text-center">
@@ -63,9 +68,13 @@ const PetFoodSection = () => {
                         </div>
                     ))}
                 </div>
-                <Link href="/all-pet-food" className="mt-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block">
-                    See All Pet Food
-                </Link>
+
+                <button 
+                    onClick={handleViewMore} 
+                    className="mt-8 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                    View More
+                </button>
             </div>
         </div>
     );

@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -42,7 +44,9 @@ const petCategories: PetCategory[] = [
 ];
 
 const PetCategoriesSection = () => {
-    const imageSize = 250; 
+    const handleViewMore = () => {
+        window.location.href = '/all-pets';
+    };
 
     return (
         <div className="bg-white py-16" id="pet-categories">
@@ -66,9 +70,12 @@ const PetCategoriesSection = () => {
                     ))}
                 </div>
 
-                <Link href="/all-pets" className="mt-8 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-block">
-                    Explore All Pets
-                </Link>
+                <button 
+                    onClick={handleViewMore} 
+                    className="mt-8 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                    View More
+                </button>
             </div>
         </div>
     );
