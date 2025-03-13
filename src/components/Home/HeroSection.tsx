@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 
 const images = [
     "/Main_Image.jpg",
-    "/Pet_Image_1.jpg",
-    "/Pet_Image_2.jpg",
-    "/Pet_Image_3.jpg"
+    "/Dog1.jpg",
+    "/Cat1.jpg",
+    "/Fish1.jpeg"
 ];
 
 const HeroSection = () => {
@@ -17,7 +17,7 @@ const HeroSection = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-        }, 1000);
+        }, 5000);
 
         return () => clearInterval(interval);
     }, []);
@@ -54,7 +54,7 @@ const HeroSection = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="mt-8 rounded-full bg-green-500 px-8 py-3 text-lg font-medium text-white shadow-lg transition-all duration-300 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-400 sm:py-4 sm:px-12 sm:text-xl"
+                        className="mt-8 rounded-full bg-transparent px-8 py-3 text-lg font-medium text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-400 sm:py-4 sm:px-12 sm:text-xl"
                     >
                         Enquire Now
                     </motion.button>
