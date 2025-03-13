@@ -1,15 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+const images = [
+    "/Main_Image.jpg",
+    "/Pet_Image_1.jpg",
+    "/Pet_Image_2.jpg",
+    "/Pet_Image_3.jpg"
+];
+
 const HeroSection = () => {
+    const [currentImage, setCurrentImage] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className="relative h-screen w-full overflow-hidden">
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
                 <Image
-                    src="/Main_Image.jpg"
+                    key={images[currentImage]}
+                    src={images[currentImage]}
                     alt="Pet Shop Background"
                     layout="fill"
                     objectFit="cover"
@@ -32,7 +50,6 @@ const HeroSection = () => {
                     <p className="mt-4 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
-                   
                     
                     <motion.button
                         whileHover={{ scale: 1.05 }}

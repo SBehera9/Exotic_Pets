@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from 'react';
 import Image from 'next/image';
@@ -18,6 +18,10 @@ const galleryImages: GalleryImage[] = [
 ];
 
 const GallerySection = () => {
+    const handleViewMore = () => {
+        window.location.href = '/gallery';
+    };
+
     return (
         <div className="bg-white py-12" id="gallery">
             <div className="container mx-auto text-center">
@@ -30,12 +34,18 @@ const GallerySection = () => {
                                 alt={image.alt}
                                 width={500}
                                 height={300}
-                                objectFit="cover"
-                                className="w-full h-full"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     ))}
                 </div>
+
+                <button 
+                    onClick={handleViewMore} 
+                    className="mt-8 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                    View More
+                </button>
             </div>
         </div>
     );
