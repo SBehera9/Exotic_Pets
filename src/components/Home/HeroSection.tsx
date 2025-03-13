@@ -14,36 +14,34 @@ const images = [
 
 const HeroSection = () => {
     const [currentImage, setCurrentImage] = useState(0);
-    const router = useRouter(); // Initialize router
+    const router = useRouter();
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+        }, 3000);
 
         return () => clearInterval(interval);
     }, []);
 
     const handleEnquireClick = () => {
-        router.push('/ContactUsSection'); // Redirects to the Contact page
+        router.push('/ContactUsSection');
     };
 
     return (
-        <div className="relative h-screen w-full overflow-hidden">
-            <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
-                <Image
-                    key={images[currentImage]}
-                    src={images[currentImage]}
-                    alt="Pet Shop Background"
-                    layout="fill"
-                    objectFit="cover"
-                    quality={100}
-                    className="brightness-75"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60"></div>
+        <div className="relative w-full h-screen">
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                    backgroundImage: `url(${images[currentImage]})`,
+                    backgroundAttachment: 'fixed', 
+                    transition: 'background-image 1s ease-in-out',
+                }}
+            >
+                <div className="absolute inset-0 bg-black/50"></div> 
             </div>
 
-            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">
+            <div className="relative z-10 flex h-screen flex-col items-center justify-center text-center px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -56,6 +54,7 @@ const HeroSection = () => {
                     <p className="mt-4 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
+                    
                 </motion.div>
             </div>
         </div>

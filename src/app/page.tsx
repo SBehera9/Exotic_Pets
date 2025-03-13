@@ -8,11 +8,11 @@ import PetFoodSection from "@/components/Home/PetFoodSection";
 import ProductCarousel from "@/components/Home/ProductCarousel";
 import TestimonialsSection from "@/components/Home/TestimonialsSection";
 import VideosSection from "@/components/Home/VideosSection";
-import Navbar from "@/components/NavigationBar/Navbar";
+import Navbar from "@/components/Home/Navbar";
 
 function App() {
   return (
-    <div className="bg-white">
+    <div>
       <Navbar />
       <HeroSection />
       <PetCategoriesSection />

@@ -33,7 +33,7 @@ const ProductCarousel = () => {
     };
 
     return (
-        <div className="bg-gray-100 py-12" id="products">
+        <div className="bg-green-100 py-12" id="products">
             <div className="container mx-auto text-center">
                 <h2 className="text-4xl font-bold text-green-700 mb-8">Products</h2>
                 <div className="relative max-w-6xl mx-auto">

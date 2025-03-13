@@ -49,8 +49,8 @@ const FooterSection = () => {
                         </a>
                     </div>
                     <div className="mt-4 text-sm">
-                        <p>Email: info@fortunepetshops.com</p>
-                        <p>Address: Berhampur</p>
+                        <p>Email: exoticpets@gmail.com </p>
+                        <p>Address: Berhampur, Ganjam, Odisha, India</p>
                     </div>
                 </div>
 

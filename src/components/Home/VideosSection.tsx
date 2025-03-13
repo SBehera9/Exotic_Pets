@@ -9,7 +9,7 @@ const VideosSection = () => {
     const videoFiles = [
         "/videos/video1.mp4",
         "/videos/video2.mp4",
-        "/videos/video3.mp4" // Corrected duplicate
+        "/videos/video3.mp4" 
     ];
 
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -23,7 +23,7 @@ const VideosSection = () => {
     };
 
     return (
-        <div className="bg-gray-100 py-12" id="videos">
+        <div className="bg-green-100 py-12" id="videos">
             <div className="container mx-auto text-center">
                 <h2 className="text-3xl font-semibold text-green-600 mb-8">Videos</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
