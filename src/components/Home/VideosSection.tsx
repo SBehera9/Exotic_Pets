@@ -1,16 +1,25 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const VideosSection = () => {
-    const videoIds = [
-        'your_first_youtube_id',
-        'your_second_youtube_id',
-        'your_third_youtube_id'
-    ]; // Replace with actual YouTube video IDs
+    const router = useRouter();
+
+    const videoFiles = [
+        "/videos/video1.mp4",
+        "/videos/video2.mp4",
+        "/videos/video3.mp4" // Corrected duplicate
+    ];
+
+    const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+    const handleVideoPlay = (videoSrc: string) => {
+        setActiveVideo(videoSrc);
+    };
 
     const handleViewMore = () => {
-        window.location.href = '/videos';
+        router.push("/videos");
     };
 
     return (
@@ -18,16 +27,17 @@ const VideosSection = () => {
             <div className="container mx-auto text-center">
                 <h2 className="text-3xl font-semibold text-green-600 mb-8">Videos</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {videoIds.map((videoId, index) => (
+                    {videoFiles.map((videoSrc, index) => (
                         <div key={index} className="rounded-xl overflow-hidden shadow-md">
-                            <iframe
+                            <video
                                 width="100%"
                                 height="315"
-                                src={`https://www.youtube.com/embed/${videoId}`}
-                                title={`YouTube video ${index + 1}`}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                                controls
+                                onPlay={() => handleVideoPlay(videoSrc)}
+                            >
+                                <source src={videoSrc} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     ))}
                 </div>
