@@ -12,10 +12,23 @@ const AboutUsSection = () => {
     Join us in celebrating the beauty and wonder of exotic pets—because every creature deserves a loving home!`;
 
     return (
-        <div className="bg-white py-16" id="about">
-            <div className="container mx-auto flex flex-col md:flex-row items-center gap-12 px-6">
+        <div className="bg-white py-12 px-4 sm:px-6 lg:px-12" id="about">
+            <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+                
+                {/* Text Section */}
                 <motion.div 
-                    className="md:w-1/2 relative"
+                    className="w-full md:w-1/2 text-center md:text-left"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                >
+                    <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-4 sm:mb-6">About Us</h2>
+                    <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{aboutUsText}</p>
+                </motion.div>
+
+                {/* Image Section */}
+                <motion.div 
+                    className="w-full md:w-1/2 flex justify-center"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1 }}
@@ -23,21 +36,12 @@ const AboutUsSection = () => {
                     <Image
                         src="/Pet.png"
                         alt="Dog and Cat"
-                        width={600}
-                        height={400}
-                        className="mx-auto"
+                        width={500}
+                        height={350}
+                        className="max-w-full h-auto rounded-lg"
                     />
                 </motion.div>
 
-                <motion.div 
-                    className="md:w-1/2 text-center md:text-left"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1 }}
-                >
-                    <h2 className="text-4xl font-bold text-green-700 mb-6">About Us</h2>
-                    <p className="text-gray-600 text-lg leading-relaxed">{aboutUsText}</p>
-                </motion.div>
             </div>
         </div>
     );
