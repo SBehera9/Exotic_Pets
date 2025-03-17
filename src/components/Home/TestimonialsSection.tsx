@@ -48,8 +48,8 @@ const TestimonialsSection = () => {
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: 'url("/Fish2.png")',
-                    backgroundAttachment: 'fixed', 
-                    zIndex: -1, 
+                    backgroundAttachment: 'fixed',
+                    zIndex: -1,
                 }}
             />
 
@@ -58,7 +58,7 @@ const TestimonialsSection = () => {
                     Customer Testimonials
                 </h2>
                 <div className="container mx-auto flex flex-col items-center text-center relative">
-                    <div className="relative w-[500px] min-h-[150px] flex flex-col justify-center p-6 bg-white/20 backdrop-blur-md text-white rounded-lg">
+                    <div className="relative w-full max-w-[90%] sm:max-w-[500px] min-h-[150px] flex flex-col justify-center p-6 bg-white/20 backdrop-blur-md text-white rounded-lg">
                         <FontAwesomeIcon
                             icon="quote-left"
                             className="absolute top-5 left-0 text-green-300 text-2xl"
@@ -69,14 +69,16 @@ const TestimonialsSection = () => {
 
                     <button
                         onClick={handlePrev}
-                        className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2"
+                        className="absolute left-2 sm:left-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2 z-10"
+                        aria-label="Previous Testimonial"
                     >
                         <FontAwesomeIcon icon="chevron-left" className="text-gray-600" />
                     </button>
 
                     <button
                         onClick={handleNext}
-                        className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2"
+                        className="absolute right-2 sm:right-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2 z-10"
+                        aria-label="Next Testimonial"
                     >
                         <FontAwesomeIcon icon="chevron-right" className="text-gray-600" />
                     </button>

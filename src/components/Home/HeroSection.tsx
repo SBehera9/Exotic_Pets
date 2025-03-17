@@ -34,11 +34,11 @@ const HeroSection = () => {
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
                     backgroundImage: `url(${images[currentImage]})`,
-                    backgroundAttachment: 'fixed', 
+                    backgroundAttachment: 'fixed',
                     transition: 'background-image 1s ease-in-out',
                 }}
             >
-                <div className="absolute inset-0 bg-black/50"></div> 
+                <div className="absolute inset-0 bg-black/50"></div>
             </div>
 
             <div className="relative z-10 flex h-screen flex-col items-center justify-center text-center px-6">
@@ -48,10 +48,12 @@ const HeroSection = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="max-w-3xl"
                 >
-                    <h1 className="text-4xl font-extrabold text-white drop-shadow-lg sm:text-5xl lg:text-6xl">
+                    {/* Adjusted font sizes and line height for mobile */}
+                    <h1 className="text-3xl font-extrabold text-white drop-shadow-lg sm:text-4xl lg:text-6xl leading-tight">
                         Exotic Pet Shops
                     </h1>
-                    <p className="mt-4 text-lg text-gray-200 sm:text-xl">
+                    {/* Adjusted text size and added margin for mobile */}
+                    <p className="mt-2 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
                     
