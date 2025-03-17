@@ -9,7 +9,8 @@ const VideosSection = () => {
     const videoFiles = [
         "/videos/video1.mp4",
         "/videos/video2.mp4",
-        "/videos/video3.mp4" 
+        "/videos/video3.mp4",
+        "/videos/video4.mp4"
     ];
 
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -24,9 +25,9 @@ const VideosSection = () => {
 
     return (
         <div className="bg-green-100 py-12" id="videos">
-            <div className="container mx-auto text-center">
+            <div className="container mx-auto text-center px-4">
                 <h2 className="text-3xl font-semibold text-green-600 mb-8">Videos</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8">
                     {videoFiles.map((videoSrc, index) => (
                         <div key={index} className="rounded-xl overflow-hidden shadow-md">
                             <video
