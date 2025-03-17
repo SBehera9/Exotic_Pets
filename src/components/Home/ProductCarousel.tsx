@@ -10,18 +10,15 @@ interface Product {
 }
 
 const products: Product[] = [
-    { name: 'Beagle Puppies', imageSrc: '/images/beagle.png' },
-    { name: 'Persian Cat', imageSrc: '/images/persian_cat.png' },
-    { name: 'Pug Puppies', imageSrc: '/images/pug_puppies.png' },
-    { name: 'Parrot', imageSrc: '/images/parrot.png' },
-    { name: 'Rabbit', imageSrc: '/images/rabbit2.png' },
-    { name: 'Hamster', imageSrc: '/images/hamster.png' },
-    { name: 'Golden Retriever', imageSrc: '/images/golden_retriever.png' },
-    { name: 'Siamese Cat', imageSrc: '/images/siamese_cat.png' },
-    { name: 'French Bulldog', imageSrc: '/images/french_bulldog.png' },
-    { name: 'Cockatiel', imageSrc: '/images/cockatiel.png' },
-    { name: 'Guinea Pig', imageSrc: '/images/guinea_pig.png' },
-    { name: 'Chinchilla', imageSrc: '/images/chinchilla.png' },
+    { name: 'Beagle Puppies', imageSrc: '/Beagle.jpeg' },
+    { name: 'Persian Cat', imageSrc: '/PersianCat.jpg' },
+    { name: 'Pomerian', imageSrc: '/Pomerian.jpeg' },
+    { name: 'Labrador Retriever', imageSrc: '/LabradorRetriever.jpg' },
+    { name: 'Rabbit', imageSrc: '/Rabbit.jpeg' },
+    { name: 'Hamster', imageSrc: '/Hamster.jpeg' },
+    { name: 'Golden Retriever', imageSrc: '/goldenretriever.jpg' },
+    { name: 'Cockatiel', imageSrc: '/cockatiel.jpg' },
+    { name: 'Guinea Pig', imageSrc: '/Guineapig.jpeg' },
 ];
 
 const ProductCarousel = () => {
@@ -43,18 +40,18 @@ const ProductCarousel = () => {
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {products.map((product, index) => (
-                            <div key={index} className="w-64 flex-shrink-0">
-                                <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 transform transition-transform duration-300 hover:scale-105">
-                                    <Image
-                                        src={product.imageSrc}
-                                        alt={product.name}
-                                        width={256}
-                                        height={200}
-                                        objectFit="contain"
-                                        className="mx-auto rounded-lg mb-4"
-                                    />
-                                    <h3 className="text-lg font-semibold text-gray-800 mb-3">{product.name}</h3>
-                                    <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-lg flex items-center justify-center w-full transition-all duration-300 shadow-md hover:shadow-lg">
+                            <div key={index} className="w-64 h-80 flex-shrink-0">
+                                <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-4 flex flex-col items-center justify-between h-full">
+                                <Image
+    src={product.imageSrc}
+    alt={product.name}
+    width={200}
+    height={200}
+    className="rounded-lg object-cover w-full h-48"
+/>
+
+                                    <h3 className="text-lg font-semibold text-gray-800 text-center">{product.name}</h3>
+                                    <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-lg w-full transition-all duration-300 shadow-md hover:shadow-lg">
                                         Buy Now
                                     </button>
                                 </div>

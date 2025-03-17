@@ -12,10 +12,12 @@ interface GalleryImage {
 const galleryImages: GalleryImage[] = [
   { src: "/Bird1.png", alt: "Two Rabbits" },
   { src: "/Dog2.png", alt: "Three Budgies" },
-  { src: "/Fish2.png", alt: "Cat with Sunglasses" },
+  { src: "/Fish4.jpg", alt: "Cat with Sunglasses" },
   { src: "/Fish3.png", alt: "Cat with Sunglasses" },
   { src: "/Bird2.jpg", alt: "Cat with Sunglasses" },
   { src: "/Bird3.jpg", alt: "Cat with Sunglasses" },
+  { src: "/PersianCat.jpg", alt: "Cat with Sunglasses" },
+  { src: "/Pomerian.jpeg", alt: "Cat with Sunglasses" },
 ];
 
 const GallerySection = () => {

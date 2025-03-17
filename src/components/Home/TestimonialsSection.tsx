@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
+import { faQuoteLeft, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-library.add(faChevronLeft, faChevronRight, faQuoteLeft);
+library.add(faQuoteLeft, faChevronLeft, faChevronRight);
 
 interface Testimonial {
     name: string;
@@ -34,6 +34,13 @@ const testimonials: Testimonial[] = [
 const TestimonialsSection = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
+        }, 6000);
+        return () => clearInterval(interval);
+    }, []);
+
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
     };
@@ -43,7 +50,7 @@ const TestimonialsSection = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="relative w-full flex flex-col items-center px-4">
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style={{
@@ -53,35 +60,40 @@ const TestimonialsSection = () => {
                 }}
             />
 
-            <div className="relative py-16 flex flex-col items-center">
-                <h2 className="text-3xl font-semibold text-white text-center mb-8">
+            <div className="relative py-12 flex flex-col items-center w-full">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-white text-center mb-6">
                     Customer Testimonials
                 </h2>
-                <div className="container mx-auto flex flex-col items-center text-center relative">
-                    <div className="relative w-full max-w-[90%] sm:max-w-[500px] min-h-[150px] flex flex-col justify-center p-6 bg-white/20 backdrop-blur-md text-white rounded-lg">
+
+                <div className="w-full max-w-[95%] sm:max-w-[500px] flex flex-col items-center text-center">
+                    <div className="relative w-full min-h-[180px] sm:min-h-[150px] flex flex-col justify-center p-5 sm:p-6 bg-white/20 backdrop-blur-md text-white rounded-lg transition-opacity duration-500 ease-in-out shadow-md">
                         <FontAwesomeIcon
                             icon="quote-left"
-                            className="absolute top-5 left-0 text-green-300 text-2xl"
+                            className="absolute top-4 left-4 text-green-300 text-xl sm:text-2xl"
                         />
-                        <p className="text-white">{testimonials[currentIndex].text}</p>
-                        <p className="font-semibold mt-2 text-gray-200">- {testimonials[currentIndex].name}</p>
+                        <p className="text-white text-sm sm:text-base">{testimonials[currentIndex].text}</p>
+                        <p className="font-semibold mt-2 text-gray-200 text-sm sm:text-base">
+                            - {testimonials[currentIndex].name}
+                        </p>
                     </div>
 
-                    <button
-                        onClick={handlePrev}
-                        className="absolute left-2 sm:left-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2 z-10"
-                        aria-label="Previous Testimonial"
-                    >
-                        <FontAwesomeIcon icon="chevron-left" className="text-gray-600" />
-                    </button>
+                    <div className="flex justify-center items-center gap-6 mt-4">
+                        <button
+                            onClick={handlePrev}
+                            className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition duration-300"
+                            aria-label="Previous Testimonial"
+                        >
+                            <FontAwesomeIcon icon="chevron-left" className="text-gray-600 text-lg" />
+                        </button>
 
-                    <button
-                        onClick={handleNext}
-                        className="absolute right-2 sm:right-[-60px] top-1/2 transform -translate-y-1/2 bg-gray-100 hover:bg-gray-200 rounded-full p-2 z-10"
-                        aria-label="Next Testimonial"
-                    >
-                        <FontAwesomeIcon icon="chevron-right" className="text-gray-600" />
-                    </button>
+                        <button
+                            onClick={handleNext}
+                            className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition duration-300"
+                            aria-label="Next Testimonial"
+                        >
+                            <FontAwesomeIcon icon="chevron-right" className="text-gray-600 text-lg" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
