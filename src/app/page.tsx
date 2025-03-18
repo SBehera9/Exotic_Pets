@@ -5,7 +5,6 @@ import GallerySection from "@/components/Home/GallerySection";
 import HeroSection from "@/components/Home/HeroSection";
 import PetCategoriesSection from "@/components/Home/PetCategoriesSection";
 import PetFoodSection from "@/components/Home/PetFoodSection";
-import ProductCarousel from "@/components/Home/ProductCarousel";
 import TestimonialsSection from "@/components/Home/TestimonialsSection";
 import VideosSection from "@/components/Home/VideosSection";
 import Navbar from "@/components/Home/Navbar";
@@ -17,7 +16,6 @@ function App() {
       <HeroSection />
       <PetCategoriesSection />
       <PetFoodSection /> 
-      <ProductCarousel />
       <AboutUsSection />
       <GallerySection />
       <VideosSection />
