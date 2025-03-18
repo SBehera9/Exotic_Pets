@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const VideosSection = () => {
@@ -16,10 +16,31 @@ const VideosSection = () => {
     ];
 
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
+    const videoRefs = useRef<HTMLVideoElement[]>([])
 
-    const handleVideoPlay = (videoSrc: string) => {
+
+    const handleVideoPlay = (videoSrc: string, index: number) => {
+        videoRefs.current.forEach((video, i) => {
+            if (i !== index && video) {
+                video.pause();
+            }
+        });
+
         setActiveVideo(videoSrc);
     };
+
+    useEffect(() => {
+        if (activeVideo) {
+            videoRefs.current.forEach((video) => {
+                if (video && video.src.includes(activeVideo)) {
+                    video.play().catch(error => {
+                      console.error("Autoplay prevented:", error);
+                    });
+                }
+            });
+        }
+    }, [activeVideo]);
+
 
     const handleViewMore = () => {
         router.push("/videos");
@@ -33,10 +54,16 @@ const VideosSection = () => {
                     {videoFiles.map((videoSrc, index) => (
                         <div key={index} className="rounded-xl overflow-hidden shadow-md">
                             <video
+                                ref={(el) => {
+                                    if (el) {
+                                        videoRefs.current[index] = el;
+                                    }
+                                }}
                                 width="100%"
                                 height="315"
                                 controls
-                                onPlay={() => handleVideoPlay(videoSrc)}
+                                onPlay={() => handleVideoPlay(videoSrc, index)}
+                                onClick={(e) => e.stopPropagation()}
                             >
                                 <source src={videoSrc} type="video/mp4" />
                                 Your browser does not support the video tag.
@@ -45,8 +72,8 @@ const VideosSection = () => {
                     ))}
                 </div>
 
-                <button 
-                    onClick={handleViewMore} 
+                <button
+                    onClick={handleViewMore}
                     className="mt-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                     View More
