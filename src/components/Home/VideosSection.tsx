@@ -7,12 +7,12 @@ const VideosSection = () => {
     const router = useRouter();
 
     const videoFiles = [
-        "/videos/video1.mp4",
-        "/videos/video2.mp4",
-        "/videos/video3.mp4",
-        "/videos/video4.mp4",
-        "/videos/video5.mp4",
-        "/videos/video6.mp4",
+        "/video/Dog.mp4",
+        "/video/Cat.mp4",
+        "/video/Bird.mp4",
+        "/video/Fish.mp4",
+        "/video/Bird1.mp4",
+        "/video/Dog1.mp4",
     ];
 
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
