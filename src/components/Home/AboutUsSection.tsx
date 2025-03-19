@@ -15,7 +15,6 @@ const AboutUsSection = () => {
         <div className="bg-white py-12 px-4 sm:px-6 lg:px-12" id="about">
             <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
                 
-                {/* Text Section */}
                 <motion.div 
                     className="w-full md:w-1/2 text-center md:text-left"
                     initial={{ opacity: 0, x: 50 }}
@@ -26,7 +25,6 @@ const AboutUsSection = () => {
                     <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{aboutUsText}</p>
                 </motion.div>
 
-                {/* Image Section */}
                 <motion.div 
                     className="w-full md:w-1/2 flex justify-center"
                     initial={{ opacity: 0, x: -50 }}
