@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 const images = [
-    "/Main_Image.jpg",
+    "/Bird5.jpg",
     "/Dog1.jpg",
     "/Cat1.jpg",
     "/Fish1.jpeg"
@@ -53,12 +53,12 @@ const HeroSection = () => {
                     <p className="mt-2 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
-                    <button
+                    {/* <button
                         onClick={handleEnquireClick}
                         className="mt-4 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
                     >
                         Enquire Now
-                    </button>
+                    </button> */}
                 </motion.div>
             </div>
         </div>
