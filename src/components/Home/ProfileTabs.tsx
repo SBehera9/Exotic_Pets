@@ -1,25 +1,29 @@
-"use client"; 
+"use client";
 
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
+const tabs = [
+  { name: "Our Pets", path: "/our-pets" },
+  { name: "Pet Foods", path: "/pet-foods" },
+];
 
 const ProfileTabs = () => {
-  const [activeTab, setActiveTab] = useState("Orders");
-
-  const tabs = ["Our Pets", "Pet Foods"];
+  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <div className="py-4">
       <div className="flex justify-center space-x-40 relative">
         {tabs.map((tab) => (
           <div
-            key={tab}
+            key={tab.name}
             className={`cursor-pointer pb-2 text-gray-700 text-2xl ${
-              activeTab === tab ? "font-semibold text-black" : ""
+              pathname === tab.path ? "font-semibold text-black" : ""
             }`}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => router.push(tab.path)}
           >
-            {tab}
-            {activeTab === tab && (
+            {tab.name}
+            {pathname === tab.path && (
               <div className="h-1 bg-green-500 mt-1 w-full transition-all"></div>
             )}
           </div>
