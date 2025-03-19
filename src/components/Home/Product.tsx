@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Navbar from "./Navbar";
 
 interface ProductProps {
   id: number;

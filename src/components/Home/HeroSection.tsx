@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
@@ -48,15 +47,18 @@ const HeroSection = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="max-w-3xl"
                 >
-                    {/* Adjusted font sizes and line height for mobile */}
                     <h1 className="text-3xl font-extrabold text-white drop-shadow-lg sm:text-4xl lg:text-6xl leading-tight">
                         Exotic Pet Shops
                     </h1>
-                    {/* Adjusted text size and added margin for mobile */}
                     <p className="mt-2 text-lg text-gray-200 sm:text-xl">
                         Assured Quality & Reliable Products
                     </p>
-                    
+                    <button
+                        onClick={handleEnquireClick}
+                        className="mt-4 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Enquire Now
+                    </button>
                 </motion.div>
             </div>
         </div>

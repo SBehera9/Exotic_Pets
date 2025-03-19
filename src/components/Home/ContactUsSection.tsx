@@ -27,7 +27,7 @@ const ContactUsSection = () => {
           Contact Us
         </h2>
         <p className="text-gray-600 text-sm sm:text-base">
-          We'd love to hear from you! Get in touch using the details below.
+          We&apos;d love to hear from you! Get in touch using the details below.
         </p>
       </motion.div>
 
