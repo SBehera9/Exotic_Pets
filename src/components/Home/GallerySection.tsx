@@ -52,7 +52,6 @@ const GallerySection = () => {
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-semibold text-green-600 mb-8">Gallery</h2>
 
-        {/* Two images in a row on mobile, 3 on medium, 4 on large screens */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {galleryImages.map((image, index) => (
             <div
@@ -79,11 +78,9 @@ const GallerySection = () => {
         </button>
       </div>
 
-      {/* Lightbox Modal */}
       {selectedIndex !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4">
           <div className="relative max-w-full sm:max-w-4xl w-full">
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white text-2xl sm:text-3xl"
@@ -91,7 +88,6 @@ const GallerySection = () => {
               <X size={30} />
             </button>
 
-            {/* Image Display */}
             <Image
               src={galleryImages[selectedIndex].src}
               alt={galleryImages[selectedIndex].alt}
@@ -100,7 +96,6 @@ const GallerySection = () => {
               className="w-full h-auto rounded-lg"
             />
 
-            {/* Navigation Arrows */}
             <button
               onClick={prevImage}
               className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 text-white text-xl sm:text-3xl"
