@@ -48,7 +48,7 @@ const petFoods: PetFood[] = [
 
 const PetFoodSection = () => {
   const handleViewMore = () => {
-    window.location.href = "/all-pet-food";
+    window.location.href = "/Product";
   };
 
   return (

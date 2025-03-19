@@ -1,5 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import Navbar from "./Navbar";
 
 interface ProductProps {
   id: number;
@@ -12,7 +13,6 @@ interface ProductProps {
 const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price, description }) => {
   return (
     <div key={id} className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
-
       <div className="w-full h-[200px] md:h-[250px] mb-2 bg-gray-100 shadow-md rounded-lg overflow-hidden relative">
         <Image
           src={imageUrl} 

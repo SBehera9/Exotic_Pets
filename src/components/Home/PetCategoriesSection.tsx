@@ -48,7 +48,7 @@ const petCategories: PetCategory[] = [
 
 const PetCategoriesSection = () => {
   const handleViewMore = () => {
-    window.location.href = "/all-pets";
+    window.location.href = "/Product";
   };
 
   return (
@@ -58,7 +58,6 @@ const PetCategoriesSection = () => {
           Pets
         </h2>
 
-        {/* Added padding using px-4 (mobile), sm:px-6 (tablet), md:px-8 (larger screens) */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {petCategories.map((category, index) => (
             <div
