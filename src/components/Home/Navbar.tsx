@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
 
-            <div className={md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}}>
+            <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <Link href="/" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
                         Home
@@ -82,4 +82,4 @@ const Navbar: React.FC = () => {
     );
 };
 
-export default Navbar;
+export default Navbar;
