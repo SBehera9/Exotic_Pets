@@ -41,13 +41,13 @@ const ProductList: React.FC = () => {
 
       <div className="flex gap-6 md:gap-80 mb-6 justify-center items-center">
         <button
-          className={`py-2 px-4 font-bold text-2xl ${activeSection === "Products" ? "text-green-600 border-b-4 border-b-green-500" : " hover:border-b-green-500 text-green-600"} transition duration-200`}
+          className={`py-2 px-4 font-bold text-xl md:text-2xl ${activeSection === "Products" ? "text-green-600 border-b-2 md:border-b-4 border-b-green-500" : " hover:border-b-green-500 text-green-600"} transition duration-200`}
           onClick={() => setActiveSection("Products")}
         >
           Our Products
         </button>
         <button
-          className={`py-2 px-4 font-bold text-2xl ${activeSection === "Foods" ?"text-green-600 border-b-4 border-b-green-500" : " hover:border-b-green-500 text-green-600"} transition duration-200`}
+          className={`py-2 px-4 font-bold text-xl md:text-2xl ${activeSection === "Foods" ?"text-green-600 border-b-2 md:border-b-4 border-b-green-500" : " hover:border-b-green-500 text-green-600"} transition duration-200`}
           onClick={() => setActiveSection("Foods")}
         >
           Our Foods
@@ -55,7 +55,7 @@ const ProductList: React.FC = () => {
       </div>
 
       <div>
-        <h3 className="text-xl font-extrabold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
+        <h3 className="text-xl  font-extrabold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {(activeSection === "Products" ? ourProducts : ourFoods).map((product) => (
             <Product key={product.id} {...product} />
