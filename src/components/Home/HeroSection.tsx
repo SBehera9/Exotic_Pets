@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import BuyNowForm from './BuyNowForm';
 
 const images = [
     "/Bird5.jpg",
@@ -13,7 +14,7 @@ const images = [
 
 const HeroSection = () => {
     const [currentImage, setCurrentImage] = useState(0);
-    const router = useRouter();
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,7 +25,7 @@ const HeroSection = () => {
     }, []);
 
     const handleEnquireClick = () => {
-        router.push('/ContactUsSection');
+        setShowForm(true); 
     };
 
     return (
@@ -61,6 +62,13 @@ const HeroSection = () => {
                     </button>
                 </motion.div>
             </div>
+
+            {showForm && (
+                <BuyNowForm 
+                    productName="Exotic Pet Product" 
+                    onClose={() => setShowForm(false)} 
+                />
+            )}
         </div>
     );
 };

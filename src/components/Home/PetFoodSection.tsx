@@ -54,7 +54,7 @@ const PetFoodSection = () => {
   return (
     <div className="bg-white mt-0 pt-0 pb-16">
       <div className="container mx-auto text-center px-4 sm:px-6 md:px-8">
-        <h2 className="text-3xl font-semibold text-green-600 mb-8">Pet Food</h2>
+        <h2 className="text-3xl font-extrabold text-green-600 mb-8">Pet Food</h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {petFoods.map((food, index) => (
@@ -81,7 +81,7 @@ const PetFoodSection = () => {
 
         <button
           onClick={handleViewMore}
-          className="mt-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+          className="mt-4 px-6 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
         >
           View More
         </button>

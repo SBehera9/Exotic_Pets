@@ -21,7 +21,7 @@ const AboutUsSection = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-4 sm:mb-6">About Us</h2>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-green-700 mb-4 sm:mb-6">About Us</h2>
                     <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{aboutUsText}</p>
                 </motion.div>
 

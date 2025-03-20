@@ -61,7 +61,7 @@ const TestimonialsSection = () => {
             />
 
             <div className="relative py-12 flex flex-col items-center w-full">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-white text-center mb-6">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white text-center mb-6">
                     Customer Testimonials
                 </h2>
 

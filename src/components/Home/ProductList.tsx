@@ -35,7 +35,7 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-3xl font-bold text-green-950 mb-4 text-center">Choose Category</h2>
+      <h2 className="text-3xl font-extrabold text-green-950 mb-4 text-center">Choose Category</h2>
 
       <div className="flex gap-6 md:gap-80 mb-6 justify-center items-center">
         <button
@@ -53,7 +53,7 @@ const ProductList: React.FC = () => {
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
+        <h3 className="text-xl font-extrabold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {(activeSection === "Products" ? ourProducts : ourFoods).map((product) => (
             <Product key={product.id} {...product} />

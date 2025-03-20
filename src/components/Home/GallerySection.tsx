@@ -50,7 +50,7 @@ const GallerySection = () => {
   return (
     <div className="bg-white py-12 px-4" id="gallery">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-green-600 mb-8">Gallery</h2>
+        <h2 className="text-3xl font-extrabold text-green-600 mb-8">Gallery</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {galleryImages.map((image, index) => (
@@ -72,7 +72,7 @@ const GallerySection = () => {
 
         <button
           onClick={handleViewMore}
-          className="mt-8 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+          className="mt-4 px-6 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
         >
           View More
         </button>

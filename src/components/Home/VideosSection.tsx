@@ -26,14 +26,22 @@ const VideosSection = () => {
     }
   }, [selectedIndex]);
 
+  const handleViewMore = () => {
+    window.location.href = "/";
+  };
+
   const openModal = (index: number) => {
     setSelectedIndex(index);
   };
 
   const closeModal = () => {
     if (videoRef.current) {
+<<<<<<< HEAD
       videoRef.current.pause();
       videoRef.current.currentTime = 0; 
+=======
+      videoRef.current.pause(); 
+>>>>>>> 18a3d0e (chenges)
     }
     setSelectedIndex(null);
   };
@@ -50,6 +58,7 @@ const VideosSection = () => {
     );
   };
 
+<<<<<<< HEAD
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -66,12 +75,17 @@ const VideosSection = () => {
       }
     }
     touchStartX.current = null;
+=======
+  const handleCloseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); 
+    closeModal();
+>>>>>>> 18a3d0e (chenges)
   };
 
   return (
     <div className="bg-green-100 py-12" id="videos">
       <div className="container mx-auto text-center px-4">
-        <h2 className="text-3xl font-semibold text-green-600 mb-8">Videos</h2>
+        <h2 className="text-3xl font-extrabold text-green-600 mb-8">Videos</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {videoFiles.map((videoSrc, index) => (
             <div
@@ -89,11 +103,18 @@ const VideosSection = () => {
             </div>
           ))}
         </div>
+        <button
+          onClick={handleViewMore}
+          className="mt-4 px-6 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
+        >
+          View More
+        </button>
       </div>
 
       {selectedIndex !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4"
+<<<<<<< HEAD
           onClick={closeModal}
         >
           <div
@@ -104,6 +125,16 @@ const VideosSection = () => {
           >
             <button
               onClick={closeModal}
+=======
+          onClick={closeModal} 
+        >
+          <div
+            className="relative max-w-full sm:max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()} 
+          >
+            <button
+              onClick={handleCloseButtonClick} 
+>>>>>>> 18a3d0e (chenges)
               className="absolute top-4 right-4 text-white text-xl sm:text-3xl"
             >
               <X size={30} />

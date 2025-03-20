@@ -23,7 +23,7 @@ const ContactUsSection = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-green-600 mb-3 sm:mb-4">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-green-600 mb-3 sm:mb-4">
           Contact Us
         </h2>
         <p className="text-gray-600 text-sm sm:text-base">
