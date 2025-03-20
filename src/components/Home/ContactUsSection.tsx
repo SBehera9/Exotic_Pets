@@ -11,6 +11,7 @@ library.add(faMapMarkerAlt, faPhone, faEnvelope);
 const ContactUsSection = () => {
   return (
     <motion.div
+    
       className="bg-white py-10 px-4 flex flex-col items-center text-center sm:py-16 sm:px-6"
       id="contact"
       initial={{ opacity: 0 }}

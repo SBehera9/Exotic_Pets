@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const FooterSection = () => {
   const googleMapsEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.629455988054!2d72.83403317513138!3d18.957408482036875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cd40b047781f%3A0x60b1f1ac6837b024!2sFortune%20Pet%20Shops!5e0!3m2!1sen!2sin!4v1697306139445!5m2!1sen!2sin";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60246.444211460745!2d84.76705668893607!3d19.30832153349362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3d500ef1cb60ad%3A0x5b75778874294ff!2sBrahmapur%2C%20Odisha!5e0!3m2!1sen!2sin!4v1742460668328!5m2!1sen!2sin";
 
   return (
     <footer className="bg-black text-white py-6 px-4 sm:px-6">
