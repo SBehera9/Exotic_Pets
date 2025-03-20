@@ -90,7 +90,7 @@ const FooterSection = () => {
         </div>
       </div>
 
-      <div className="text-center mt-6 text-sm text-white bg-black">
+      <div className="text-center mt-6 text-sm text-white">
         <p>© {new Date().getFullYear()} Exotic Pets. All rights reserved.</p>
       </div>
     </footer>
