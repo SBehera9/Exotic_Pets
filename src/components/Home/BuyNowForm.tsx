@@ -19,23 +19,20 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
         formRef.current!,
         "4uN2kcMHYEGfvMOXP" // Replace with your EmailJS Public Key
       )
-      .then(
-        (result) => {
-          alert("Order submitted successfully! 🎉");
-          formRef.current?.reset(); // Reset form
-          onClose(); // Close the modal
-        },
-        (error) => {
-          alert("Failed to submit order. Please try again.");
-          console.error("Error:", error);
-        }
-      );
+      .then(() => {
+        alert("Order submitted successfully! 🎉");
+        formRef.current?.reset();
+        onClose(); 
+      })
+      .catch((error) => {
+        alert("Failed to submit order. Please try again.");
+        console.error("Error:", error);
+      });
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/30">
       <div className="bg-white p-6 rounded-xl w-96 shadow-2xl border border-gray-200 relative">
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-2 right-3 text-gray-600 hover:text-red-500 text-xl"
@@ -48,7 +45,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
         </h2>
 
         <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
-          {/* Product Name */}
           <div>
             <label className="block text-gray-700 font-semibold">Product Name</label>
             <input
@@ -60,7 +56,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
             />
           </div>
 
-          {/* Name */}
           <div>
             <label className="block text-gray-700 font-semibold">Name</label>
             <input
@@ -72,7 +67,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
             />
           </div>
 
-          {/* Phone Number */}
           <div>
             <label className="block text-gray-700 font-semibold">Phone Number</label>
             <input
@@ -84,7 +78,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
             />
           </div>
 
-          {/* Address */}
           <div>
             <label className="block text-gray-700 font-semibold">Address</label>
             <textarea
@@ -95,7 +88,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
             ></textarea>
           </div>
 
-          {/* Buttons */}
           <div className="flex justify-between">
             <button
               type="button"
