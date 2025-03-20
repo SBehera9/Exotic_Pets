@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 const videoFiles = [
     "/video/Dog.mp4",
@@ -53,13 +53,16 @@ const VideosSection = () => {
                     {videoFiles.map((videoSrc, index) => (
                         <div
                             key={index}
-                            className="rounded-xl overflow-hidden shadow-md cursor-pointer aspect-video"
+                            className="relative rounded-xl overflow-hidden shadow-md cursor-pointer aspect-video"
                             onClick={() => openModal(index)}
                         >
                             <video className="w-full h-full object-cover">
                                 <source src={videoSrc} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <Play size={50} className="text-white" />
+                            </div>
                         </div>
                     ))}
                 </div>
