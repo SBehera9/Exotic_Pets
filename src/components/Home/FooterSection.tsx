@@ -25,7 +25,7 @@ const FooterSection = () => {
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="text-sm space-y-2">
             <li><a href="#" className="hover:text-gray-400">Home</a></li>
-            <li><a href="#products" className="hover:text-gray-400">Products</a></li>
+            <li><a href="/Product" className="hover:text-gray-400">Products</a></li>
             <li><a href="#gallery" className="hover:text-gray-400">Gallery</a></li>
             <li><a href="#contact" className="hover:text-gray-400">Contact Us</a></li>
           </ul>
