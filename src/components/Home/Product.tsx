@@ -11,10 +11,10 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price, description }) => {
   return (
-    <div key={id} className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
+    <div className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
       <div className="w-full h-[200px] md:h-[250px] mb-2 bg-gray-100 shadow-md rounded-lg overflow-hidden relative">
         <Image
-          src={imageUrl} 
+          src={imageUrl}
           alt={name}
           layout="fill"
           objectFit="cover"
@@ -23,7 +23,7 @@ const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price, descriptio
       </div>
 
       <h3 className="text-lg font-semibold text-gray-800 mb-2">{name}</h3>
-      <p className="text-md font-bold text-green-600 mb-2">Rs.{price.toFixed(2)}</p>
+      <p className="text-md font-bold text-green-600 mb-2">Rs. {price.toFixed(2)}</p>
       <p className="text-sm text-gray-600 mb-4">{description}</p>
 
       <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline self-start">
