@@ -15,6 +15,7 @@ const videoFiles = [
 const VideosSection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     if (selectedIndex !== null && videoRef.current) {
@@ -31,7 +32,8 @@ const VideosSection = () => {
 
   const closeModal = () => {
     if (videoRef.current) {
-      videoRef.current.pause(); // Pause the video
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; 
     }
     setSelectedIndex(null);
   };
@@ -48,9 +50,22 @@ const VideosSection = () => {
     );
   };
 
-  const handleCloseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Prevent the click from bubbling to the parent div
-    closeModal();
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current !== null) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffX = touchStartX.current - touchEndX;
+
+      if (diffX > 50) {
+        nextVideo(); 
+      } else if (diffX < -50) {
+        prevVideo(); 
+      }
+    }
+    touchStartX.current = null;
   };
 
   return (
@@ -79,14 +94,16 @@ const VideosSection = () => {
       {selectedIndex !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4"
-          onClick={closeModal} //click anywhere outside the modal to close
+          onClick={closeModal}
         >
           <div
             className="relative max-w-full sm:max-w-4xl w-full"
-            onClick={(e) => e.stopPropagation()} //prevents closing when clicking inside modal
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <button
-              onClick={handleCloseButtonClick} // Use the new handler
+              onClick={closeModal}
               className="absolute top-4 right-4 text-white text-xl sm:text-3xl"
             >
               <X size={30} />
