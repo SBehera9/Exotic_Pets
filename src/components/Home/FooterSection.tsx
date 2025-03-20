@@ -18,7 +18,7 @@ const FooterSection = () => {
     <footer className="bg-black text-white py-6 px-4 sm:px-6">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
         <div className="flex justify-center sm:justify-start">
-          <Image src="/logo.png" alt="Company Logo" width={130} height={40} className="sm:w-[150px] sm:h-auto" />
+          <Image src="/logo.png" alt="Company Logo" width={130} height={40} className="sm:w-[150px] sm:h-[150px]" />
         </div>
 
         <div>
