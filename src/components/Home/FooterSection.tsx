@@ -90,8 +90,8 @@ const FooterSection = () => {
         </div>
       </div>
 
-      <div className="text-center mt-6 text-sm text-gray-400">
-        <p>© {new Date().getFullYear()} Exotic Birds. All rights reserved.</p>
+      <div className="text-center mt-6 text-sm text-white bg-black">
+        <p>© {new Date().getFullYear()} Exotic Pets. All rights reserved.</p>
       </div>
     </footer>
   );
