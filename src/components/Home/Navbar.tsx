@@ -31,20 +31,19 @@ const Navbar: React.FC = () => {
                         </Link>
                     </div>
 
-                    <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            <Link href="/" className={`block px-3 py-2 rounded-md text-base font-semibold ${mobileMenuOpen ? 'text-black' : 'text-white'} hover:bg-gray-100 hover:text-gray-800`}>
+                    <div className="hidden md:block">
+                        <div className="ml-10 flex items-baseline space-x-4">
+                            <Link href="/" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
                                 Home
                             </Link>
-                            <Link href="/Product" className={`block px-3 py-2 rounded-md text-base font-semibold ${mobileMenuOpen ? 'text-black' : 'text-white'} hover:bg-gray-100 hover:text-gray-800`}>
+                            <Link href="/Product" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
                                 Products
                             </Link>
-                            <Link href="/#contact" className={`block px-3 py-2 rounded-md text-base font-semibold ${mobileMenuOpen ? 'text-black' : 'text-white'} hover:bg-gray-100 hover:text-gray-800`}>
+                            <Link href="/#contact" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
                                 Contact Us
                             </Link>
                         </div>
                     </div>
-
 
                     <div className="-mr-2 flex md:hidden">
                         <button
@@ -66,15 +65,15 @@ const Navbar: React.FC = () => {
                 </div>
             </div>
 
-            <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+            <div className={md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <Link href="/" className="text-white hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
+                    <Link href="/" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
                         Home
                     </Link>
-                    <Link href="/Product" className="text-white hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
+                    <Link href="/Product" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
                         Products
                     </Link>
-                    <Link href="/" className="text-white hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
+                    <Link href="/#contact" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
                         Contact Us
                     </Link>
                 </div>
