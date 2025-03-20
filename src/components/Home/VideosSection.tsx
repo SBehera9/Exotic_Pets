@@ -36,12 +36,8 @@ const VideosSection = () => {
 
   const closeModal = () => {
     if (videoRef.current) {
-<<<<<<< HEAD
       videoRef.current.pause();
-      videoRef.current.currentTime = 0; 
-=======
-      videoRef.current.pause(); 
->>>>>>> 18a3d0e (chenges)
+      videoRef.current.currentTime = 0;
     }
     setSelectedIndex(null);
   };
@@ -58,7 +54,6 @@ const VideosSection = () => {
     );
   };
 
-<<<<<<< HEAD
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -69,17 +64,12 @@ const VideosSection = () => {
       const diffX = touchStartX.current - touchEndX;
 
       if (diffX > 50) {
-        nextVideo(); 
+        nextVideo();
       } else if (diffX < -50) {
-        prevVideo(); 
+        prevVideo();
       }
     }
     touchStartX.current = null;
-=======
-  const handleCloseButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); 
-    closeModal();
->>>>>>> 18a3d0e (chenges)
   };
 
   return (
@@ -114,7 +104,6 @@ const VideosSection = () => {
       {selectedIndex !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4"
-<<<<<<< HEAD
           onClick={closeModal}
         >
           <div
@@ -125,16 +114,6 @@ const VideosSection = () => {
           >
             <button
               onClick={closeModal}
-=======
-          onClick={closeModal} 
-        >
-          <div
-            className="relative max-w-full sm:max-w-4xl w-full"
-            onClick={(e) => e.stopPropagation()} 
-          >
-            <button
-              onClick={handleCloseButtonClick} 
->>>>>>> 18a3d0e (chenges)
               className="absolute top-4 right-4 text-white text-xl sm:text-3xl"
             >
               <X size={30} />
