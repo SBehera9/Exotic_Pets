@@ -15,7 +15,7 @@ const petCategories: PetCategory[] = [
   {
     title: "Dogs",
     description:
-      "Find the perfect canine companion! We offer a variety of dog breeds, from playful puppies to loyal adult dogs.",
+      "Loyal, loving, and full of energy! Discover a variety of dog breeds, from playful puppies to devoted companions.",
     imageSrc: "/Dog.jpeg",
     imageAlt: "Dogs",
     link: "/dogs",
@@ -23,7 +23,7 @@ const petCategories: PetCategory[] = [
   {
     title: "Birds",
     description:
-      "Add a touch of color and song to your life! Explore our range of beautiful birds, from finches to parrots.",
+      "Brighten your home with the charm of exotic birds! From melodious songbirds to vibrant parrots, find your perfect feathered friend.",
     imageSrc: "/Birds.jpeg",
     imageAlt: "Birds",
     link: "/birds",
@@ -31,7 +31,7 @@ const petCategories: PetCategory[] = [
   {
     title: "Cats",
     description:
-      "Discover your purrfect feline friend! Our selection includes cuddly kittens and graceful adult cats, all ready for a loving home.",
+      "Graceful, independent, and affectionate! Choose from adorable kittens to majestic cats, all waiting for a loving home.",
     imageSrc: "/Cat.jpeg",
     imageAlt: "Cats",
     link: "/cats",
@@ -39,12 +39,13 @@ const petCategories: PetCategory[] = [
   {
     title: "Small Fish",
     description:
-      "Create a mesmerizing underwater world! We have a diverse collection of colorful freshwater and saltwater fish.",
+      "Transform your space with a stunning aquatic world! Explore our collection of vibrant freshwater and saltwater fish.",
     imageSrc: "/Fish.jpeg",
     imageAlt: "Small Fish",
     link: "/fish",
   },
 ];
+
 
 const PetCategoriesSection = () => {
   const handleViewMore = () => {

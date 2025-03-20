@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 interface BuyNowFormProps {
@@ -8,6 +8,11 @@ interface BuyNowFormProps {
 
 const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
   const formRef = useRef<HTMLFormElement>(null);
+  const [orderTime, setOrderTime] = useState("");
+
+  useEffect(() => {
+    setOrderTime(new Date().toLocaleString()); 
+  }, []);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +26,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
       )
       .then(() => {
         alert("Order submitted successfully! 🎉");
-        formRef.current?.reset();
+        formRef.current?.reset(); 
         onClose(); 
       })
       .catch((error) => {
@@ -87,6 +92,8 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, onClose }) => {
               required
             ></textarea>
           </div>
+
+          <input type="hidden" name="order_time" value={orderTime} />
 
           <div className="flex justify-between">
             <button

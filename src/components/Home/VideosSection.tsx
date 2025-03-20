@@ -73,7 +73,7 @@ const VideosSection = () => {
   };
 
   return (
-    <div className="bg-green-100 py-12" id="videos">
+    <div className="bg-gradient-to-r from-white to-green-300 py-12" id="videos">
       <div className="container mx-auto text-center px-4">
         <h2 className="text-3xl font-extrabold text-green-600 mb-8">Videos</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

@@ -14,20 +14,20 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
     {
-        name: 'Rahul Vaidya',
-        text: 'I always take my dogs to their vets as they are more experienced and trustworthy.',
+        name: 'Aarav Mehta',
+        text: 'Amazing service and expert advice! My exotic bird is thriving thanks to them.',
     },
     {
-        name: 'Rashi Gupta',
-        text: 'I bought a hamster from them for my little brother and they guided me very well during and after the purchase.',
+        name: 'Priya Desai',
+        text: 'Adopted a kitten, and the process was seamless. Highly recommended!',
     },
     {
-        name: 'Anjali Sharma',
-        text: 'The staff is incredibly knowledgeable and helped me choose the perfect food for my picky cat.',
+        name: 'Vikram Kapoor',
+        text: 'Great selection of pet food and accessories. My dog loves it!',
     },
     {
-        name: 'Suresh Menon',
-        text: 'Great selection of toys and accessories. My parrot loves the new climbing rope I got from here!',
+        name: 'Neha Sharma',
+        text: 'Best place for exotic pets! My fish tank setup looks stunning.',
     },
 ];
 

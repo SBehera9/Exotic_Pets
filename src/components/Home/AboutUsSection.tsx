@@ -5,11 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const AboutUsSection = () => {
-    const aboutUsText = `Welcome to Exotic Birds, your ultimate destination for discovering and caring for exotic pets! We are passionate about unique and extraordinary animals, from vibrant reptiles and rare amphibians to fascinating small mammals and tropical birds.
-
-    At Exotic Birds, we aim to provide pet lovers with expert advice, high-quality pet supplies, and a community dedicated to responsible exotic pet care. Whether you're a seasoned pet owner or just beginning your journey with an exotic companion, we're here to guide you every step of the way.
-    
-    Join us in celebrating the beauty and wonder of exotic pets—because every creature deserves a loving home!`;
+    const aboutUsText = `Welcome to Exotic Birds, your one-stop destination for rare and beautiful pets! From vibrant parrots to exotic reptiles and small mammals, we provide expert guidance, high-quality supplies, and a caring community for responsible pet ownership`;
 
     return (
         <div className="bg-white py-12 px-4 sm:px-6 lg:px-12" id="about">

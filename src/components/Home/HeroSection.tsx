@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import BuyNowForm from './BuyNowForm';
 
 const images = [
     "/Bird5.jpg",
@@ -13,7 +12,6 @@ const images = [
 
 const HeroSection = () => {
     const [currentImage, setCurrentImage] = useState(0);
-    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,10 +20,6 @@ const HeroSection = () => {
 
         return () => clearInterval(interval);
     }, []);
-
-    const handleEnquireClick = () => {
-        setShowForm(true); 
-    };
 
     return (
         <div className="relative w-full h-screen">
@@ -48,26 +42,14 @@ const HeroSection = () => {
                     className="max-w-3xl"
                 >
                     <h1 className="text-3xl font-extrabold text-white drop-shadow-lg sm:text-4xl lg:text-6xl leading-tight">
-                        Exotic Pet Shops
+                        Exotic Pet Store
                     </h1>
                     <p className="mt-2 text-lg text-gray-200 sm:text-xl">
-                        Assured Quality & Reliable Products
+                        Find Rare & Beautiful Pets for Your Home
                     </p>
-                    <button
-                        onClick={handleEnquireClick}
-                        className="mt-4 px-6 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
-                    >
-                        Enquire Now
-                    </button>
+
                 </motion.div>
             </div>
-
-            {showForm && (
-                <BuyNowForm 
-                    productName="Exotic Pet Product" 
-                    onClose={() => setShowForm(false)} 
-                />
-            )}
         </div>
     );
 };

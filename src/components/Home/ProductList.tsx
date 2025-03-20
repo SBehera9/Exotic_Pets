@@ -13,22 +13,24 @@ interface ProductData {
 }
 
 const ourProducts: ProductData[] = [
-  { id: 1, name: "Labrador Retriever", imageUrl: "/LabradorRetriever.jpg", price: 15000, description: "Labrador Retriever", category: "Dog" },
-  { id: 2, name: "Macaw", imageUrl: "/Bird6.jpg", price: 150000, description: "Macaw", category: "Birds" },
-  { id: 3, name: "PersianCat", imageUrl: "/PersianCat.jpg", price: 8000, description: "PersianCat", category: "Cat" },
-  { id: 4, name: "Golden Retriever", imageUrl: "/goldenretriever.jpg", price: 15000, description: "Golden Retriever", category: "Dog" },
-  { id: 5, name: "Fish", imageUrl: "/Fish1.jpeg", price: 300, description: "Beta Fish", category: "Fish" },
-  { id: 6, name: "Budgies", imageUrl: "/Bird1.png", price: 350, description: "Budgies", category: "Birds" },
+  { id: 1, name: "Labrador Retriever", imageUrl: "/LabradorRetriever.jpg", price: 15000, description: "Friendly and intelligent breed, perfect for families.", category: "Dog" },
+  { id: 2, name: "Macaw", imageUrl: "/Bird6.jpg", price: 150000, description: "Colorful and social parrot known for its intelligence.", category: "Birds" },
+  { id: 3, name: "Persian Cat", imageUrl: "/PersianCat.jpg", price: 8000, description: "Elegant and affectionate cat with a luxurious coat.", category: "Cat" },
+  { id: 4, name: "Golden Retriever", imageUrl: "/goldenretriever.jpg", price: 15000, description: "Loyal and playful dog, great with kids and families.", category: "Dog" },
+  { id: 5, name: "Beta Fish", imageUrl: "/Fish1.jpeg", price: 300, description: "Vibrant and easy-to-care-for fish, perfect for beginners.", category: "Fish" },
+  { id: 6, name: "Budgies", imageUrl: "/Bird1.png", price: 350, description: "Small, cheerful birds that make great companions.", category: "Birds" },
 ];
 
+
 const ourFoods: ProductData[] = [
-  { id: 7, name: "Dog Food", imageUrl: "/Dog_Food.jpeg", price: 120, description: "Dog Food", category: "Foods" },
-  { id: 8, name: "Fish Food", imageUrl: "/Fish_Food.jpeg", price: 300, description: "Fish Food", category: "Foods" },
-  { id: 9, name: "Cat Food", imageUrl: "/Cat_Food.jpeg", price: 250, description: "Cat Food", category: "Foods" },
-  { id: 10, name: "Bird Food", imageUrl: "/Birds_Food.jpg", price: 100, description: "Bird Food", category: "Foods" },
-  { id: 11, name: "Bird Food", imageUrl: "/Birds_Food1.jpg", price: 150, description: "Bird Food", category: "Foods" },
-  { id: 12, name: "Bird Food", imageUrl: "/Birds_Food2.jpg", price: 400, description: "Bird Food", category: "Foods" },
+  { id: 7, name: "Dog Food", imageUrl: "/Dog_Food.jpeg", price: 120, description: "Nutritious and tasty food for strong and healthy dogs.", category: "Foods" },
+  { id: 8, name: "Fish Food", imageUrl: "/Fish_Food.jpeg", price: 300, description: "High-quality flakes and pellets for active, vibrant fish.", category: "Foods" },
+  { id: 9, name: "Cat Food", imageUrl: "/Cat_Food.jpeg", price: 250, description: "Delicious and balanced meals for a happy, healthy cat.", category: "Foods" },
+  { id: 10, name: "Bird Food", imageUrl: "/Birds_Food.jpg", price: 100, description: "Essential seed mix to keep your birds energetic and healthy.", category: "Foods" },
+  { id: 11, name: "Premium Bird Food", imageUrl: "/Birds_Food1.jpg", price: 150, description: "Enhanced formula with vitamins for better bird health.", category: "Foods" },
+  { id: 12, name: "Organic Bird Food", imageUrl: "/Birds_Food2.jpg", price: 400, description: "Organic, chemical-free food for a natural bird diet.", category: "Foods" },
 ];
+
 
 const ProductList: React.FC = () => {
   const [activeSection, setActiveSection] = useState<"Products" | "Foods">("Products");
