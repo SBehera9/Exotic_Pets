@@ -19,20 +19,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <head>
-        <title>Exotic Pets</title>
         <link rel="icon" href="/logo1.png" sizes="any"/>
         <link rel="icon" href="/logo1.png" type="image/svg+xml"/>
         <link rel="apple-touch-icon" href="/logo1.png"/>
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         {children}
       </body>
     </html>
