@@ -1,85 +1,211 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ShoppingCartIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import BuyNowForm from "../Home/BuyNowForm";
 
 const Navbar: React.FC = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<string>("");
+  const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
 
-    const logoSrc = "/Logo.png";
-    const logoAlt = "Exotic Birds";
-
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
+  useEffect(() => {
+    const updateCart = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartItems(cart);
     };
 
-    return (
-        <nav className="bg-gradient-to-r from-white to-green-600 shadow-md sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center">
-                        <Link href="/" aria-label="Go to homepage">
-                            <Image
-                                className="h-24 w-auto"
-                                src={logoSrc}
-                                alt={logoAlt}
-                                width={120}
-                                height={40}
-                                priority
-                            />
-                        </Link>
-                    </div>
+    updateCart();
+    window.addEventListener("cartUpdated", updateCart);
+    return () => window.removeEventListener("cartUpdated", updateCart);
+  }, []);
 
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
-                            <Link href="/" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                Home
-                            </Link>
-                            <Link href="/Product" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                Products
-                            </Link>
-                            <Link href="/#contact" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                Contact Us
-                            </Link>
-                        </div>
-                    </div>
+  const removeFromCart = (id: number) => {
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
 
-                    <div className="-mr-2 flex md:hidden">
-                        <button
-                            type="button"
-                            className="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                            aria-expanded={mobileMenuOpen ? 'true' : 'false'}
-                            onClick={toggleMobileMenu}
-                        >
-                            <span className="sr-only">{mobileMenuOpen ? 'Close main menu' : 'Open main menu'}</span>
-                            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                {mobileMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+  const updateQuantity = (id: number, newQuantity: number) => {
+    if (newQuantity < 1) return;
 
-            <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <Link href="/" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
-                        Home
-                    </Link>
-                    <Link href="/Product" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
-                        Products
-                    </Link>
-                    <Link href="/#contact" className="text-black hover:bg-gray-100 hover:text-gray-800 block px-3 py-2 rounded-md text-base font-semibold">
-                        Contact Us
-                    </Link>
-                </div>
-            </div>
-        </nav>
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: newQuantity } : item
     );
+
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      const selectedProducts = cartItems.map((item) => item.name).join(", ");
+      const totalPrice = cartItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+
+      setSelectedProduct(selectedProducts);
+      setTotalCartPrice(totalPrice);
+      setIsBuyNowOpen(true);
+    }
+  };
+
+  return (
+    <>
+      <nav className="bg-gradient-to-r from-white to-green-600 shadow-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/" aria-label="Go to homepage">
+                <Image
+                  className="h-24 w-auto"
+                  src="/Logo.png"
+                  alt="Exotic Birds"
+                  width={120}
+                  height={40}
+                  priority
+                />
+              </Link>
+            </div>
+
+            <div className="hidden md:flex items-center space-x-4">
+              <Link
+                href="/"
+                className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold"
+              >
+                Home
+              </Link>
+              <Link
+                href="/Product"
+                className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold"
+              >
+                Products
+              </Link>
+              <Link
+                href="/#contact"
+                className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold"
+              >
+                Contact Us
+              </Link>
+
+              {/* Cart Icon with Badge */}
+              <div className="relative">
+                <button
+                  onClick={() => setCartOpen(!cartOpen)}
+                  className="relative text-white hover:bg-black hover:text-green-400 p-2 rounded-md"
+                >
+                  <ShoppingCartIcon className="h-7 w-7" />
+                  {cartItems.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {cartItems.length}
+                    </span>
+                  )}
+                </button>
+
+                {/* Cart Dropdown */}
+                {cartOpen && (
+                  <div className="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg p-4 z-50">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-bold text-gray-800">Cart</h3>
+                      <button onClick={() => setCartOpen(false)}>
+                        <XCircleIcon className="h-6 w-6 text-gray-500 hover:text-gray-700" />
+                      </button>
+                    </div>
+
+                    {cartItems.length === 0 ? (
+                      <p className="text-gray-500 text-sm mt-4">
+                        Your cart is empty.
+                      </p>
+                    ) : (
+                      <ul className="mt-4 space-y-4">
+                        {cartItems.map((item, index) => (
+                          <li
+                            key={`${item.id}-${index}`}
+                            className="flex items-center space-x-4 border-b pb-2"
+                          >
+                            <Image
+                              src={item.imageUrl}
+                              alt={item.name}
+                              width={50}
+                              height={50}
+                              className="rounded-md"
+                            />
+                            <div className="flex-1">
+                              <p className="text-md font-semibold text-gray-700">
+                                {item.name}
+                              </p>
+                              <p className="text-sm text-green-600">
+                                Rs. {item.price.toFixed(2)}
+                              </p>
+
+                              {/* Quantity Selector */}
+                              <div className="flex items-center mt-1 space-x-2">
+                                <button
+                                  onClick={() =>
+                                    updateQuantity(item.id, item.quantity - 1)
+                                  }
+                                  className="bg-gray-300 px-2 rounded text-gray-700"
+                                >
+                                  -
+                                </button>
+                                <span className="text-gray-800">
+                                  {item.quantity}
+                                </span>
+                                <button
+                                  onClick={() =>
+                                    updateQuantity(item.id, item.quantity + 1)
+                                  }
+                                  className="bg-gray-300 px-2 rounded text-gray-700"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => removeFromCart(item.id)}
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              ✖
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {cartItems.length > 0 && (
+                      <button
+                        onClick={handleCheckout}
+                        className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Go to Checkout
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Buy Now Form Modal */}
+      {isBuyNowOpen && (
+        <BuyNowForm
+          productName={selectedProduct}
+          unitPrice={totalCartPrice}
+          onClose={() => setIsBuyNowOpen(false)}
+        />
+      )}
+    </>
+  );
 };
 
-export default Navbar;
+export default Navbar;

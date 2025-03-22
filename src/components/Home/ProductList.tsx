@@ -7,7 +7,7 @@ interface ProductData {
   id: number;
   name: string;
   imageUrl: string;
-  price: number;
+  price: number; // Ensure price is always a number
   description: string;
   category: string;
 }
@@ -21,16 +21,12 @@ const ourProducts: ProductData[] = [
   { id: 6, name: "Budgies", imageUrl: "/Bird1.png", price: 350, description: "Small, cheerful birds that make great companions.", category: "Birds" },
 ];
 
-
 const ourFoods: ProductData[] = [
   { id: 7, name: "Dog Food", imageUrl: "/Dog_Food.jpeg", price: 120, description: "Nutritious and tasty food for strong and healthy dogs.", category: "Foods" },
   { id: 8, name: "Fish Food", imageUrl: "/Fish_Food.jpeg", price: 300, description: "High-quality flakes and pellets for active, vibrant fish.", category: "Foods" },
   { id: 9, name: "Cat Food", imageUrl: "/Cat_Food.jpeg", price: 250, description: "Delicious and balanced meals for a happy, healthy cat.", category: "Foods" },
   { id: 10, name: "Bird Food", imageUrl: "/Birds_Food.jpg", price: 100, description: "Essential seed mix to keep your birds energetic and healthy.", category: "Foods" },
-  { id: 11, name: "Premium Bird Food", imageUrl: "/Birds_Food1.jpg", price: 150, description: "Enhanced formula with vitamins for better bird health.", category: "Foods" },
-  { id: 12, name: "Organic Bird Food", imageUrl: "/Birds_Food2.jpg", price: 400, description: "Organic, chemical-free food for a natural bird diet.", category: "Foods" },
 ];
-
 
 const ProductList: React.FC = () => {
   const [activeSection, setActiveSection] = useState<"Products" | "Foods">("Products");
@@ -55,7 +51,7 @@ const ProductList: React.FC = () => {
       </div>
 
       <div>
-        <h3 className="text-xl  font-extrabold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
+        <h3 className="text-xl font-extrabold text-green-800 mb-4">{activeSection === "Products" ? "Our Products" : "Our Foods"}</h3>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {(activeSection === "Products" ? ourProducts : ourFoods).map((product) => (
             <Product key={product.id} {...product} />
