@@ -202,6 +202,7 @@ const Navbar: React.FC = () => {
           productName={selectedProduct}
           unitPrice={totalCartPrice}
           onClose={() => setIsBuyNowOpen(false)}
+          cartItems={cartItems} // Pass the cart items here
         />
       )}
     </>

@@ -9,22 +9,37 @@ interface ProductProps {
   imageUrl: string;
   price?: number;
   description: string;
+  quantity?: number; // Add quantity to the interface
 }
 
-const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price = 0, description }) => {
+const MAX_PRODUCTS_IN_CART = 3;
+
+const Product: React.FC<ProductProps> = ({
+  id,
+  name,
+  imageUrl,
+  price = 0,
+  description,
+}) => {
   const [isAdded, setIsAdded] = useState(false);
+  const [cartCount, setCartCount] = useState(0); // Track total items in the cart
 
   const checkIfInCart = () => {
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const isProductInCart = savedCart.some((item: ProductProps) => item.id === id);
-    setIsAdded(isProductInCart);
+    if (typeof window !== "undefined") {
+      const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const isProductInCart = savedCart.some(
+        (item: ProductProps) => item.id === id
+      );
+      setIsAdded(isProductInCart);
+      setCartCount(savedCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); // Recalculate total cart count
+    }
   };
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       checkIfInCart();
 
-      // Listen for cart updates
       const handleCartUpdate = () => checkIfInCart();
       window.addEventListener("cartUpdated", handleCartUpdate);
 
@@ -32,21 +47,43 @@ const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price = 0, descri
     }
   }, [id]);
 
+
+
   const addToCart = () => {
     if (typeof window !== "undefined") {
       const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const existingItemIndex = existingCart.findIndex((item: ProductProps) => item.id === id);
+      const existingItemIndex = existingCart.findIndex(
+        (item: ProductProps) => item.id === id
+      );
+
+      // Check if adding this product would exceed the limit
+      if (cartCount >= MAX_PRODUCTS_IN_CART && existingItemIndex === -1) {
+        alert(`You can only add a maximum of ${MAX_PRODUCTS_IN_CART} products to your cart. First Please ordered`);
+        return;
+      }
 
       if (existingItemIndex !== -1) {
-        existingCart[existingItemIndex].quantity += 1;
+        existingCart[existingItemIndex].quantity = (existingCart[existingItemIndex].quantity || 1) + 1; // Increment existing quantity
+
       } else {
-        existingCart.push({ id, name, imageUrl, price, description, quantity: 1 });
+        existingCart.push({
+          id,
+          name,
+          imageUrl,
+          price,
+          description,
+          quantity: 1, // Initialize quantity
+
+        });
       }
+
+
 
       localStorage.setItem("cart", JSON.stringify(existingCart));
       window.dispatchEvent(new Event("cartUpdated"));
 
       setIsAdded(true);
+      setCartCount(existingCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); //Update cart count after adding
     }
   };
 
@@ -70,10 +107,12 @@ const Product: React.FC<ProductProps> = ({ id, name, imageUrl, price = 0, descri
 
       <button
         className={`text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline self-start ${
-          isAdded ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-700"
+          isAdded || cartCount >= MAX_PRODUCTS_IN_CART
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-green-500 hover:bg-green-700"
         }`}
         onClick={addToCart}
-        disabled={isAdded}
+        disabled={isAdded || cartCount >= MAX_PRODUCTS_IN_CART}
       >
         {isAdded ? "Added" : "Add to Cart"}
       </button>
