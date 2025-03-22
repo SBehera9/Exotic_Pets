@@ -12,10 +12,19 @@ interface BuyNowFormProps {
   cartItems?: any[];
 }
 
-const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, productImage, unitPrice = 0, onClose, cartItems = [] }) => {
+const BuyNowForm: React.FC<BuyNowFormProps> = ({
+  productName,
+  productImage,
+  unitPrice = 0,
+  onClose,
+  cartItems = [],
+}) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [orderTime, setOrderTime] = useState("");
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   useEffect(() => {
     setOrderTime(new Date().toLocaleString());
@@ -25,7 +34,12 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, productImage, unit
     e.preventDefault();
 
     emailjs
-      .sendForm("service_t5of1oj", "template_hpda8wv", formRef.current!, "4uN2kcMHYEGfvMOXP")
+      .sendForm(
+        "service_t5of1oj",
+        "template_hpda8wv",
+        formRef.current!,
+        "4uN2kcMHYEGfvMOXP"
+      )
       .then(() => {
         alert("Order submitted successfully! 🎉");
         formRef.current?.reset();
@@ -39,71 +53,139 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({ productName, productImage, unit
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/30">
-      <div className="bg-white p-6 rounded-xl max-w-md md:max-w-3xl shadow-2xl border border-gray-200 flex flex-col md:flex-row relative">
-        {/* Close Button */}
-        <button onClick={onClose} className="absolute top-2 right-3 text-gray-600 hover:text-red-500 text-xl">✖</button>
+      <div className="bg-white p-4 rounded-xl max-w-md md:max-w-3xl shadow-2xl border border-gray-200 flex flex-col sm:flex-row relative w-full max-h-[90vh] overflow-auto">
 
-        {/* Left: Product Details */}
-        <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
-          {/* Display multiple product images in a column if cartItems exist */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-3 text-gray-600 hover:text-red-500 text-xl"
+        >
+          ✖
+        </button>
+
+        <div className="w-full sm:w-1/2 bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
           {cartItems.length > 0 ? (
             <div>
-              <h2 className="text-lg font-bold text-gray-700 mb-2">Order Summary</h2>
-              <div className="flex flex-col items-center"> {/* Use flex-col to display items in a column */}
+              <h2 className="text-lg font-bold text-gray-700 mb-2">
+                Order Summary
+              </h2>
+              <div className="flex flex-col items-center">
+
                 {cartItems.map((item, index) => (
-                  <div key={index} className="mb-4 w-full max-w-[200px]"> {/* Added margin-bottom and width restriction */}
-                    <Image src={item.imageUrl} alt={item.name} width={150} height={150} className="rounded-lg object-cover mb-2" />
-                    <p className="text-sm text-gray-600 overflow-hidden text-overflow-ellipsis whitespace-nowrap">{item.name} (Qty: {item.quantity})</p>
-                    <p className="text-sm text-gray-600">Rs. {(item.price * item.quantity).toFixed(2)}</p>
+                  <div
+                    key={index}
+                    className="mb-4 w-full max-w-[200px] flex flex-col items-center"
+                  >
+
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      width={150}
+                      height={150}
+                      className="rounded-lg object-cover mb-2"
+                    />
+                    <p className="text-sm text-gray-600 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
+                      {item.name} (Qty: {item.quantity})
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Rs. {(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
             <>
-              {/* Fallback to single product display if cartItems is empty */}
-              {productImage && <Image src={productImage} alt={productName} width={150} height={150} className="rounded-lg mb-3 object-cover" />}
+
+              {productImage && (
+                <Image
+                  src={productImage}
+                  alt={productName}
+                  width={150}
+                  height={150}
+                  className="rounded-lg mb-3 object-cover"
+                />
+              )}
               <h2 className="text-lg font-bold text-gray-700">{productName}</h2>
-              <p className="text-gray-600"><span className="font-semibold">Price:</span> Rs. {unitPrice?.toFixed(2)}</p>
+              <p className="text-gray-600">
+                <span className="font-semibold">Price:</span> Rs.{" "}
+                {unitPrice?.toFixed(2)}
+              </p>
             </>
           )}
-          <p className="text-gray-600"><span className="font-semibold">Total Price:</span> Rs. {totalPrice.toFixed(2)}</p>
-
+          <p className="text-gray-600">
+            <span className="font-semibold">Total Price:</span> Rs.{" "}
+            {totalPrice.toFixed(2)}
+          </p>
         </div>
 
-        {/* Right: Order Form */}
-        <div className="w-full md:w-1/2 p-4">
-          <h2 className="text-2xl font-extrabold text-green-600 text-center mb-3">Buy Now 🛍️</h2>
+        <div className="w-full sm:w-1/2 p-4">
+          <h2 className="text-2xl font-extrabold text-green-600 text-center mb-3">
+            Buy Now 🛍️
+          </h2>
 
           <form ref={formRef} onSubmit={sendEmail} className="space-y-3">
             <input type="hidden" name="order_time" value={orderTime} />
-            <input type="hidden" name="products" value={cartItems.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ')} />
-            <input type="hidden" name="total_price" value={totalPrice.toFixed(2)} />
+            <input
+              type="hidden"
+              name="products"
+              value={cartItems
+                .map((item) => `${item.name} (Qty: ${item.quantity})`)
+                .join(", ")}
+            />
+            <input
+              type="hidden"
+              name="total_price"
+              value={totalPrice.toFixed(2)}
+            />
 
-            {/* Name */}
             <div>
               <label className="block text-gray-700 font-semibold">Name</label>
-              <input type="text" name="name" placeholder="Enter your name" className="w-full p-3 border rounded-lg text-black" required />
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="w-full p-3 border rounded-lg text-black"
+                required
+              />
             </div>
 
-            {/* Phone Number */}
             <div>
-              <label className="block text-gray-700 font-semibold">Phone Number</label>
-              <input type="tel" name="phone" placeholder="Enter your phone number" className="w-full p-3 border rounded-lg text-black" required />
+              <label className="block text-gray-700 font-semibold">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Enter your phone number"
+                className="w-full p-3 border rounded-lg text-black"
+                required
+              />
             </div>
 
-            {/* Address */}
             <div>
-              <label className="block text-gray-700 font-semibold">Address</label>
-              <textarea name="address" placeholder="Enter your address" className="w-full p-3 border rounded-lg text-black" required></textarea>
+              <label className="block text-gray-700 font-semibold">
+                Address
+              </label>
+              <textarea
+                name="address"
+                placeholder="Enter your address"
+                className="w-full p-3 border rounded-lg text-black"
+                required
+              ></textarea>
             </div>
 
-            {/* Buttons */}
             <div className="flex justify-between">
-              <button type="button" className="px-5 py-2 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600" onClick={onClose}>
+              <button
+                type="button"
+                className="px-5 py-2 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600"
+                onClick={onClose}
+              >
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600">
+              <button
+                type="submit"
+                className="px-5 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600"
+              >
                 Submit
               </button>
             </div>
