@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface ProductProps {
   id: number;
@@ -9,7 +9,7 @@ interface ProductProps {
   imageUrl: string;
   price?: number;
   description: string;
-  quantity?: number; // Add quantity to the interface
+  quantity?: number;
 }
 
 const MAX_PRODUCTS_IN_CART = 3;
@@ -22,19 +22,18 @@ const Product: React.FC<ProductProps> = ({
   description,
 }) => {
   const [isAdded, setIsAdded] = useState(false);
-  const [cartCount, setCartCount] = useState(0); // Track total items in the cart
+  const [cartCount, setCartCount] = useState(0);
 
-  const checkIfInCart = () => {
+  const checkIfInCart = useCallback(() => {
     if (typeof window !== "undefined") {
       const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
       const isProductInCart = savedCart.some(
         (item: ProductProps) => item.id === id
       );
       setIsAdded(isProductInCart);
-      setCartCount(savedCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); // Recalculate total cart count
+      setCartCount(savedCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0));
     }
-  };
-
+  }, [id]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -43,11 +42,11 @@ const Product: React.FC<ProductProps> = ({
       const handleCartUpdate = () => checkIfInCart();
       window.addEventListener("cartUpdated", handleCartUpdate);
 
-      return () => window.removeEventListener("cartUpdated", handleCartUpdate);
+      return () => {
+        window.removeEventListener("cartUpdated", handleCartUpdate);
+      };
     }
-  }, [id]);
-
-
+  }, [checkIfInCart]);
 
   const addToCart = () => {
     if (typeof window !== "undefined") {
@@ -56,15 +55,13 @@ const Product: React.FC<ProductProps> = ({
         (item: ProductProps) => item.id === id
       );
 
-      // Check if adding this product would exceed the limit
       if (cartCount >= MAX_PRODUCTS_IN_CART && existingItemIndex === -1) {
         alert(`You can only add a maximum of ${MAX_PRODUCTS_IN_CART} products to your cart. First Please ordered`);
         return;
       }
 
       if (existingItemIndex !== -1) {
-        existingCart[existingItemIndex].quantity = (existingCart[existingItemIndex].quantity || 1) + 1; // Increment existing quantity
-
+        existingCart[existingItemIndex].quantity = (existingCart[existingItemIndex].quantity || 1) + 1;
       } else {
         existingCart.push({
           id,
@@ -72,18 +69,15 @@ const Product: React.FC<ProductProps> = ({
           imageUrl,
           price,
           description,
-          quantity: 1, // Initialize quantity
-
+          quantity: 1,
         });
       }
-
-
 
       localStorage.setItem("cart", JSON.stringify(existingCart));
       window.dispatchEvent(new Event("cartUpdated"));
 
       setIsAdded(true);
-      setCartCount(existingCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); //Update cart count after adding
+      setCartCount(existingCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0));
     }
   };
 

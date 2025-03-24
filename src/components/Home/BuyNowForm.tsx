@@ -4,12 +4,20 @@ import React, { useRef, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
 
+interface CartItem {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  quantity: number;
+}
+
 interface BuyNowFormProps {
   productName: string;
   productImage?: string;
   unitPrice?: number;
   onClose: () => void;
-  cartItems?: any[];
+  cartItems?: CartItem[];
 }
 
 const BuyNowForm: React.FC<BuyNowFormProps> = ({
@@ -52,12 +60,12 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/30">
-      <div className="bg-white p-4 rounded-xl max-w-md md:max-w-3xl shadow-2xl border border-gray-200 flex flex-col sm:flex-row relative w-full max-h-[90vh] overflow-auto">
+    <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/30 gap-8">
+      <div className="bg-white p-4 rounded-xl max-w-md md:max-w-3xl shadow-2xl border border-gray-200 flex flex-col sm:flex-row relative w-full max-h-[90vh]">
 
         <button
           onClick={onClose}
-          className="absolute top-2 right-3 text-gray-600 hover:text-red-500 text-xl"
+          className="absolute top-2 left-5 text-gray-600 hover:text-red-500 text-xl"
         >
           ✖
         </button>
@@ -68,12 +76,11 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
               <h2 className="text-lg font-bold text-gray-700 mb-2">
                 Order Summary
               </h2>
-              <div className="flex flex-col items-center">
-
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto">
                 {cartItems.map((item, index) => (
                   <div
                     key={index}
-                    className="mb-4 w-full max-w-[200px] flex flex-col items-center"
+                    className="w-full max-w-[200px] flex flex-col items-center"
                   >
 
                     <Image
