@@ -8,28 +8,17 @@ import {
     XCircleIcon,
     Bars3Icon,
 } from "@heroicons/react/24/outline";
-import BuyNowForm from "../Home/BuyNowForm";
-
-type CartItem = {
-    id: number;
-    name: string;
-    price: number;
-    imageUrl: string;
-    quantity: number;
-    extraInfo?: Record<string, any>; // Changed 'unknown' to 'any' to resolve the error, but consider a more specific type if possible.
-};
 
 const Navbar: React.FC = () => {
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [cartItems, setCartItems] = useState<any[]>([]);
     const [cartOpen, setCartOpen] = useState<boolean>(false);
-    const [isBuyNowOpen, setIsBuyNowOpen] = useState<boolean>(false);
-    const [selectedProduct, setSelectedProduct] = useState<string>("");
-    const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+    const [authMode, setAuthMode] = useState<"login" | "signup">("login");
 
     useEffect(() => {
         const updateCart = () => {
-            const cart: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
+            const cart: any[] = JSON.parse(localStorage.getItem("cart") || "[]");
             setCartItems(cart);
         };
 
@@ -37,46 +26,6 @@ const Navbar: React.FC = () => {
         window.addEventListener("cartUpdated", updateCart);
         return () => window.removeEventListener("cartUpdated", updateCart);
     }, []);
-
-    useEffect(() => {
-        document.body.style.overflow = cartOpen ? "hidden" : "unset";
-        return () => {
-            document.body.style.overflow = "unset";
-        };
-    }, [cartOpen]);
-
-    const removeFromCart = (id: number) => {
-        const updatedCart = cartItems.filter((item) => item.id !== id);
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-        setCartItems(updatedCart);
-        window.dispatchEvent(new Event("cartUpdated"));
-    };
-
-    const updateQuantity = (id: number, newQuantity: number) => {
-        if (newQuantity < 1) return;
-
-        const updatedCart = cartItems.map((item) =>
-            item.id === id ? { ...item, quantity: newQuantity } : item
-        );
-
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-        setCartItems(updatedCart);
-        window.dispatchEvent(new Event("cartUpdated"));
-    };
-
-    const handleCheckout = () => {
-        if (cartItems.length > 0) {
-            const selectedProducts = cartItems.map((item) => item.name).join(", ");
-            const totalPrice = cartItems.reduce(
-                (sum, item) => sum + item.price * item.quantity,
-                0
-            );
-
-            setSelectedProduct(selectedProducts);
-            setTotalCartPrice(totalPrice);
-            setIsBuyNowOpen(true);
-        }
-    };
 
     return (
         <>
@@ -96,20 +45,19 @@ const Navbar: React.FC = () => {
                             </Link>
                         </div>
 
+                        {/* Mobile View */}
                         <div className="md:hidden flex items-center space-x-4">
-                            <div className="relative">
-                                <button
-                                    onClick={() => setCartOpen(!cartOpen)}
-                                    className="relative text-white hover:bg-black hover:text-green-400 p-2 rounded-md"
-                                >
-                                    <ShoppingCartIcon className="h-7 w-7" />
-                                    {cartItems.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                            {cartItems.length}
-                                        </span>
-                                    )}
-                                </button>
-                            </div>
+                            <button
+                                onClick={() => setCartOpen(!cartOpen)}
+                                className="relative text-white hover:bg-black hover:text-green-400 p-2 rounded-md"
+                            >
+                                <ShoppingCartIcon className="h-7 w-7" />
+                                {cartItems.length > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                        {cartItems.length}
+                                    </span>
+                                )}
+                            </button>
 
                             <button
                                 onClick={() => setMenuOpen(!menuOpen)}
@@ -120,6 +68,7 @@ const Navbar: React.FC = () => {
                             </button>
                         </div>
 
+                        {/* Desktop View */}
                         <div className="hidden md:flex items-center space-x-4">
                             <Link href="/" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
                                 Home
@@ -131,70 +80,92 @@ const Navbar: React.FC = () => {
                                 Contact Us
                             </Link>
 
-                            <div className="relative">
-                                <button onClick={() => setCartOpen(!cartOpen)} className="relative text-white hover:bg-black hover:text-green-400 p-2 rounded-md">
-                                    <ShoppingCartIcon className="h-7 w-7" />
-                                    {cartItems.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                            {cartItems.length}
-                                        </span>
-                                    )}
+                            {/* Cart Button */}
+                            <button onClick={() => setCartOpen(!cartOpen)} className="relative text-white hover:bg-black hover:text-green-400 p-2 rounded-md">
+                                <ShoppingCartIcon className="h-7 w-7" />
+                                {cartItems.length > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                        {cartItems.length}
+                                    </span>
+                                )}
+                            </button>
+
+                            {/* Login & Sign Up Buttons */}
+                            <div className="flex items-center space-x-2">
+                                <button
+                                    onClick={() => {
+                                        setAuthMode("login");
+                                        setAuthModalOpen(true);
+                                    }}
+                                    className="text-white border border-white px-3 py-1 rounded-md hover:bg-black hover:text-green-400"
+                                >
+                                    Login
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setAuthMode("signup");
+                                        setAuthModalOpen(true);
+                                    }}
+                                    className="bg-white text-green-600 px-3 py-1 rounded-md hover:bg-black hover:text-white"
+                                >
+                                    Sign Up
                                 </button>
                             </div>
                         </div>
                     </div>
-
-                    {menuOpen && (
-                        <div className="md:hidden absolute top-full left-0 w-full bg-green-600 shadow-md rounded-b-md overflow-hidden z-50">
-                            <div className="flex flex-col items-center py-4">
-                                <Link href="/" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                    Home
-                                </Link>
-                                <Link href="/Product" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                    Products
-                                </Link>
-                                <Link href="/#contact" className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold">
-                                    Contact Us
-                                </Link>
-                            </div>
-                        </div>
-                    )}
-
-                    {cartOpen && (
-                        <div className="fixed top-0 right-0 h-full w-full sm:w-80 bg-white shadow-lg rounded-lg p-4 z-50 overflow-y-auto">
-                            <div className="flex justify-between items-center">
-                                <h3 className="text-lg font-bold text-gray-800">Cart</h3>
-                                <button onClick={() => setCartOpen(false)}>
-                                    <XCircleIcon className="h-6 w-6 text-gray-500 hover:text-gray-700" />
-                                </button>
-                            </div>
-
-                            {cartItems.length === 0 ? (
-                                <p className="text-gray-500 text-sm mt-4">Your cart is empty.</p>
-                            ) : (
-                                <ul className="mt-4 space-y-4">
-                                    {cartItems.map((item) => (
-                                        <li key={item.id} className="flex items-center space-x-4 border-b pb-2">
-                                            <Image src={item.imageUrl} alt={item.name} width={50} height={50} className="rounded-md" />
-                                            <div className="flex-1">
-                                                <p className="text-md font-semibold text-gray-700">{item.name}</p>
-                                                <p className="text-sm text-green-600">Rs. {item.price.toFixed(2)}</p>
-                                            </div>
-                                            <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700">✖</button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-
-                            {cartItems.length > 0 && (
-                                <button onClick={handleCheckout} className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                    Go to Checkout
-                                </button>
-                            )}
-                        </div>
-                    )}
                 </div>
             </nav>
+
+            {/* Authentication Modal */}
+            {authModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white w-96 p-6 rounded-md shadow-lg relative">
+                        <button
+                            className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                            onClick={() => setAuthModalOpen(false)}
+                        >
+                            ✖
+                        </button>
+                        <h2 className="text-xl font-semibold text-center">
+                            {authMode === "login" ? "Login" : "Sign Up"}
+                        </h2>
+                        <form className="mt-4">
+                            {authMode === "signup" && (
+                                <input
+                                    type="text"
+                                    placeholder="Full Name"
+                                    className="w-full border border-gray-300 p-2 rounded-md mb-2 text-black"
+                                />
+                            )}
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                className="w-full border border-gray-300 p-2 rounded-md mb-2 text-black"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="w-full border border-gray-300 p-2 rounded-md mb-4 text-black"
+                            />
+                            <button
+                                type="submit"
+                                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md"
+                            >
+                                {authMode === "login" ? "Login" : "Sign Up"}
+                            </button>
+                        </form>
+                        <p className="text-center text-sm mt-3">
+                            {authMode === "login" ? "Don't have an account?" : "Already have an account?"}{" "}
+                            <button
+                                className="text-green-600 underline"
+                                onClick={() => setAuthMode(authMode === "login" ? "signup" : "login")}
+                            >
+                                {authMode === "login" ? "Sign Up" : "Login"}
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
