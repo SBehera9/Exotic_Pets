@@ -71,55 +71,59 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
         </button>
 
         <div className="w-full sm:w-1/2 bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
-          {cartItems.length > 0 ? (
-            <div>
-              <h2 className="text-lg font-bold text-gray-700 mb-2">
-                Order Summary
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto">
-                {cartItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className="w-full max-w-[200px] flex flex-col items-center"
-                  >
-
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      width={150}
-                      height={150}
-                      className="rounded-lg object-cover mb-2"
-                    />
-                    <p className="text-sm text-gray-600 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
-                      {item.name} (Qty: {item.quantity})
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      Rs. {(item.price * item.quantity).toFixed(2)}
-                    </p>
-                  </div>
-                ))}
+          <div className="flex-grow">
+            {cartItems.length > 0 ? (
+              <div>
+                <h2 className="text-lg font-bold text-gray-700 mb-2">
+                  Order Summary
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto p-2">
+                  {cartItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="w-full max-w-[200px] flex flex-col items-center"
+                    >
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.name}
+                        width={150}
+                        height={150}
+                        style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                        className="rounded-lg object-cover mb-2"
+                      />
+                      <p className="text-[10px] sm:text-[13px] text-gray-600 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
+                        {item.name} (Qty: {item.quantity})
+                      </p>
+                      <p className="text-[10px] sm:text-[13px] text-gray-600">
+                        Rs. {(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <>
+            ) : (
+              <>
+                {productImage && (
+                  <Image
+                    src={productImage}
+                    alt={productName}
+                    width={150}
+                    height={150}
+                    style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                    className="rounded-lg mb-3 object-cover"
+                  />
+                )}
+                <h2 className="text-sm sm:text-lg font-bold text-gray-700">{productName}</h2>
+                <p className="text-gray-600">
+                  <span className="font-semibold">Price:</span> Rs.{" "}
+                  {unitPrice?.toFixed(2)}
+                </p>
+              </>
+            )}
+          </div>
 
-              {productImage && (
-                <Image
-                  src={productImage}
-                  alt={productName}
-                  width={150}
-                  height={150}
-                  className="rounded-lg mb-3 object-cover"
-                />
-              )}
-              <h2 className="text-lg font-bold text-gray-700">{productName}</h2>
-              <p className="text-gray-600">
-                <span className="font-semibold">Price:</span> Rs.{" "}
-                {unitPrice?.toFixed(2)}
-              </p>
-            </>
-          )}
-          <p className="text-gray-600">
+
+          <p className="text-gray-600 mt-2">
             <span className="font-semibold">Total Price:</span> Rs.{" "}
             {totalPrice.toFixed(2)}
           </p>
