@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
   }, [cartOpen]);
 
   useEffect(() => {
-    // Recalculate total cart price whenever cartItems change
+    
     const newTotal = cartItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
