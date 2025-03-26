@@ -90,26 +90,29 @@ const ProductPage: React.FC = () => {
         {productsToDisplay.map((product) => (
           <div
             key={product.id}
-            className="border rounded-lg shadow-md bg-white flex flex-col overflow-hidden"
+            className="border border-gray-200 rounded-xl shadow-lg bg-white flex flex-col overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out"
           >
-            <div className="h-48 w-full relative">
+            <div className="h-56 w-full relative">
               <Image
                 src={product.imageUrl}
                 alt={product.name}
                 layout="fill"
                 objectFit="cover"
+                className="rounded-t-xl"
               />
             </div>
 
-            <div className="flex flex-col flex-grow p-4">
-              <h3 className="text-lg font-semibold">{product.name}</h3>
-              <p className="text-green-600 font-bold">Rs. {product.price}</p>
-              <p className="text-gray-600 mb-4">{product.description}</p>
+            {/* Product Details */}
+            <div className="flex flex-col flex-grow p-5">
+              <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
+              <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
+              <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
 
+              {/* Add to Cart Button */}
               <div className="mt-auto">
                 <button
                   onClick={() => addToCart(product)}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+                  className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all duration-300 ease-in-out"
                 >
                   Add to Cart
                 </button>
