@@ -1,123 +1,123 @@
-// "use client";
+"use client";
 
-// import Image from "next/image";
-// import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 
-// interface ProductProps {
-//   id: number;
-//   name: string;
-//   imageUrl: string;
-//   price?: number;
-//   description: string;
-//   quantity?: number; // Add quantity to the interface
-// }
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+  category: "pets" | "petFood";
+}
 
-// const MAX_PRODUCTS_IN_CART = 3;
+const ProductPage: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-// const Product: React.FC<ProductProps> = ({
-//   id,
-//   name,
-//   imageUrl,
-//   price = 0,
-//   description,
-// }) => {
-//   const [isAdded, setIsAdded] = useState(false);
-//   const [cartCount, setCartCount] = useState(0); // Track total items in the cart
+  const pets: Product[] = [
+    { id: 1, name: "Macaw Parrot", price: 5000, imageUrl: "/macaw.jpg", category: "pets" },
+    { id: 2, name: "Cockatiel", price: 2000, imageUrl: "/cockatiel.jpg", category: "pets" },
+    { id: 3, name: "Lovebird", price: 1500, imageUrl: "/lovebird.jpg", category: "pets" },
+  ];
 
-//   const checkIfInCart = () => {
-//     if (typeof window !== "undefined") {
-//       const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-//       const isProductInCart = savedCart.some(
-//         (item: ProductProps) => item.id === id
-//       );
-//       setIsAdded(isProductInCart);
-//       setCartCount(savedCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); // Recalculate total cart count
-//     }
-//   };
+  const petFood: Product[] = [
+    { id: 4, name: "Bird Seed Mix", price: 500, imageUrl: "/birdfood.jpg", category: "petFood" },
+    { id: 5, name: "Dog Food Pack", price: 800, imageUrl: "/dogfood.jpg", category: "petFood" },
+  ];
 
+  const shuffleArray = (array: Product[]) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
 
-//   useEffect(() => {
-//     if (typeof window !== "undefined") {
-//       checkIfInCart();
+  const getFilteredProducts = () => {
+    if (selectedCategory === "all") {
+      return shuffleArray([...pets, ...petFood]);
+    } else if (selectedCategory === "pets") {
+      return pets;
+    } else if (selectedCategory === "petFood") {
+      return petFood;
+    }
+    return [];
+  };
 
-//       const handleCartUpdate = () => checkIfInCart();
-//       window.addEventListener("cartUpdated", handleCartUpdate);
+  const productsToDisplay = getFilteredProducts();
 
-//       return () => window.removeEventListener("cartUpdated", handleCartUpdate);
-//     }
-//   }, [id]);
+  const filterCategory = (category: string) => {
+    setSelectedCategory(category);
+  };
 
+  const addToCart = (product: Product) => {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
+    const existingItem = cart.find((item: Product) => item.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
 
-//   const addToCart = () => {
-//     if (typeof window !== "undefined") {
-//       const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-//       const existingItemIndex = existingCart.findIndex(
-//         (item: ProductProps) => item.id === id
-//       );
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
 
-//       // Check if adding this product would exceed the limit
-//       if (cartCount >= MAX_PRODUCTS_IN_CART && existingItemIndex === -1) {
-//         alert(`You can only add a maximum of ${MAX_PRODUCTS_IN_CART} products to your cart. First Please ordered`);
-//         return;
-//       }
+  return (
+    <div className="container mx-auto py-10 px-4">
+      <h2 className="text-3xl font-bold text-center mb-6">Our Products</h2>
 
-//       if (existingItemIndex !== -1) {
-//         existingCart[existingItemIndex].quantity = (existingCart[existingItemIndex].quantity || 1) + 1; // Increment existing quantity
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          className={`px-4 py-2 rounded ${selectedCategory === "all" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => filterCategory("all")}
+        >
+          All Products
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${selectedCategory === "pets" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => filterCategory("pets")}
+        >
+          Pets
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${selectedCategory === "petFood" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          onClick={() => filterCategory("petFood")}
+        >
+          Pet Food
+        </button>
+      </div>
 
-//       } else {
-//         existingCart.push({
-//           id,
-//           name,
-//           imageUrl,
-//           price,
-//           description,
-//           quantity: 1, // Initialize quantity
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {productsToDisplay.map((product) => (
+          <div
+            key={product.id}
+            className="border rounded-lg shadow-md bg-white flex flex-col overflow-hidden"
+          >
+            <div className="h-48 w-full relative">
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
 
-//         });
-//       }
+            <div className="flex flex-col flex-grow p-4">
+              <h3 className="text-lg font-semibold">{product.name}</h3>
+              <p className="text-green-600 font-bold mb-4">Rs. {product.price}</p>
 
+              <div className="mt-auto">
+                <button
+                  onClick={() => addToCart(product)}
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-
-//       localStorage.setItem("cart", JSON.stringify(existingCart));
-//       window.dispatchEvent(new Event("cartUpdated"));
-
-//       setIsAdded(true);
-//       setCartCount(existingCart.reduce((total: number, item: ProductProps) => total + (item.quantity || 1), 0)); //Update cart count after adding
-//     }
-//   };
-
-//   return (
-//     <div className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
-//       <div className="w-full h-[200px] md:h-[250px] mb-2 bg-gray-100 shadow-md rounded-lg overflow-hidden relative">
-//         <Image
-//           src={imageUrl}
-//           alt={name}
-//           layout="fill"
-//           objectFit="cover"
-//           className="rounded-lg"
-//         />
-//       </div>
-
-//       <h3 className="text-lg font-semibold text-gray-800 mb-2">{name}</h3>
-//       <p className="text-md font-bold text-green-600 mb-2">
-//         Rs. {price.toFixed(2)}
-//       </p>
-//       <p className="text-sm text-gray-600 mb-4">{description}</p>
-
-//       <button
-//         className={`text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline self-start ${
-//           isAdded || cartCount >= MAX_PRODUCTS_IN_CART
-//             ? "bg-gray-400 cursor-not-allowed"
-//             : "bg-green-500 hover:bg-green-700"
-//         }`}
-//         onClick={addToCart}
-//         disabled={isAdded || cartCount >= MAX_PRODUCTS_IN_CART}
-//       >
-//         {isAdded ? "Added" : "Add to Cart"}
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Product;
+export default ProductPage;

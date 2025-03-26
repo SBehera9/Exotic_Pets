@@ -1,13 +1,13 @@
 import FooterSection from "@/components/Home/FooterSection";
 import Navbar from "@/components/Home/Navbar";
-import ProductList from "@/components/Home/ProductList";
+import ProductPage from "@/components/Home/Product";
 
 export default function Product() {
-  return (
-    <main className="min-h-screen bg-gray-100 ">
-      <Navbar />
-      <ProductList />
-      <FooterSection/>
-    </main>
-  );
+    return (
+        <div>
+            <Navbar/>
+            <ProductPage />
+            <FooterSection />
+        </div>
+    )
 }
