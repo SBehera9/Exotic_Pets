@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ProductData {
   id: number;
@@ -123,7 +124,13 @@ const AdminPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {products.map((product) => (
             <div key={product.id} className="border p-4 rounded-lg shadow-md">
-              <img src={product.imageUrl} alt={product.name} className="h-40 w-40 object-cover rounded mx-auto" />
+              <Image 
+                src={product.imageUrl} 
+                alt={product.name} 
+                width={160} 
+                height={160} 
+                className="h-40 w-40 object-cover rounded mx-auto" 
+              />
               <h3 className="text-lg font-bold mt-2">{product.name}</h3>
               <p className="text-gray-700">{product.description}</p>
               <p className="font-semibold text-green-700">₹{product.price}</p>

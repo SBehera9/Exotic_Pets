@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Product from "./Product";
+// import Product from "./Product"; // Removed unused import
+import Image from "next/image"; // Import Image component from next/image
 
 interface ProductData {
   id: number;
@@ -35,7 +36,7 @@ const ProductList: React.FC = () => {
   const addToCart = (product: ProductData) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const existingItem = cart.find((item: ProductData) => item.id === product.id);
-    
+
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
@@ -74,10 +75,13 @@ const ProductList: React.FC = () => {
           .filter((product) => product.category === activeSection)
           .map((product) => (
             <div key={product.id} className="border p-4 rounded-lg shadow-md relative">
-              <img
+              <Image
                 src={product.imageUrl}
                 alt={product.name}
+                width={500} // Adjust as needed
+                height={300} // Adjust as needed
                 className="w-full h-60 object-cover rounded"
+                style={{ objectFit: "cover" }} // added style to ensure the image covers the area
               />
               <h3 className="text-lg font-bold mt-2">{product.name}</h3>
               <p className="text-gray-700">{product.description}</p>
