@@ -29,6 +29,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [orderTime, setOrderTime] = useState("");
+
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -50,8 +51,10 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
       )
       .then(() => {
         alert("Order submitted successfully! 🎉");
-        formRef.current?.reset();
-        onClose();
+
+        localStorage.removeItem("cart");
+        window.dispatchEvent(new Event("cartUpdated")); 
+        onClose(); 
       })
       .catch((error) => {
         alert("Failed to submit order. Please try again.");
@@ -63,7 +66,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
     <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-black/40 p-4">
       <div className="bg-white p-6 rounded-2xl max-w-lg sm:max-w-3xl shadow-xl border border-gray-300 flex flex-col sm:flex-row relative w-full max-h-[90vh] overflow-hidden">
 
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-3 left-4 text-gray-700 hover:text-red-500 text-2xl transition"
@@ -71,18 +73,17 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
           ✖
         </button>
 
-        {/* Order Summary Section */}
-        <div className="w-full sm:w-1/2 bg-gray-100 p-5 rounded-lg flex flex-col items-center text-center">
+        <div className="w-full sm:w-1/2 bg-gray-100 p-5 rounded-lg flex flex-col text-center">
           <h2 className="text-lg font-bold text-gray-700 mb-3">
             {cartItems.length > 0 ? "Order Summary" : productName}
           </h2>
 
-          {cartItems.length > 0 ? (
-            <div className="w-full max-h-[250px] overflow-y-auto">
-              {cartItems.map((item, index) => (
+          <div className="w-full flex-1 overflow-y-auto p-4 max-h-[250px]">
+            {cartItems.length > 0 ? (
+              cartItems.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between border-b border-gray-300 py-2"
+                  className="flex items-center justify-between border-b border-gray-300 py-3"
                 >
                   <Image
                     src={item.imageUrl}
@@ -98,26 +99,28 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
                     Rs. {(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
-              ))}
-            </div>
-          ) : (
-            productImage && (
-              <Image
-                src={productImage}
-                alt={productName}
-                width={100}
-                height={100}
-                className="rounded-lg object-cover mb-3"
-              />
-            )
-          )}
+              ))
+            ) : (
+              productImage && (
+                <Image
+                  src={productImage}
+                  alt={productName}
+                  width={100}
+                  height={100}
+                  className="rounded-lg object-cover mb-3"
+                />
+              )
+            )}
+          </div>
 
-          <p className="text-gray-700 mt-3 font-semibold">
-            Total: Rs. {totalPrice.toFixed(2)}
-          </p>
+          <div className="border-t border-gray-300 pt-3 mt-auto">
+            <div className="flex justify-between text-lg font-bold text-gray-800">
+              <span>Total:</span>
+              <span>Rs. {totalPrice.toFixed(2)}</span>
+            </div>
+          </div>
         </div>
 
-        {/* Form Section */}
         <div className="w-full sm:w-1/2 p-6">
           <h2 className="text-2xl font-bold text-green-600 text-center mb-4">
             Buy Now 🛍️
@@ -125,8 +128,30 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
 
           <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
             <input type="hidden" name="order_time" value={orderTime} />
-            <input type="hidden" name="products" value={cartItems.map((item) => `${item.name} (Qty: ${item.quantity})`).join(", ")} />
+            <input
+              type="hidden"
+              name="products"
+              value={cartItems.map((item) => `${item.name} (Qty: ${item.quantity})`).join(", ")}
+            />
             <input type="hidden" name="total_price" value={totalPrice.toFixed(2)} />
+
+            {/* Hidden field to send product images */}
+            <input
+              type="hidden"
+              name="product_images"
+              value={cartItems.map((item) => item.imageUrl).join(", ")}
+            />
+
+            <div>
+              <label className="block text-gray-700 font-semibold">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="w-full p-3 border rounded-lg text-black focus:ring-2 focus:ring-green-400 transition"
+                required
+              />
+            </div>
 
             <div>
               <label className="block text-gray-700 font-semibold">Name</label>
@@ -177,7 +202,6 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );
