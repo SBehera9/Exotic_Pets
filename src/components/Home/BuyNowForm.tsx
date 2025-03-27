@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import emailjs from "emailjs-com"; // Import EmailJS
+import emailjs from "emailjs-com";
 
 interface CartItem {
   id: number;
@@ -45,118 +45,124 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
 
     if (!formRef.current) return;
 
-    // Sending email using EmailJS
     emailjs
       .sendForm(
-        "service_t5of1oj", // Replace with your EmailJS service ID
-        "template_hpda8wv", // Replace with your EmailJS template ID
+        "service_t5of1oj",
+        "template_hpda8wv",
         formRef.current,
-        "4uN2kcMHYEGfvMOXP" // Replace with your EmailJS public key
+        "4uN2kcMHYEGfvMOXP"
       )
       .then(
-        (response) => {
-          console.log("Email sent successfully!", response);
+        () => {
           alert("Order submitted successfully!");
           localStorage.removeItem("cart");
           window.dispatchEvent(new Event("cartUpdated"));
           onClose();
         },
-        (error) => {
-          console.error("Error sending email:", error);
+        () => {
           alert("Failed to send email. Please try again.");
         }
       );
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md bg-black/40 p-4">
-      <div className="bg-white rounded-2xl max-w-lg sm:max-w-3xl shadow-xl border border-gray-200 flex flex-col sm:flex-row relative w-full max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 p-4">
+      <div className="bg-white rounded-xl max-w-3xl shadow-lg flex flex-col sm:flex-row relative w-full overflow-hidden">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-xl transition"
+          className="absolute top-3 right-3 text-gray-600 hover:text-red-500 text-2xl transition"
           aria-label="Close"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          ✖
         </button>
 
-        <div className="w-full sm:w-1/2 bg-gray-50 p-3 sm:p-4 rounded-t-lg sm:rounded-l-lg sm:rounded-t-none flex flex-col text-center">
-          <h2 className="text-lg font-semibold text-gray-800 mb-2">
+        <div className="w-full sm:w-1/2 bg-gray-50 p-5 flex flex-col text-center">
+          <h2 className="text-xl font-semibold text-gray-800 mb-3">
             {cartItems.length > 0 ? "Order Summary" : productName}
           </h2>
 
-          <div className="w-full flex-1 overflow-y-auto p-2 sm:p-3 max-h-[200px]">
+          <div className="w-full flex-1 overflow-y-auto p-3 max-h-[220px]">
             {cartItems.length > 0 ? (
-              cartItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between border-b border-gray-200 py-2 last:border-b-0"
-                >
-                  <div className="w-8 h-8 relative rounded-lg overflow-hidden">
-                    <Image src={item.imageUrl} alt={item.name} fill style={{ objectFit: "cover" }} />
-                  </div>
-                  <p className="text-xs sm:text-sm text-gray-700 flex-1 ml-2 truncate">
+              cartItems.map((item) => (
+                <div key={item.id} className="flex items-center justify-between border-b py-2">
+                  <Image src={item.imageUrl} alt={item.name} width={40} height={40} className="rounded-lg" />
+                  <p className="text-sm text-gray-700 flex-1 ml-2 truncate">
                     {item.name} (Qty: {item.quantity})
                   </p>
-                  <p className="text-xs sm:text-sm text-gray-800 font-medium">
+                  <p className="text-sm text-gray-800 font-medium">
                     Rs. {(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
               ))
             ) : (
               productImage && (
-                <div className="w-24 h-24 mx-auto relative">
-                  <Image src={productImage} alt={productName} fill style={{ objectFit: "cover" }} className="rounded-lg" />
+                <div className="w-28 h-28 mx-auto relative">
+                  <Image src={productImage} alt={productName} width={100} height={100} className="rounded-lg" />
                 </div>
               )
             )}
           </div>
 
-          <div className="border-t border-gray-200 pt-2 mt-auto">
-            <div className="flex justify-between text-sm sm:text-lg font-semibold text-gray-900">
-              <span>Total:</span>
-              <span>Rs. {totalPrice.toFixed(2)}</span>
-            </div>
-          </div>
+          {cartItems.length > 0 && (
+            <p className="text-lg font-semibold text-gray-900 mt-4">
+              Total: Rs. {totalPrice.toFixed(2)}
+            </p>
+          )}
         </div>
 
-        <div className="w-full sm:w-1/2 p-3 sm:p-4">
-          <div className="bg-gray-50 rounded-b-lg sm:rounded-r-lg p-3 sm:p-4 shadow-md">
-            <h2 className="text-xl font-bold text-green-700 text-center mb-3">Order Details</h2>
+        <div className="w-full sm:w-1/2 p-5">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <input type="hidden" name="order_time" value={orderTime} />
+            <input type="hidden" name="total_price" value={totalPrice.toFixed(2)} />
+            <input type="hidden" name="product_name" value={productName} />
+            <input type="hidden" name="product_image" value={productImage || ""} />
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
-              <input type="hidden" name="order_time" value={orderTime} />
-              <input type="hidden" name="total_price" value={totalPrice.toFixed(2)} />
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter your name"
+              />
+            </div>
 
-              <div>
-                <label htmlFor="firstName" className="block text-xs font-medium text-gray-700">First Name</label>
-                <input type="text" id="firstName" name="name" className="mt-1 w-full p-2 border rounded-md shadow-sm text-gray-900 text-xs" required value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter your phone number"
+              />
+            </div>
 
-              <div>
-                <label htmlFor="phone" className="block text-xs font-medium text-gray-700">Phone Number</label>
-                <input type="tel" id="phone" name="phone" className="mt-1 w-full p-2 border rounded-md shadow-sm text-gray-900 text-xs" required value={phone} onChange={(e) => setPhone(e.target.value)} />
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Address</label>
+              <textarea
+                name="address"
+                required
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                placeholder="Enter your address"
+                rows={3}
+              ></textarea>
+            </div>
 
-              <div>
-                <label htmlFor="address" className="block text-xs font-medium text-gray-700">Address</label>
-                <textarea id="address" name="address" className="mt-1 w-full p-2 border rounded-md shadow-sm text-gray-900 text-xs" required value={address} onChange={(e) => setAddress(e.target.value)}></textarea>
-              </div>
-
-              <div className="flex justify-end gap-2">
-                <button type="button" className="px-3 py-1 bg-gray-200 text-gray-700 font-medium rounded-md hover:bg-gray-300 transition text-xs" onClick={onClose}>Cancel</button>
-                <button type="submit" className="px-3 py-1 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 transition text-xs">Place Order</button>
-              </div>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-md font-medium text-lg hover:bg-blue-700 transition"
+            >
+              Place Order
+            </button>
+          </form>
         </div>
       </div>
     </div>
