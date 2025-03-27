@@ -1,3 +1,4 @@
+// ./src/components/Home/Product.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -10,20 +11,56 @@ interface Product {
   description: string;
   imageUrl: string;
   category: "pets" | "petFood";
+  quantity?: number; // Optional quantity for cart items
 }
 
 const ProductPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const pets: Product[] = [
-    { id: 1, name: "Macaw Parrot", price: 5000, description: "A colorful and intelligent parrot.", imageUrl: "/Bird5.jpg", category: "pets" },
-    { id: 2, name: "Cockatiel", price: 2000, description: "A friendly bird that loves to sing.", imageUrl: "/Bird6.jpg", category: "pets" },
-    { id: 3, name: "Dog", price: 1500, description: "A small and affectionate companion bird.", imageUrl: "/Dog1.jpg", category: "pets" },
+    {
+      id: 1,
+      name: "Macaw Parrot",
+      price: 5000,
+      description: "A colorful and intelligent parrot.",
+      imageUrl: "/Bird5.jpg",
+      category: "pets",
+    },
+    {
+      id: 2,
+      name: "Cockatiel",
+      price: 2000,
+      description: "A friendly bird that loves to sing.",
+      imageUrl: "/Bird6.jpg",
+      category: "pets",
+    },
+    {
+      id: 3,
+      name: "Dog",
+      price: 1500,
+      description: "A small and affectionate companion bird.",
+      imageUrl: "/Dog1.jpg",
+      category: "pets",
+    },
   ];
 
   const petFood: Product[] = [
-    { id: 4, name: "Bird Seed Mix", price: 500, description: "A healthy seed mix for all birds.", imageUrl: "/Birds_Food.jpg", category: "petFood" },
-    { id: 5, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/Dog_Food.jpeg", category: "petFood" },
+    {
+      id: 4,
+      name: "Bird Seed Mix",
+      price: 500,
+      description: "A healthy seed mix for all birds.",
+      imageUrl: "/Birds_Food.jpg",
+      category: "petFood",
+    },
+    {
+      id: 5,
+      name: "Dog Food Pack",
+      price: 800,
+      description: "Nutritious food pack for dogs.",
+      imageUrl: "/Dog_Food.jpeg",
+      category: "petFood",
+    },
   ];
 
   const shuffleArray = (array: Product[]) => {
@@ -48,11 +85,12 @@ const ProductPage: React.FC = () => {
   };
 
   const addToCart = (product: Product) => {
-    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartString = localStorage.getItem("cart");
+    const cart: Product[] = cartString ? JSON.parse(cartString) : [];
 
-    const existingItem = cart.find((item: Product) => item.id === product.id);
+    const existingItem = cart.find((item) => item.id === product.id);
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity = (existingItem.quantity || 0) + 1;
     } else {
       cart.push({ ...product, quantity: 1 });
     }
@@ -67,19 +105,27 @@ const ProductPage: React.FC = () => {
 
       <div className="flex justify-center gap-4 mb-6">
         <button
-          className={`px-4 py-2 rounded ${selectedCategory === "all" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded ${
+            selectedCategory === "all" ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
           onClick={() => filterCategory("all")}
         >
           All Products
         </button>
         <button
-          className={`px-4 py-2 rounded ${selectedCategory === "pets" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded ${
+            selectedCategory === "pets" ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
           onClick={() => filterCategory("pets")}
         >
           Pets
         </button>
         <button
-          className={`px-4 py-2 rounded ${selectedCategory === "petFood" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+          className={`px-4 py-2 rounded ${
+            selectedCategory === "petFood"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-300"
+          }`}
           onClick={() => filterCategory("petFood")}
         >
           Pet Food
@@ -105,7 +151,9 @@ const ProductPage: React.FC = () => {
             {/* Product Details */}
             <div className="flex flex-col flex-grow p-5">
               <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
-              <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
+              <p className="text-green-600 font-bold text-lg">
+                Rs. {product.price}
+              </p>
               <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
 
               {/* Add to Cart Button */}
@@ -126,4 +174,3 @@ const ProductPage: React.FC = () => {
 };
 
 export default ProductPage;
-  
