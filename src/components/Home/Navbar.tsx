@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
                 Products
               </Link>
               <Link
-                href="/#contact"
+                href="/contactuspage"
                 className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold"
               >
                 Contact Us
@@ -179,7 +179,7 @@ const Navbar: React.FC = () => {
                   Products
                 </Link>
                 <Link
-                  href="/#contact"
+                  href="/contactuspage"
                   className="text-white hover:bg-black hover:text-green-400 px-3 py-2 rounded-md text-lg font-semibold"
                 >
                   Contact Us

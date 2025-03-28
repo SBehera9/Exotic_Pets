@@ -27,7 +27,7 @@ const VideosSection = () => {
   }, [selectedIndex]);
 
   const handleViewMore = () => {
-    window.location.href = "/";
+    window.location.href = "/videopage";
   };
 
   const openModal = (index: number) => {

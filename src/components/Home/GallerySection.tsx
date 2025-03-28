@@ -24,7 +24,7 @@ const GallerySection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleViewMore = () => {
-    window.location.href = "/";
+    window.location.href = "/gallerypage";
   };
 
   const openModal = (index: number) => {
