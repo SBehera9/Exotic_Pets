@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import Image from 'next/image';
 
 interface Image {
   id: number;
@@ -33,11 +34,13 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, onClick }) => {
       className="group rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
       onClick={() => onClick(image)}
     >
-      <div className="relative">
-        <img
+      <div className="relative w-full h-48">
+        <Image
           src={image.imageUrl}
           alt={`Image ${image.id}`}
-          className="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-105"
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-300 transform group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
       </div>
@@ -55,9 +58,7 @@ interface ImageModalProps {
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ image, onClose, onNext, onPrev, hasNext, hasPrev }) => {
-  if (!image) {
-    return null;
-  }
+  if (!image) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center z-50">
@@ -84,8 +85,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ image, onClose, onNext, onPrev,
             </svg>
           </button>
         </div>
-        <div className="p-4 flex justify-center items-center">
-          <img src={image.imageUrl} alt={`Image`} className="w-full object-contain max-h-[70vh]" />
+        <div className="p-4 flex justify-center items-center w-full h-[70vh] relative">
+          <Image src={image.imageUrl} alt="Image" layout="fill" objectFit="contain" />
         </div>
 
         {hasPrev && (

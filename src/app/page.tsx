@@ -20,7 +20,7 @@ function App() {
     <div>
       <Navbar />
 
-      <div className="fixed bottom-4 right-5 z-50 flex flex-col items-end">
+      <div className="fixed bottom-4 right-5 z-50 flex flex-col items-end ">
         <div className={`transition-all ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"} flex flex-col gap-2 items-end`}>
           <a
             href="https://wa.me/918328873021"

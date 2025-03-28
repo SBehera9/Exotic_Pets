@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface PetFood {
   title: string;
@@ -14,32 +15,28 @@ interface PetFood {
 const petFoods: PetFood[] = [
   {
     title: "Dog Food",
-    description:
-      "Premium nutrition for your furry companion! Choose from high-quality dry kibble, wet food, and special diet options.",
+    description: "Premium nutrition for your furry companion! Choose from high-quality dry kibble, wet food, and special diet options.",
     imageSrc: "/Dog_Food.jpeg",
     imageAlt: "Dog Food",
     link: "/dog-food",
   },
   {
     title: "Bird Food",
-    description:
-      "Give your birds the best! Nutritious seed mixes, pellets, and treats to keep them happy, healthy, and full of energy.",
+    description: "Give your birds the best! Nutritious seed mixes, pellets, and treats to keep them happy, healthy, and full of energy.",
     imageSrc: "/Birds_Food.jpg",
     imageAlt: "Bird Food",
     link: "/bird-food",
   },
   {
     title: "Cat Food",
-    description:
-      "Tasty and wholesome meals for your feline friend! From crunchy kibble to mouthwatering wet food, perfect for every cat.",
+    description: "Tasty and wholesome meals for your feline friend! From crunchy kibble to mouthwatering wet food, perfect for every cat.",
     imageSrc: "/Cat_Food.jpeg",
     imageAlt: "Cat Food",
     link: "/cat-food",
   },
   {
     title: "Fish Food",
-    description:
-      "Essential nutrition for a thriving aquarium! High-quality flakes, pellets, and specialized diets for all types of fish.",
+    description: "Essential nutrition for a thriving aquarium! High-quality flakes, pellets, and specialized diets for all types of fish.",
     imageSrc: "/Fish_Food.jpeg",
     imageAlt: "Fish Food",
     link: "/fish-food",
@@ -47,9 +44,7 @@ const petFoods: PetFood[] = [
 ];
 
 const PetFoodSection = () => {
-  const handleViewMore = () => {
-    window.location.href = "/Product";
-  };
+  const router = useRouter();
 
   return (
     <div className="bg-white mt-0 pt-0 pb-16">
@@ -60,7 +55,8 @@ const PetFoodSection = () => {
           {petFoods.map((food, index) => (
             <div
               key={index}
-              className="relative flex flex-col items-center transform transition-transform hover:scale-105"
+              className="relative flex flex-col items-center transform transition-transform hover:scale-105 cursor-pointer"
+              onClick={() => router.push("/product")}
             >
               <div className="w-full max-w-[250px] h-[200px] md:h-[250px] bg-gray-100 shadow-md rounded-lg overflow-hidden">
                 <Image
@@ -80,7 +76,7 @@ const PetFoodSection = () => {
         </div>
 
         <button
-          onClick={handleViewMore}
+          onClick={() => router.push("/product")}
           className="mt-4 px-6 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition"
         >
           View More

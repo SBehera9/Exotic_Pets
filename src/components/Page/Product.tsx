@@ -10,7 +10,7 @@ interface Product {
   description: string;
   imageUrl: string;
   category: "pets" | "petFood";
-  quantity?: number; // Optional quantity for cart items
+  quantity?: number; 
 }
 
 const ProductPage: React.FC = () => {
@@ -99,13 +99,13 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto py-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-6">Our Products</h2>
+    <div className="container mx-auto py-10 px-4 bg-white">
+      <h2 className="text-3xl font-extrabold text-green-600 mb-8 text-center">Our Products</h2>
 
       <div className="flex justify-center gap-4 mb-6">
         <button
           className={`px-4 py-2 rounded ${
-            selectedCategory === "all" ? "bg-blue-500 text-white" : "bg-gray-300"
+            selectedCategory === "all" ? "bg-green-500 text-white" : "bg-green-300 text-green-900"
           }`}
           onClick={() => filterCategory("all")}
         >
@@ -113,7 +113,7 @@ const ProductPage: React.FC = () => {
         </button>
         <button
           className={`px-4 py-2 rounded ${
-            selectedCategory === "pets" ? "bg-blue-500 text-white" : "bg-gray-300"
+            selectedCategory === "pets" ? "bg-green-500 text-white" : "bg-green-300 text-green-900"
           }`}
           onClick={() => filterCategory("pets")}
         >
@@ -122,8 +122,7 @@ const ProductPage: React.FC = () => {
         <button
           className={`px-4 py-2 rounded ${
             selectedCategory === "petFood"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-300"
+              ? "bg-green-500 text-white" : "bg-green-300 text-green-900"
           }`}
           onClick={() => filterCategory("petFood")}
         >
@@ -131,7 +130,7 @@ const ProductPage: React.FC = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {productsToDisplay.map((product) => (
           <div
             key={product.id}
@@ -147,7 +146,6 @@ const ProductPage: React.FC = () => {
               />
             </div>
 
-            {/* Product Details */}
             <div className="flex flex-col flex-grow p-5">
               <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
               <p className="text-green-600 font-bold text-lg">
@@ -155,7 +153,6 @@ const ProductPage: React.FC = () => {
               </p>
               <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
 
-              {/* Add to Cart Button */}
               <div className="mt-auto">
                 <button
                   onClick={() => addToCart(product)}

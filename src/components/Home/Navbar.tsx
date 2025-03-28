@@ -1,4 +1,3 @@
-// ./src/components/Home/Navbar.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -67,11 +66,11 @@ const Navbar: React.FC = () => {
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return;
-
+  
     const updatedCart = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: newQuantity } : item
+      item.id === id ? { ...item, quantity: newQuantity, price: (item.price / item.quantity) * newQuantity } : item
     );
-
+  
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
     window.dispatchEvent(new Event("cartUpdated"));
@@ -164,7 +163,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {menuOpen && (
-            <div className="md:hidden absolute top-full left-0 w-full bg-green-600 shadow-md rounded-b-md overflow-hidden z-50">
+            <div className="md:hidden absolute top-full left-0 w-full bg-gradient-to-r from-green-300 to-green-600 shadow-md rounded-b-md overflow-hidden z-50">
               <div className="flex flex-col items-center py-4">
                 <Link
                   href="/"
@@ -264,7 +263,6 @@ const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* Checkout Section (Fixed at the Bottom) */}
               {cartItems.length > 0 && (
                 <div className="bg-white shadow-md p-4 border-t">
                   <div className="flex justify-between text-lg font-bold text-gray-800">

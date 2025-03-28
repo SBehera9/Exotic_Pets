@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 function ContactUsPage() {
   return (
@@ -44,9 +45,11 @@ function ContactUsPage() {
           </div>
 
           <div className="md:w-1/2 p-8 bg-gray-50">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1549480173-a416f13d1f9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
               alt="Colorful bird"
+              width={600} // Set width explicitly
+              height={400} // Set height explicitly
               className="w-full h-full object-cover rounded-lg"
             />
           </div>

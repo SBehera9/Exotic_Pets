@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import Image from 'next/image';
 
 interface Video {
   id: number;
@@ -95,11 +96,13 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
       className="group rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
       onClick={() => onClick(video)}
     >
-      <div className="relative">
-        <img
+      <div className="relative w-full h-48">
+        <Image
           src={video.thumbnailUrl}
           alt={video.title}
-          className="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-105"
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-300 transform group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
       </div>

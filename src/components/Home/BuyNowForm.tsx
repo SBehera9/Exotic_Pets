@@ -104,9 +104,10 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
           </div>
 
           {cartItems.length > 0 && (
-            <p className="text-lg font-semibold text-gray-900 mt-4">
-              Total: Rs. {totalPrice.toFixed(2)}
-            </p>
+            <div className="flex justify-between text-lg font-bold text-gray-800">
+            <span>Total:</span>
+            <span>Rs. {totalPrice.toFixed(2)}</span>
+          </div>
           )}
         </div>
 
@@ -125,7 +126,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-green-400 outline-none"
                 placeholder="Enter your name"
               />
             </div>
@@ -138,7 +139,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-green-400 outline-none"
                 placeholder="Enter your phone number"
               />
             </div>
@@ -150,7 +151,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
                 required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-400 outline-none"
+                className="w-full border rounded-md px-3 py-2 text-gray-900 focus:ring-2 focus:ring-green-400 outline-none"
                 placeholder="Enter your address"
                 rows={3}
               ></textarea>
@@ -158,7 +159,7 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md font-medium text-lg hover:bg-blue-700 transition"
+              className="w-full bg-green-500 text-white py-2 rounded-md font-medium text-lg hover:bg-green-700 transition"
             >
               Place Order
             </button>
