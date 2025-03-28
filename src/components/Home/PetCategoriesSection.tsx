@@ -54,11 +54,11 @@ const PetCategoriesSection = () => {
       <div className="container mx-auto text-center px-4 sm:px-6 md:px-8">
         <h2 className="text-3xl font-extrabold text-green-600 mb-8">Pets</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {petCategories.map((category, index) => (
             <div
               key={index}
-              className="relative flex flex-col items-center transform transition-transform hover:scale-110 cursor-pointer w-full"
+              className="relative flex flex-col items-center transform transition-transform hover:scale-105 cursor-pointer w-full max-w-xs mx-auto"
             >
               <div className="w-full max-w-[250px] h-[200px] md:h-[250px] bg-gray-100 shadow-md rounded-lg overflow-hidden relative">
                 <Image
@@ -66,8 +66,7 @@ const PetCategoriesSection = () => {
                   alt={category.imageAlt}
                   width={250}
                   height={200}
-                  objectFit="cover"
-                  className="rounded-lg w-full h-full"
+                  className="rounded-lg w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-lg md:text-xl font-semibold text-gray-800 mt-3 md:mt-4 text-center">
