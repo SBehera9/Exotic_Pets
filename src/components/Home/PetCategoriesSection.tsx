@@ -54,7 +54,7 @@ const PetCategoriesSection = () => {
       <div className="container mx-auto text-center px-4 sm:px-6 md:px-8">
         <h2 className="text-3xl font-extrabold text-green-600 mb-8">Pets</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {petCategories.map((category, index) => (
             <div
               key={index}
