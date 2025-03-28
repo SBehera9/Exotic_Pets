@@ -23,7 +23,7 @@ function ContactUsPage() {
                 </svg>
                 <span className="text-gray-700 font-medium">Email:</span>
               </div>
-              <p className="text-gray-500 mb-4">info@exoticbirds.com</p>
+              <p className="text-gray-500 mb-4">exoticpethouse1@gmail.com</p>
 
               <div className="flex items-center mb-4">
                 <svg className="w-6 h-6 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@ function ContactUsPage() {
                 </svg>
                 <span className="text-gray-700 font-medium">Phone:</span>
               </div>
-              <p className="text-gray-500 mb-4">+1 (555) 123-4567</p>
+              <p className="text-gray-500 mb-4">+91 8984118017</p>
 
               <div className="flex items-center">
                 <svg className="w-6 h-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@ function ContactUsPage() {
                 </svg>
                 <span className="text-gray-700 font-medium">Address:</span>
               </div>
-              <p className="text-gray-500">123 Bird Street, Anytown, USA</p>
+              <p className="text-gray-500">Rauta Pentho street, Aska Road, Berhampur, Ganjam </p>
             </div>
           </div>
 
@@ -48,8 +48,8 @@ function ContactUsPage() {
             <Image
               src="https://images.unsplash.com/photo-1549480173-a416f13d1f9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
               alt="Colorful bird"
-              width={600} // Set width explicitly
-              height={400} // Set height explicitly
+              width={600} 
+              height={400} 
               className="w-full h-full object-cover rounded-lg"
             />
           </div>

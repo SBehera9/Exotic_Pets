@@ -66,11 +66,11 @@ const Navbar: React.FC = () => {
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return;
-  
+
     const updatedCart = cartItems.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity, price: (item.price / item.quantity) * newQuantity } : item
     );
-  
+
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartItems(updatedCart);
     window.dispatchEvent(new Event("cartUpdated"));
@@ -82,6 +82,11 @@ const Navbar: React.FC = () => {
       setSelectedProduct(selectedProducts);
       setIsBuyNowOpen(true);
     }
+  };
+
+  const closeBuyNowAndCart = () => {
+    setIsBuyNowOpen(false);
+    setCartOpen(false);
   };
 
   return (
@@ -188,7 +193,7 @@ const Navbar: React.FC = () => {
                 </Link>
               </div>
             </div>
-          )}    
+          )}
 
           {cartOpen && (
             <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-lg border border-gray-200 z-50 flex flex-col">
@@ -286,7 +291,7 @@ const Navbar: React.FC = () => {
       {isBuyNowOpen && (
         <BuyNowForm
           productName={selectedProduct}
-          onClose={() => setIsBuyNowOpen(false)}
+          onClose={closeBuyNowAndCart} // Use the new function here
           cartItems={cartItems}
         />
       )}

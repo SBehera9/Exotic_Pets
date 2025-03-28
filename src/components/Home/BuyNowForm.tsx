@@ -3,6 +3,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import emailjs from "emailjs-com";
+import { useRouter } from 'next/navigation'; // Import useRouter
+import { NextPage } from 'next';
+
 
 interface CartItem {
   id: number;
@@ -19,7 +22,7 @@ interface BuyNowFormProps {
   cartItems?: CartItem[];
 }
 
-const BuyNowForm: React.FC<BuyNowFormProps> = ({
+const BuyNowForm: NextPage<BuyNowFormProps> = ({
   productName,
   productImage,
   onClose,
@@ -30,6 +33,8 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const router = useRouter(); // Initialize useRouter
+
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -57,7 +62,8 @@ const BuyNowForm: React.FC<BuyNowFormProps> = ({
           alert("Order submitted successfully!");
           localStorage.removeItem("cart");
           window.dispatchEvent(new Event("cartUpdated"));
-          onClose();
+          onClose(); // This will now close both BuyNowForm and Cart
+          router.push('/productss'); // Redirect to products page
         },
         () => {
           alert("Failed to send email. Please try again.");
