@@ -1,6 +1,6 @@
 import FooterSection from '@/components/Home/FooterSection'
 import Navbar from '@/components/Home/Navbar'
-import ProductPage from '@/components/Page/Product'
+import ProductPage from '@/components/Page/ProductPage';
 import React from 'react'
 
 function page() {

@@ -49,7 +49,7 @@ const PetFoodSection = () => {
   return (
     <div
       className="bg-white mt-0 pt-0 pb-16 w-full min-h-screen"
-      onClick={() => router.push("/product")} // Clicking anywhere redirects to /product
+      onClick={() => router.push("/productss")} // Clicking anywhere redirects to /product
     >
       <div className="container mx-auto text-center px-4 sm:px-6 md:px-8">
         <h2 className="text-3xl font-extrabold text-green-600 mb-8">Pet Food</h2>
