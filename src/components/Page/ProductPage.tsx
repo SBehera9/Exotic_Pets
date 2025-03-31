@@ -133,14 +133,15 @@ const ProductPage: React.FC = () => {
                 <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
                 <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
 
-                {/* Add to Cart Button */}
-                <button
+
+              </div>
+              {/* Add to Cart Button - Fixed to bottom */}
+               <button
                   onClick={() => addToCart(product)}
-                  className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out"
+                  className="mt-auto w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-b-lg shadow-md transition-all duration-300 ease-in-out"
                 >
                   Add to Cart
                 </button>
-              </div>
             </div>
           ))
         ) : (
