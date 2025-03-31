@@ -11,7 +11,6 @@ interface Product {
   description: string;
   imageUrl: string;
   category: "dog" | "cat" | "birds" | "fish" | "petFood";
-  quantity?: number;
 }
 
 const ProductPage: React.FC = () => {
@@ -70,10 +69,13 @@ const ProductPage: React.FC = () => {
   };
 
   const shareProduct = (product: Product) => {
+    // Generate a unique link for the product
+    const productLink = `${window.location.origin}/product/${product.id}`; // Adjust URL as needed
+
     const shareData = {
       title: product.name,
       text: `Check out this product: ${product.name} for Rs. ${product.price}`,
-      url: window.location.href,
+      url: productLink,
     };
 
     if (navigator.share) {
