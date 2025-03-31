@@ -22,27 +22,27 @@ const ProductPage: React.FC = () => {
   // Product data organized by category with proper typing
   const PRODUCT_DATA = useMemo(() => ({
     dog: [
-      { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "A playful and energetic golden retriever puppy.", imageUrl: "/golden_retriever_puppy.jpg", category: "dog" as const },
-      { id: 2, name: "Labrador Puppy", price: 12000, description: "A friendly and loyal Labrador puppy.", imageUrl: "/labrador_puppy.jpg", category: "dog" as const },
-      { id: 3, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/Dog_Food.jpeg", category: "petFood" as const },
+      { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "Playful, friendly, and energetic.", imageUrl: "/goldenretriever.jpg", category: "dog" as const },
+      { id: 2, name: "Labrador Puppy", price: 12000, description: "Loyal, affectionate, and intelligent.", imageUrl: "/LabradorRetriever.jpg", category: "dog" as const },
+      { id: 3, name: "Dog Food Pack", price: 800, description: "Nutritious and tasty dog food.", imageUrl: "/Dog_Food.jpeg", category: "petFood" as const },
     ],
     cat: [
-      { id: 4, name: "Siamese Kitten", price: 8000, description: "A beautiful and intelligent Siamese kitten.", imageUrl: "/siamese_kitten.jpg", category: "cat" as const },
-      { id: 5, name: "Persian Cat", price: 10000, description: "A fluffy and affectionate Persian cat.", imageUrl: "/persian_cat.jpg", category: "cat" as const },
-      { id: 6, name: "Cat Food Pack", price: 700, description: "Delicious and nutritious cat food.", imageUrl: "/cat_food.jpg", category: "petFood" as const },
+      { id: 4, name: "Siamese Kitten", price: 5000, description: "Elegant, vocal, and intelligent.", imageUrl: "/Cat.jpeg", category: "cat" as const },
+      { id: 5, name: "Persian Cat", price: 7000, description: "Fluffy, calm, and affectionate.", imageUrl: "/PersianCat.jpg", category: "cat" as const },
+      { id: 6, name: "Cat Food Pack", price: 700, description: "Healthy and delicious cat food.", imageUrl: "/Cat_food.jpeg", category: "petFood" as const },
     ],
     birds: [
-      { id: 15, name: "Parrot", price: 400, description: "A colorful talking parrot.", imageUrl: "/budgies.jpg", category: "birds" as const },
-      { id: 16, name: "Parrot", price: 2000, description: "A colorful talking parrot.", imageUrl: "/cockatiel.jpg", category: "birds" as const },
-      { id: 17, name: "Canary", price: 20000, description: "A small bright yellow canary.", imageUrl: "/conure.jpeg", category: "birds" as const },
-      { id: 18, name: "Canary", price: 8000, description: "A small bright yellow canary.", imageUrl: "/parrotlets.jpeg", category: "birds" as const },
-      { id: 19, name: "Canary", price: 400, description: "A small bright yellow canary.", imageUrl: "/zebrafinch.jpg", category: "birds" as const },
-      { id: 20, name: "Canary", price: 4000, description: "A small bright yellow canary.", imageUrl: "/smallconure.jpeg", category: "birds" as const },
+      { id: 15, name: "Budgies Parrot Pair", price: 400, description: "Playful, social, and colorful parrots.", imageUrl: "/budgies.jpg", category: "birds" as const },
+      { id: 16, name: "Cockatiel Parrot Pair", price: 2000, description: "Affectionate parrots with charming crests.", imageUrl: "/cockatiel.jpg", category: "birds" as const },
+      { id: 17, name: "Sunconure Pair", price: 20000, description: "Bright, intelligent, and energetic parrots.", imageUrl: "/conure.jpeg", category: "birds" as const },
+      { id: 18, name: "Parrotlets Pair", price: 8000, description: "Tiny, bold, and full of personality.", imageUrl: "/parrotlets.jpeg", category: "birds" as const },
+      { id: 19, name: "Zebrafinch Pair", price: 400, description: "Small songbirds with striking markings.", imageUrl: "/zebrafinch.jpg", category: "birds" as const },
+      { id: 20, name: "Small Conure Pair", price: 4000, description: "Lively, social, and playful parrots.", imageUrl: "/smallconure.jpeg", category: "birds" as const },
     ],
     fish: [
-      { id: 21, name: "Goldfish", price: 2000, description: "A bright and lively goldfish.", imageUrl: "/goldfish.jpg", category: "fish" as const },
-      { id: 22, name: "Koi Fish", price: 5000, description: "A decorative and vibrant koi fish.", imageUrl: "/koi_fish.jpg", category: "fish" as const },
-    ]
+      { id: 21, name: "Beta Fish Pair", price: 400, description: "Colorful, active, and easy to care for.", imageUrl: "/Fish2.png", category: "fish" as const },
+      { id: 22, name: "Molly Fish Pair", price: 50, description: "Hardy, peaceful, and beginner-friendly.", imageUrl: "/Fish1.jpeg", category: "fish" as const },
+    ],
   }), []);
 
   // Combine all products
@@ -154,7 +154,7 @@ const ProductPage: React.FC = () => {
 
       {/* Product Grid */}
       {productsToDisplay.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productsToDisplay.map((product) => (
             <div
               key={product.id}
