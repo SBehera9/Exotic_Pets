@@ -38,10 +38,14 @@ const ProductPage: React.FC = () => {
       { id: 18, name: "Parrotlets Pair", price: 8000, description: "Tiny, bold, and full of personality.", imageUrl: "/parrotlets.jpeg", category: "birds" as const },
       { id: 19, name: "Zebrafinch Pair", price: 400, description: "Small songbirds with striking markings.", imageUrl: "/zebrafinch.jpg", category: "birds" as const },
       { id: 20, name: "Small Conure Pair", price: 4000, description: "Lively, social, and playful parrots.", imageUrl: "/smallconure.jpeg", category: "birds" as const },
+      { id: 14, name: "Bird Food", price: 700, description: "Healthy and delicious cat food.", imageUrl: "/Birds_Food.jpg", category: "petFood" as const },
+      { id: 13, name: "Bird Food", price: 700, description: "Healthy and delicious cat food.", imageUrl: "/Birds_Food1.jpg", category: "petFood" as const },
+      { id: 12, name: "Bird Food", price: 700, description: "Healthy and delicious cat food.", imageUrl: "/Birds_Food2.jpg", category: "petFood" as const },
     ],
     fish: [
       { id: 21, name: "Beta Fish Pair", price: 400, description: "Colorful, active, and easy to care for.", imageUrl: "/Fish2.png", category: "fish" as const },
-      { id: 22, name: "Molly Fish Pair", price: 50, description: "Hardy, peaceful, and beginner-friendly.", imageUrl: "/Fish1.jpeg", category: "fish" as const },
+      { id: 22, name: "Molly Fish Pair", price: 50, description: "Hardy, peaceful, and beginner-friendly.", imageUrl: "/Mollies.jpg", category: "fish" as const },
+      { id: 23, name: "Fish food", price: 50, description: "Hardy, peaceful, and beginner-friendly.", imageUrl: "/Fish_Food.jpeg", category: "petFood" as const },
     ],
   }), []);
 
