@@ -68,23 +68,10 @@ const ProductPage: React.FC = () => {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // ✅ Sharing Function with Image & Product Details
   const shareProduct = (product: Product) => {
-<<<<<<< HEAD
-    // Generate a unique link for the product
-    const productLink = `${window.location.origin}/product/${product.id}`; // Adjust URL as needed
-
-    const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name} for Rs. ${product.price}`,
-      url: productLink,
-    };
-
-=======
     const productUrl = `${window.location.origin}/product/${product.id}`;
     const shareText = `🛒 Check out this product: ${product.name} \n💰 Price: Rs. ${product.price} \n📄 ${product.description} \n🔗 ${productUrl}`;
-    
->>>>>>> c433045600eceac9305a1acf4d9c2c5c94301cad
+
     if (navigator.share) {
       navigator
         .share({
@@ -142,30 +129,6 @@ const ProductPage: React.FC = () => {
               <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="cover" className="rounded-t-xl" />
             </div>
 
-<<<<<<< HEAD
-              {/* Product Details */}
-              <div className="flex flex-col flex-grow p-4 md:p-5">
-                {/* Product Name & Share Icon */}
-                <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
-                  <button onClick={() => shareProduct(product)} className="p-2 text-green-600 hover:text-green-800">
-                    <Share2 size={20} />
-                  </button>
-                </div>
-
-                <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
-                <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
-
-
-              </div>
-              {/* Add to Cart Button - Fixed to bottom */}
-               <button
-                  onClick={() => addToCart(product)}
-                  className="mt-auto w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-b-lg shadow-md transition-all duration-300 ease-in-out"
-                >
-                  Add to Cart
-                </button>
-=======
             {/* Product Details */}
             <div className="flex flex-col flex-grow p-4 md:p-5">
               <div className="flex justify-between items-center">
@@ -178,15 +141,16 @@ const ProductPage: React.FC = () => {
               <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
               <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
 
-              {/* Add to Cart Button */}
-              <button
-                onClick={() => addToCart(product)}
-                className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out"
-              >
-                Add to Cart
-              </button>
->>>>>>> c433045600eceac9305a1acf4d9c2c5c94301cad
             </div>
+
+            {/* Add to Cart Button - Fixed to bottom */}
+            <button
+              onClick={() => addToCart(product)}
+              className="mt-auto w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-b-lg shadow-md transition-all duration-300 ease-in-out"
+            >
+              Add to Cart
+            </button>
+
           </div>
         ))}
       </div>
