@@ -19,29 +19,29 @@ const ProductPage: React.FC = () => {
   const [productsToDisplay, setProductsToDisplay] = useState<Product[]>([]);
   const [isClient, setIsClient] = useState(false);
 
-  // Product data organized by category
+  // Product data organized by category with proper typing
   const PRODUCT_DATA = useMemo(() => ({
     dog: [
-      { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "A playful and energetic golden retriever puppy.", imageUrl: "/golden_retriever_puppy.jpg", category: "dog" },
-      { id: 2, name: "Labrador Puppy", price: 12000, description: "A friendly and loyal Labrador puppy.", imageUrl: "/labrador_puppy.jpg", category: "dog" },
-      { id: 3, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/Dog_Food.jpeg", category: "petFood" },
+      { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "A playful and energetic golden retriever puppy.", imageUrl: "/golden_retriever_puppy.jpg", category: "dog" as const },
+      { id: 2, name: "Labrador Puppy", price: 12000, description: "A friendly and loyal Labrador puppy.", imageUrl: "/labrador_puppy.jpg", category: "dog" as const },
+      { id: 3, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/Dog_Food.jpeg", category: "petFood" as const },
     ],
     cat: [
-      { id: 4, name: "Siamese Kitten", price: 8000, description: "A beautiful and intelligent Siamese kitten.", imageUrl: "/siamese_kitten.jpg", category: "cat" },
-      { id: 5, name: "Persian Cat", price: 10000, description: "A fluffy and affectionate Persian cat.", imageUrl: "/persian_cat.jpg", category: "cat" },
-      { id: 6, name: "Cat Food Pack", price: 700, description: "Delicious and nutritious cat food.", imageUrl: "/cat_food.jpg", category: "petFood" },
+      { id: 4, name: "Siamese Kitten", price: 8000, description: "A beautiful and intelligent Siamese kitten.", imageUrl: "/siamese_kitten.jpg", category: "cat" as const },
+      { id: 5, name: "Persian Cat", price: 10000, description: "A fluffy and affectionate Persian cat.", imageUrl: "/persian_cat.jpg", category: "cat" as const },
+      { id: 6, name: "Cat Food Pack", price: 700, description: "Delicious and nutritious cat food.", imageUrl: "/cat_food.jpg", category: "petFood" as const },
     ],
     birds: [
-      { id: 15, name: "Parrot", price: 400, description: "A colorful talking parrot.", imageUrl: "/budgies.jpg", category: "birds" },
-      { id: 16, name: "Parrot", price: 2000, description: "A colorful talking parrot.", imageUrl: "/cockatiel.jpg", category: "birds" },
-      { id: 17, name: "Canary", price: 20000, description: "A small bright yellow canary.", imageUrl: "/conure.jpeg", category: "birds" },
-      { id: 18, name: "Canary", price: 8000, description: "A small bright yellow canary.", imageUrl: "/parrotlets.jpeg", category: "birds" },
-      { id: 19, name: "Canary", price: 400, description: "A small bright yellow canary.", imageUrl: "/zebrafinch.jpg", category: "birds" },
-      { id: 20, name: "Canary", price: 4000, description: "A small bright yellow canary.", imageUrl: "/smallconure.jpeg", category: "birds" },
+      { id: 15, name: "Parrot", price: 400, description: "A colorful talking parrot.", imageUrl: "/budgies.jpg", category: "birds" as const },
+      { id: 16, name: "Parrot", price: 2000, description: "A colorful talking parrot.", imageUrl: "/cockatiel.jpg", category: "birds" as const },
+      { id: 17, name: "Canary", price: 20000, description: "A small bright yellow canary.", imageUrl: "/conure.jpeg", category: "birds" as const },
+      { id: 18, name: "Canary", price: 8000, description: "A small bright yellow canary.", imageUrl: "/parrotlets.jpeg", category: "birds" as const },
+      { id: 19, name: "Canary", price: 400, description: "A small bright yellow canary.", imageUrl: "/zebrafinch.jpg", category: "birds" as const },
+      { id: 20, name: "Canary", price: 4000, description: "A small bright yellow canary.", imageUrl: "/smallconure.jpeg", category: "birds" as const },
     ],
     fish: [
-      { id: 21, name: "Goldfish", price: 2000, description: "A bright and lively goldfish.", imageUrl: "/goldfish.jpg", category: "fish" },
-      { id: 22, name: "Koi Fish", price: 5000, description: "A decorative and vibrant koi fish.", imageUrl: "/koi_fish.jpg", category: "fish" },
+      { id: 21, name: "Goldfish", price: 2000, description: "A bright and lively goldfish.", imageUrl: "/goldfish.jpg", category: "fish" as const },
+      { id: 22, name: "Koi Fish", price: 5000, description: "A decorative and vibrant koi fish.", imageUrl: "/koi_fish.jpg", category: "fish" as const },
     ]
   }), []);
 
@@ -53,13 +53,15 @@ const ProductPage: React.FC = () => {
     ...PRODUCT_DATA.fish
   ], [PRODUCT_DATA]);
 
-  // Filter products based on selected category
+  // Filter products based on selected category with proper type handling
   useEffect(() => {
-    setProductsToDisplay(
-      selectedCategory === "all" 
-        ? ALL_PRODUCTS 
-        : ALL_PRODUCTS.filter(p => p.category === selectedCategory)
-    );
+    if (selectedCategory === "all") {
+      setProductsToDisplay(ALL_PRODUCTS);
+    } else {
+      setProductsToDisplay(
+        ALL_PRODUCTS.filter((p): p is Product => p.category === selectedCategory)
+      );
+    }
   }, [selectedCategory, ALL_PRODUCTS]);
 
   // Check if component is mounted (client-side)
@@ -87,7 +89,7 @@ const ProductPage: React.FC = () => {
 
       localStorage.setItem("cart", JSON.stringify(cart));
       window.dispatchEvent(new Event("cartUpdated"));
-      alert(`${product.name} added to cart!`); // Using alert as fallback
+      alert(`${product.name} added to cart!`);
     } catch (error) {
       console.error("Error adding to cart:", error);
       alert("Failed to add item to cart");
@@ -108,7 +110,6 @@ const ProductPage: React.FC = () => {
           url: productUrl,
         });
       } else {
-        // Fallback for browsers that don't support Web Share API
         const encodedText = encodeURIComponent(shareText);
         const whatsappUrl = `https://wa.me/?text=${encodedText}`;
         window.open(whatsappUrl, "_blank");
@@ -167,7 +168,7 @@ const ProductPage: React.FC = () => {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={product.id <= 4} // Only prioritize first few images
+                  priority={product.id <= 4}
                 />
               </div>
 
