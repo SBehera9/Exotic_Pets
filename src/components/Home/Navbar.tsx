@@ -291,7 +291,7 @@ const Navbar: React.FC = () => {
       {isBuyNowOpen && (
         <BuyNowForm
           productName={selectedProduct}
-          onClose={closeBuyNowAndCart} // Use the new function here
+          onClose={closeBuyNowAndCart} 
           cartItems={cartItems}
         />
       )}

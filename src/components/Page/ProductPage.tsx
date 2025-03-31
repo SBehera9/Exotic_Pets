@@ -18,36 +18,36 @@ const ProductPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [productsToDisplay, setProductsToDisplay] = useState<Product[]>([]);
 
-  // Sample product data
   const DOG_DATA: Product[] = [
-    { id: 7, name: "Golden Retriever Puppy", price: 15000, description: "A playful and energetic golden retriever puppy.", imageUrl: "/golden_retriever_puppy.jpg", category: "dog" },
-    { id: 10, name: "Labrador Puppy", price: 12000, description: "A friendly and loyal Labrador puppy.", imageUrl: "/labrador_puppy.jpg", category: "dog" },
-    { id: 14, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/dog_food.jpeg", category: "petFood" },
+    { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "A playful and energetic golden retriever puppy.", imageUrl: "/golden_retriever_puppy.jpg", category: "dog" },
+    { id: 2, name: "Labrador Puppy", price: 12000, description: "A friendly and loyal Labrador puppy.", imageUrl: "/labrador_puppy.jpg", category: "dog" },
+    { id: 3, name: "Dog Food Pack", price: 800, description: "Nutritious food pack for dogs.", imageUrl: "/Dog_Food.jpeg", category: "petFood" },
   ];
 
   const CAT_DATA: Product[] = [
-    { id: 8, name: "Siamese Kitten", price: 8000, description: "A beautiful and intelligent Siamese kitten.", imageUrl: "/siamese_kitten.jpg", category: "cat" },
-    { id: 11, name: "Persian Cat", price: 10000, description: "A fluffy and affectionate Persian cat.", imageUrl: "/persian_cat.jpg", category: "cat" },
-    { id: 15, name: "Cat Food Pack", price: 700, description: "Delicious and nutritious cat food.", imageUrl: "/cat_food.jpg", category: "petFood" },
+    { id: 4, name: "Siamese Kitten", price: 8000, description: "A beautiful and intelligent Siamese kitten.", imageUrl: "/siamese_kitten.jpg", category: "cat" },
+    { id: 5, name: "Persian Cat", price: 10000, description: "A fluffy and affectionate Persian cat.", imageUrl: "/persian_cat.jpg", category: "cat" },
+    { id: 6, name: "Cat Food Pack", price: 700, description: "Delicious and nutritious cat food.", imageUrl: "/cat_food.jpg", category: "petFood" },
   ];
 
-  const BIRD_DATA: Product[] = [
-    { id: 16, name: "Parrot", price: 2500, description: "A vibrant and intelligent parrot.", imageUrl: "/parrot.jpg", category: "birds" },
-    { id: 17, name: "Canary", price: 2000, description: "A beautiful singing canary.", imageUrl: "/canary.jpg", category: "birds" },
+  const BIRDS_DATA: Product[] = [
+    { id: 15, name: "Parrot", price: 400, description: "A colorful talking parrot.", imageUrl: "/budgies.jpg", category: "birds" },
+    { id: 16, name: "Parrot", price: 2000, description: "A colorful talking parrot.", imageUrl: "/cockatiel.jpg", category: "birds" },
+    { id: 17, name: "Canary", price: 20000, description: "A small bright yellow canary.", imageUrl: "/conure.jpeg", category: "birds" },
+    { id: 18, name: "Canary", price: 8000, description: "A small bright yellow canary.", imageUrl: "/parrotlets.jpeg", category: "birds" },
+    { id: 19, name: "Canary", price: 400, description: "A small bright yellow canary.", imageUrl: "/zebrafinch.jpg", category: "birds" },
+    { id: 20, name: "Canary", price: 4000, description: "A small bright yellow canary.", imageUrl: "/smallconure.jpeg", category: "birds" },
   ];
 
   const FISH_DATA: Product[] = [
-    { id: 18, name: "Goldfish", price: 500, description: "A lively and easy-to-care-for goldfish.", imageUrl: "/goldfish.jpg", category: "fish" },
-    { id: 19, name: "Betta Fish", price: 800, description: "A stunning Betta fish with flowing fins.", imageUrl: "/betta_fish.jpg", category: "fish" },
-    { id: 20, name: "Fish Food Pack", price: 300, description: "Nutritious food for aquarium fish.", imageUrl: "/fish_food.jpg", category: "petFood" },
+    { id: 21, name: "Goldfish", price: 2000, description: "A bright and lively goldfish.", imageUrl: "/goldfish.jpg", category: "fish" },
+    { id: 22, name: "Koi Fish", price: 5000, description: "A decorative and vibrant koi fish.", imageUrl: "/koi_fish.jpg", category: "fish" },
   ];
 
-  const ALL_PRODUCTS = [...DOG_DATA, ...CAT_DATA, ...BIRD_DATA, ...FISH_DATA];
+  const ALL_PRODUCTS = [...DOG_DATA, ...CAT_DATA, ...BIRDS_DATA, ...FISH_DATA];
 
   useEffect(() => {
-    setProductsToDisplay(
-      selectedCategory === "all" ? ALL_PRODUCTS : ALL_PRODUCTS.filter(p => p.category === selectedCategory)
-    );
+    setProductsToDisplay(selectedCategory === "all" ? ALL_PRODUCTS : ALL_PRODUCTS.filter(p => p.category === selectedCategory));
   }, [selectedCategory]);
 
   const filterCategory = (category: string) => {
@@ -69,18 +69,30 @@ const ProductPage: React.FC = () => {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
+  // ✅ Sharing Function with Image & Product Details
   const shareProduct = (product: Product) => {
-    const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name} for Rs. ${product.price}`,
-      url: window.location.href,
-    };
-
+    const productUrl = `${window.location.origin}/product/${product.id}`;
+    const shareText = `🛒 Check out this product: ${product.name} \n💰 Price: Rs. ${product.price} \n📄 ${product.description} \n🔗 ${productUrl}`;
+    
     if (navigator.share) {
-      navigator.share(shareData).catch((error) => console.error("Error sharing:", error));
+      navigator
+        .share({
+          title: product.name,
+          text: shareText,
+          url: productUrl,
+        })
+        .catch((error) => console.error("Error sharing:", error));
     } else {
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareData.text + " " + shareData.url)}`;
-      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`;
+      // Fallback: WhatsApp & Facebook
+      const encodedText = encodeURIComponent(shareText);
+      const encodedImage = encodeURIComponent(product.imageUrl);
+
+      // WhatsApp Share Link
+      const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+
+      // Facebook Share Link
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&picture=${encodedImage}`;
+
       window.open(whatsappUrl, "_blank");
       window.open(facebookUrl, "_blank");
     }
@@ -109,43 +121,38 @@ const ProductPage: React.FC = () => {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {productsToDisplay.length > 0 ? (
-          productsToDisplay.map((product) => (
-            <div
-              key={product.id}
-              className="border border-gray-200 rounded-xl shadow-lg bg-white flex flex-col overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out"
-            >
-              {/* Product Image */}
-              <div className="h-48 md:h-56 w-full relative">
-                <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="cover" className="rounded-t-xl" />
-              </div>
+        {productsToDisplay.map((product) => (
+          <div
+            key={product.id}
+            className="border border-gray-200 rounded-xl shadow-lg bg-white flex flex-col overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out"
+          >
+            {/* Product Image */}
+            <div className="h-48 md:h-56 w-full relative">
+              <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="cover" className="rounded-t-xl" />
+            </div>
 
-              {/* Product Details */}
-              <div className="flex flex-col flex-grow p-4 md:p-5">
-                {/* Product Name & Share Icon */}
-                <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
-                  <button onClick={() => shareProduct(product)} className="p-2 text-green-600 hover:text-green-800">
-                    <Share2 size={20} />
-                  </button>
-                </div>
-
-                <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
-                <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
-
-                {/* Add to Cart Button */}
-                <button
-                  onClick={() => addToCart(product)}
-                  className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out"
-                >
-                  Add to Cart
+            {/* Product Details */}
+            <div className="flex flex-col flex-grow p-4 md:p-5">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-gray-800">{product.name}</h3>
+                <button onClick={() => shareProduct(product)} className="p-2 text-green-600 hover:text-green-800">
+                  <Share2 size={20} />
                 </button>
               </div>
+
+              <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
+              <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
+
+              {/* Add to Cart Button */}
+              <button
+                onClick={() => addToCart(product)}
+                className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out"
+              >
+                Add to Cart
+              </button>
             </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-500 col-span-full">No products available in this category.</p>
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
