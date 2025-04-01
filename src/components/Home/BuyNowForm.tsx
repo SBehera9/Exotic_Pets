@@ -13,6 +13,7 @@ interface CartItem {
   imageUrl: string;
   price: number;
   quantity: number;
+  description?: string;
 }
 
 interface BuyNowFormProps {
@@ -51,57 +52,82 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
     setIsSubmitting(true);
   
     try {
-      // Format order items as HTML table
-      const orderItemsTable = `
-        <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
-          <thead>
-            <tr>
-              <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd; background-color: #f5f5f5;">Product</th>
-              <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd; background-color: #f5f5f5;">Qty</th>
-              <th style="padding: 10px; text-align: right; border-bottom: 2px solid #ddd; background-color: #f5f5f5;">Price</th>
-              <th style="padding: 10px; text-align: right; border-bottom: 2px solid #ddd; background-color: #f5f5f5;">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${cartItems.length > 0 
-              ? cartItems.map(item => `
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${item.name}</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">${item.quantity}</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${item.price.toFixed(2)}</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${(item.price * item.quantity).toFixed(2)}</td>
+      // Create the complete email HTML
+      const emailHTML = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+          <div style="background-color: #458500; color: white; padding: 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Order Confirmation</h1>
+          </div>
+          
+          <div style="padding: 20px; border-bottom: 1px solid #e0e0e0;">
+            <h2 style="color: #458500; margin-top: 0; font-size: 18px;">Customer Information</h2>
+            <p><strong>Name:</strong> ${firstName}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Order Time:</strong> ${new Date().toLocaleString()}</p>
+          </div>
+          
+          <div style="padding: 20px;">
+            <h2 style="color: #458500; margin-top: 0; font-size: 18px;">Order Summary</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+              <thead>
+                <tr style="background-color: #f5f5f5;">
+                  <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Product</th>
+                  <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">Qty</th>
+                  <th style="padding: 10px; text-align: right; border-bottom: 2px solid #ddd;">Price</th>
+                  <th style="padding: 10px; text-align: right; border-bottom: 2px solid #ddd;">Total</th>
                 </tr>
-              `).join('')
-              : `
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${productName}</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">1</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${totalPrice.toFixed(2)}</td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${totalPrice.toFixed(2)}</td>
+              </thead>
+              <tbody>
+                ${cartItems.length > 0 
+                  ? cartItems.map(item => `
+                    <tr>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; vertical-align: top;">
+                        <div style="font-weight: bold;">${item.name}</div>
+                        ${item.description ? `<div style="font-size: 13px; color: #666; margin-top: 4px;">${item.description}</div>` : ''}
+                      </td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">${item.quantity}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${item.price.toFixed(2)}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${(item.price * item.quantity).toFixed(2)}</td>
+                    </tr>
+                  `).join('')
+                  : `
+                    <tr>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; vertical-align: top;">
+                        <div style="font-weight: bold;">${productName}</div>
+                      </td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: center;">1</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${totalPrice.toFixed(2)}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">Rs. ${totalPrice.toFixed(2)}</td>
+                    </tr>
+                  `}
+                <tr style="font-weight: bold; background-color: #f9f9f9;">
+                  <td colspan="3" style="padding: 10px; text-align: right; border-top: 2px solid #ddd;">Order Total:</td>
+                  <td style="padding: 10px; text-align: right; border-top: 2px solid #ddd;">Rs. ${totalPrice.toFixed(2)}</td>
                 </tr>
-              `}
-            <tr style="font-weight: bold; background-color: #f9f9f9;">
-              <td colspan="3" style="padding: 10px; text-align: right;">Order Total:</td>
-              <td style="padding: 10px; text-align: right;">Rs. ${totalPrice.toFixed(2)}</td>
-            </tr>
-          </tbody>
-        </table>
+              </tbody>
+            </table>
+          </div>
+          
+          <div style="background-color: #f9f9f9; padding: 15px; text-align: center; font-size: 13px; color: #777;">
+            <p>Thank you for your order! We'll contact you shortly to confirm delivery details.</p>
+          </div>
+        </div>
       `;
 
-      // Prepare template parameters
       const templateParams = {
         customer_name: firstName,
         customer_phone: phone,
         customer_address: address,
         order_time: new Date().toLocaleString(),
-        order_items: orderItemsTable,
+        order_items: emailHTML,
         order_total: totalPrice.toFixed(2),
-        product_image: productImage || ''
+        to_email: 'your@email.com' // Add recipient email if needed
       };
 
       await emailjs.send(
         "service_t5of1oj",
-        "template_hpda8wv",
+        "template_tiym0oa",
         templateParams,
         "4uN2kcMHYEGfvMOXP"
       );
@@ -111,7 +137,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
         localStorage.removeItem("cart");
         window.dispatchEvent(new Event("cartUpdated"));
         onClose();
-        router.push('/products');
+        router.push('/productss');
       }, 1500);
     } catch (error) {
       console.error("Email sending error:", error);
@@ -228,11 +254,6 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
           <h2 className="text-xl font-bold text-gray-800 mb-6">Shipping Information</h2>
           
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-            <input type="hidden" name="order_time" value={orderTime} />
-            <input type="hidden" name="total_price" value={totalPrice.toFixed(2)} />
-            <input type="hidden" name="product_name" value={productName} />
-            <input type="hidden" name="product_image" value={productImage || ""} />
-
             <div className="space-y-1">
               <label className="block text-sm font-medium text-gray-700">Full Name</label>
               <input
