@@ -16,6 +16,14 @@ function ContactUsPage() {
               Get in touch with Exotic Birds for any inquiries or support. We are passionate about birds and eager to assist you!
             </p>
 
+            {/* Pet Category Button */}
+            <div className="mt-6">
+              <button className="bg-green-500 text-white font-semibold py-2 px-6 rounded-md transition duration-300 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 
+              sm:text-lg sm:px-8 md:text-xl md:px-10 lg:text-2xl lg:px-12">
+                Explore Pet Categories
+              </button>
+            </div>
+
             <div className="mt-8">
               <div className="flex items-center mb-4">
                 <svg className="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

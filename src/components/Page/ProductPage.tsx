@@ -19,7 +19,6 @@ const ProductPage: React.FC = () => {
   const [productsToDisplay, setProductsToDisplay] = useState<Product[]>([]);
   const [isClient, setIsClient] = useState(false);
 
-  // Product data organized by category with proper typing
   const PRODUCT_DATA = useMemo(() => ({
     dog: [
       { id: 1, name: "Golden Retriever Puppy", price: 15000, description: "Playful, friendly, and energetic.", imageUrl: "/goldenretriever.jpg", category: "dog" as const },
@@ -49,7 +48,6 @@ const ProductPage: React.FC = () => {
     ],
   }), []);
 
-  // Combine all products
   const ALL_PRODUCTS = useMemo(() => [
     ...PRODUCT_DATA.dog,
     ...PRODUCT_DATA.cat,
@@ -57,7 +55,6 @@ const ProductPage: React.FC = () => {
     ...PRODUCT_DATA.fish
   ], [PRODUCT_DATA]);
 
-  // Filter products based on selected category with proper type handling
   useEffect(() => {
     if (selectedCategory === "all") {
       setProductsToDisplay(ALL_PRODUCTS);
@@ -68,7 +65,6 @@ const ProductPage: React.FC = () => {
     }
   }, [selectedCategory, ALL_PRODUCTS]);
 
-  // Check if component is mounted (client-side)
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -122,7 +118,6 @@ const ProductPage: React.FC = () => {
     }
   };
 
-  // Categories for filter buttons
   const categories = [
     { value: "all", label: "All Products" },
     { value: "dog", label: "Dogs" },
@@ -138,12 +133,11 @@ const ProductPage: React.FC = () => {
         Our Products
       </h2>
 
-      {/* Category Filter Buttons */}
-      <div className="flex justify-center gap-2 mb-8 overflow-x-auto pb-2">
+      <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
         {categories.map(({ value, label }) => (
           <button
             key={value}
-            className={`px-4 py-2 rounded-full text-sm md:text-base transition-colors duration-200 ${
+            className={`px-4 py-2 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-200 ${
               selectedCategory === value 
                 ? "bg-green-600 text-white shadow-md" 
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -155,7 +149,7 @@ const ProductPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Product Grid */}
+
       {productsToDisplay.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productsToDisplay.map((product) => (
@@ -163,7 +157,7 @@ const ProductPage: React.FC = () => {
               key={product.id}
               className="border border-gray-200 rounded-xl shadow-md bg-white flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300"
             >
-              {/* Product Image */}
+
               <div className="h-48 md:h-56 w-full relative">
                 <Image 
                   src={product.imageUrl} 
@@ -175,7 +169,6 @@ const ProductPage: React.FC = () => {
                 />
               </div>
 
-              {/* Product Details */}
               <div className="flex flex-col flex-grow p-4">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
@@ -197,7 +190,6 @@ const ProductPage: React.FC = () => {
                   {product.description}
                 </p>
 
-                {/* Add to Cart Button */}
                 <button
                   onClick={() => addToCart(product)}
                   className="mt-auto flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded-lg transition-colors duration-200"
