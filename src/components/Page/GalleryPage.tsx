@@ -9,18 +9,18 @@ interface Image {
 }
 
 const imageData: Image[] = [
-  { id: 1, imageUrl: '/images/landscape1.jpg' },
-  { id: 2, imageUrl: '/images/city1.jpg' },
-  { id: 3, imageUrl: '/images/abstract1.jpg' },
-  { id: 4, imageUrl: '/images/wildlife1.jpg' },
-  { id: 5, imageUrl: '/images/minimalist1.jpg' },
-  { id: 6, imageUrl: '/images/portrait1.jpg' },
-  { id: 7, imageUrl: '/images/food1.jpg' },
-  { id: 8, imageUrl: '/images/architecture1.jpg' },
-  { id: 9, imageUrl: '/images/macro1.jpg' },
-  { id: 10, imageUrl: '/images/sunset1.jpg' },
-  { id: 11, imageUrl: '/images/flower1.jpg' },
-  { id: 12, imageUrl: '/images/sports1.jpg' },
+  { id: 1, imageUrl: '/Bird1.png' },
+  { id: 2, imageUrl: '/smallconure.jpeg' },
+  { id: 3, imageUrl: '/Bird3.jpg' },
+  { id: 4, imageUrl: '/zebrafinch.jpg' },
+  { id: 5, imageUrl: '/Mollies.jpg' },
+  { id: 6, imageUrl: '/budgies.jpg' },
+  { id: 7, imageUrl: '/cockatiel.jpg' },
+  { id: 8, imageUrl: '/conure.jpeg' },
+  { id: 9, imageUrl: '/parrotlets.jpeg' },
+  { id: 10, imageUrl: '/Fish2.png' },
+  { id: 11, imageUrl: '/Cat.jpeg' },
+  { id: 12, imageUrl: '/goldenretriever.jpg' },
 ];
 
 interface ImageCardProps {
