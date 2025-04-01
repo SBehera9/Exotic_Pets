@@ -47,37 +47,55 @@ const PetFoodSection = () => {
   const router = useRouter();
 
   return (
-    <div
-      className="bg-white mt-0 pt-0 pb-16 w-full min-h-screen"
-      onClick={() => router.push("/productss")} // Clicking anywhere redirects to /product
-    >
-      <div className="container mx-auto text-center px-4 sm:px-6 md:px-8">
-        <h2 className="text-3xl font-extrabold text-green-600 mb-8">Pet Food</h2>
+    <section className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-16 w-full">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-3">Premium Pet Nutrition</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            High-quality food options tailored to your pet's specific needs
+          </p>
+        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {petFoods.map((food, index) => (
             <div
               key={index}
-              className="relative flex flex-col items-center transform transition-transform hover:scale-105 cursor-pointer w-full"
+              className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={() => router.push(food.link)}
             >
-              <div className="w-full max-w-[250px] h-[200px] md:h-[250px] bg-gray-100 shadow-md rounded-lg overflow-hidden">
+              <div className="relative h-48 md:h-56 overflow-hidden">
                 <Image
                   src={food.imageSrc}
                   alt={food.imageAlt}
-                  width={250}
-                  height={250}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mt-4 text-center">
-                {food.title}
-              </h3>
-              <p className="text-gray-600 text-center">{food.description}</p>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{food.title}</h3>
+                <p className="text-gray-600 mb-4">{food.description}</p>
+                <button className="inline-flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors">
+                  Shop now
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-1 transition-transform group-hover:translate-x-1"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
