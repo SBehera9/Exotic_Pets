@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import Image from 'next/image';
 
 library.add(faQuoteLeft, faChevronLeft, faChevronRight);
 
@@ -119,9 +120,11 @@ const TestimonialsSection = () => {
                                         <div className="mr-4">
                                             <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-green-300/50">
                                                 {testimonial.avatar ? (
-                                                    <img 
+                                                    <Image 
                                                         src={testimonial.avatar} 
                                                         alt={testimonial.name}
+                                                        width={56}
+                                                        height={56}
                                                         className="w-full h-full object-cover"
                                                     />
                                                 ) : (

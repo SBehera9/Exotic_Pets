@@ -112,7 +112,7 @@ const HeroSection = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="mt-4 text-xl text-gray-100 sm:text-2xl max-w-2xl mx-auto leading-relaxed"
                     >
-                        Discover the world's most <span className="text-amber-300 font-medium">rare and beautiful</span> pets, carefully curated for discerning owners.
+                        Discover the world&apos;s most <span className="text-amber-300 font-medium">rare and beautiful</span> pets, carefully curated for discerning owners.
                     </motion.p>
 
                     <motion.div

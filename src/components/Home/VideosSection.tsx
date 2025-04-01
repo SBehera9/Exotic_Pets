@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
 import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ type VideoItem = {
   src: string;
   title: string;
   duration: string;
-  category?: string;
+  category: string; // Changed from optional to required
   views?: string;
 };
 
@@ -78,7 +78,7 @@ const VideosSection = () => {
     ? videoFiles 
     : videoFiles.filter(video => video.category === activeCategory);
 
-  // Get unique categories
+  // Get unique categories - now all categories are guaranteed to be strings
   const categories = ["All", ...new Set(videoFiles.map(video => video.category))];
 
   // Handle view more action
@@ -131,6 +131,52 @@ const VideosSection = () => {
     };
   }, [isPlaying, isHoveringControls, selectedIndex, controlsAnim]);
 
+  // Memoized callbacks for keyboard shortcuts
+  const togglePlay = useCallback(() => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  }, [isPlaying]);
+
+  const toggleMute = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  }, [isMuted]);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!modalRef.current) return;
+
+    if (!isFullscreen) {
+      modalRef.current.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+    setIsFullscreen(!isFullscreen);
+  }, [isFullscreen]);
+
+  const seek = useCallback((seconds: number) => {
+    if (!videoRef.current) return;
+    videoRef.current.currentTime += seconds;
+  }, []);
+
+  const closeModal = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    setSelectedIndex(null);
+    setIsPlaying(false);
+    setProgress(0);
+    document.body.style.overflow = 'auto';
+  }, []);
+
   // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -164,43 +210,21 @@ const VideosSection = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, isPlaying, isMuted, isFullscreen]);
+  }, [selectedIndex, isPlaying, isMuted, isFullscreen, togglePlay, toggleMute, toggleFullscreen, closeModal, seek]);
 
   // Fullscreen handling
-  const toggleFullscreen = () => {
-    if (!modalRef.current) return;
-
-    if (!isFullscreen) {
-      modalRef.current.requestFullscreen?.();
-    } else {
-      document.exitFullscreen?.();
-    }
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const handleFullscreenChange = () => {
+  const handleFullscreenChange = useCallback(() => {
     setIsFullscreen(!!document.fullscreenElement);
-  };
+  }, []);
 
   useEffect(() => {
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  }, []);
+  }, [handleFullscreenChange]);
 
   const openModal = (index: number) => {
     setSelectedIndex(index);
     document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-    setSelectedIndex(null);
-    setIsPlaying(false);
-    setProgress(0);
-    document.body.style.overflow = 'auto';
   };
 
   const nextVideo = () => {
@@ -219,32 +243,9 @@ const VideosSection = () => {
     setProgress(0);
   };
 
-  const seek = (seconds: number) => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime += seconds;
-  };
-
   const handleVideoClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     togglePlay();
-  };
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
   };
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {

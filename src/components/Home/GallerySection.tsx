@@ -27,8 +27,8 @@ const GallerySection = () => {
   const [isHovering, setIsHovering] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
-  // Get unique categories
-  const categories = ["All", ...new Set(galleryImages.map(img => img.category))];
+  // Get unique categories, filtering out undefined and adding "All"
+  const categories = ["All", ...new Set(galleryImages.map(img => img.category).filter((c): c is string => !!c))];
 
   // Filter images by category
   const filteredImages = activeCategory === "All" 
@@ -130,7 +130,6 @@ const GallerySection = () => {
               onMouseEnter={() => setIsHovering(index)}
               onMouseLeave={() => setIsHovering(null)}
               whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "50px" }}

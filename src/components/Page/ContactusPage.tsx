@@ -18,7 +18,7 @@ function ContactUsPage() {
             Contact Us
           </h1>
           <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-            Get in touch with our team for any inquiries about our exotic birds. We're here to help!
+            Get in touch with our team for any inquiries about our exotic birds. We&apos;re here to help!
           </p>
         </div>
 
@@ -119,7 +119,7 @@ function ContactUsPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent flex items-end p-6">
               <div>
                 <h3 className="text-white text-2xl font-bold mb-2">Exotic Birds Paradise</h3>
-                <p className="text-white/90">Discover the beauty of nature's most colorful creatures</p>
+                <p className="text-white/90">Discover the beauty of nature&apos;s most colorful creatures</p>
               </div>
             </div>
           </motion.div>

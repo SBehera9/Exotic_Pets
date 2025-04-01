@@ -32,7 +32,7 @@ const ContactUsSection = () => {
           </h2>
           <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mb-4" />
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            We're here to help you with any questions about our exotic pets. Reach out through any of these channels.
+            We&apos;re here to help you with any questions about our exotic pets. Reach out through any of these channels.
           </p>
         </motion.div>
 

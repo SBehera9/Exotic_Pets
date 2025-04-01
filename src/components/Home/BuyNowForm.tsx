@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import emailjs from "emailjs-com";
 import { useRouter } from 'next/navigation';
@@ -30,7 +30,6 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
   cartItems = [],
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [orderTime, setOrderTime] = useState("");
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -43,16 +42,11 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
     0
   );
 
-  useEffect(() => {
-    setOrderTime(new Date().toLocaleString());
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
   
     try {
-      // Create the complete email HTML
       const emailHTML = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #458500; color: white; padding: 20px; text-align: center;">
@@ -110,7 +104,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
           </div>
           
           <div style="background-color: #f9f9f9; padding: 15px; text-align: center; font-size: 13px; color: #777;">
-            <p>Thank you for your order! We'll contact you shortly to confirm delivery details.</p>
+            <p>Thank you for your order! We&apos;ll contact you shortly to confirm delivery details.</p>
           </div>
         </div>
       `;
@@ -122,7 +116,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
         order_time: new Date().toLocaleString(),
         order_items: emailHTML,
         order_total: totalPrice.toFixed(2),
-        to_email: 'your@email.com' // Add recipient email if needed
+        to_email: 'your@email.com'
       };
 
       await emailjs.send(
@@ -153,7 +147,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
         <div className="bg-white rounded-xl max-w-md w-full p-8 text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Order Confirmed!</h2>
-          <p className="text-gray-600 mb-6">Thank you for your purchase. We'll contact you shortly.</p>
+          <p className="text-gray-600 mb-6">Thank you for your purchase. We&apos;ll contact you shortly.</p>
           <button
             onClick={() => {
               onClose();
@@ -179,7 +173,6 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
           <X size={24} />
         </button>
 
-        {/* Order Summary Section */}
         <div className="w-full sm:w-2/5 bg-gradient-to-b from-green-50 to-gray-50 p-6 flex flex-col">
           <div className="flex items-center gap-2 mb-4">
             <ShoppingCart className="text-green-600" size={24} />
@@ -249,7 +242,6 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
           )}
         </div>
 
-        {/* Checkout Form Section */}
         <div className="w-full sm:w-3/5 p-6 sm:p-8">
           <h2 className="text-xl font-bold text-gray-800 mb-6">Shipping Information</h2>
           
