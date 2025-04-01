@@ -84,19 +84,18 @@ const ProductPage: React.FC = () => {
       const cartString = localStorage.getItem("cart");
       const cart: Product[] = cartString ? JSON.parse(cartString) : [];
       const existingItem = cart.find((item) => item.id === product.id);
-
+  
       if (existingItem) {
         existingItem.quantity = (existingItem.quantity || 0) + 1;
       } else {
         cart.push({ ...product, quantity: 1 });
       }
-
+  
       localStorage.setItem("cart", JSON.stringify(cart));
       window.dispatchEvent(new Event("cartUpdated"));
-      alert(`${product.name} added to cart!`);
     } catch (error) {
       console.error("Error adding to cart:", error);
-      alert("Failed to add item to cart");
+      alert("Failed to add item to cart"); 
     }
   };
 
