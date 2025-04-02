@@ -73,17 +73,6 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
             >
-                <div className="relative w-48 h-64 bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                    <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
-                    <div className="relative p-4 h-full flex flex-col justify-end">
-                        <span className="text-xs font-semibold text-amber-400 mb-1">NEW ARRIVAL</span>
-                        <h3 className="text-white font-bold text-lg mb-2">Golden Macaw</h3>
-                        <div className="text-xs text-white/70 mb-3">From $1,200</div>
-                        <button className="text-xs bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-full transition-all">
-                            View Details
-                        </button>
-                    </div>
-                </div>
             </motion.div>
 
             <div className="relative z-10 flex h-screen flex-col items-center justify-center text-center px-6">
@@ -93,16 +82,6 @@ const HeroSection = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="max-w-4xl px-4"
                 >
-                    <div className="inline-block mb-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                        <span className="text-sm font-medium text-amber-300">Exclusive Pets Collection</span>
-                    </div>
-                    
-                    <h1 className="text-5xl font-extrabold text-white sm:text-6xl lg:text-7xl xl:text-8xl leading-tight mb-6">
-                        <span className="bg-gradient-to-r from-amber-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-                            Exceptional Companions
-                        </span>
-                    </h1>
-                    
                     <motion.p 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
