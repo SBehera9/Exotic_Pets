@@ -46,7 +46,6 @@ const HeroSection = () => {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
         >
-            {/* Animated Background */}
             <AnimatePresence custom={direction}>
                 <motion.div
                     key={currentImage}
@@ -68,7 +67,6 @@ const HeroSection = () => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* Floating Pet Cards */}
             <motion.div 
                 className="absolute left-10 bottom-10 z-10 hidden lg:block"
                 initial={{ opacity: 0, y: 50 }}
@@ -88,7 +86,6 @@ const HeroSection = () => {
                 </div>
             </motion.div>
 
-            {/* Main Content */}
             <div className="relative z-10 flex h-screen flex-col items-center justify-center text-center px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -137,7 +134,6 @@ const HeroSection = () => {
                 </motion.div>
             </div>
 
-            {/* Navigation Controls */}
             <div className="absolute bottom-8 right-10 z-20 flex items-center gap-6">
                 <div className="flex gap-2">
                     {images.map((_, i) => (
@@ -169,7 +165,6 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            {/* Decorative Elements */}
             <motion.div 
                 className="absolute top-20 left-20 w-16 h-16 rounded-full bg-amber-400/20 blur-xl"
                 animate={{

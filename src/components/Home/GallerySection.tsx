@@ -27,15 +27,12 @@ const GallerySection = () => {
   const [isHovering, setIsHovering] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
-  // Get unique categories, filtering out undefined and adding "All"
   const categories = ["All", ...new Set(galleryImages.map(img => img.category).filter((c): c is string => !!c))];
 
-  // Filter images by category
   const filteredImages = activeCategory === "All" 
     ? galleryImages 
     : galleryImages.filter(img => img.category === activeCategory);
 
-  // Prevent scrolling when modal is open
   useEffect(() => {
     if (selectedIndex !== null) {
       document.body.style.overflow = 'hidden';
@@ -98,7 +95,6 @@ const GallerySection = () => {
           </motion.p>
         </div>
 
-        {/* Category Filter */}
         <motion.div 
           className="flex flex-wrap justify-center gap-2 mb-8"
           initial={{ opacity: 0 }}

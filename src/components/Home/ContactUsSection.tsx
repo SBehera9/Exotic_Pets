@@ -19,7 +19,6 @@ const ContactUsSection = () => {
       viewport={{ once: true }}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
         <motion.div
           className="text-center mb-12"
           initial={{ y: -30, opacity: 0 }}
@@ -36,7 +35,6 @@ const ContactUsSection = () => {
           </p>
         </motion.div>
 
-        {/* Contact Cards Grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
           initial={{ opacity: 0, y: 30 }}
@@ -44,7 +42,6 @@ const ContactUsSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {/* Location Card */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex items-start">
             <div className="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0">
               <FontAwesomeIcon icon="map-marker-alt" className="text-green-600 w-5 h-5" />
@@ -56,7 +53,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Phone Card */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex items-start">
             <div className="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0">
               <FontAwesomeIcon icon="phone" className="text-green-600 w-5 h-5" />
@@ -68,7 +64,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Email Card */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex items-start">
             <div className="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0">
               <FontAwesomeIcon icon="envelope" className="text-green-600 w-5 h-5" />
@@ -80,7 +75,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Hours Card */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex items-start">
             <div className="bg-green-100 p-3 rounded-full mr-4 flex-shrink-0">
               <FontAwesomeIcon icon="clock" className="text-green-600 w-5 h-5" />
@@ -93,7 +87,6 @@ const ContactUsSection = () => {
           </div>
         </motion.div>
 
-        {/* Map Embed Placeholder */}
         <motion.div
           className="mt-12 bg-white rounded-xl shadow-md overflow-hidden"
           initial={{ opacity: 0, y: 30 }}

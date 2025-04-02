@@ -9,7 +9,7 @@ type VideoItem = {
   src: string;
   title: string;
   duration: string;
-  category: string; // Changed from optional to required
+  category: string; 
   views?: string;
 };
 
@@ -73,20 +73,16 @@ const VideosSection = () => {
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
   const controlsAnim = useAnimationControls();
 
-  // Filter videos by category
   const filteredVideos = activeCategory === "All" 
     ? videoFiles 
     : videoFiles.filter(video => video.category === activeCategory);
 
-  // Get unique categories - now all categories are guaranteed to be strings
   const categories = ["All", ...new Set(videoFiles.map(video => video.category))];
 
-  // Handle view more action
   const handleViewMore = () => {
     router.push("/videopage");
   };
 
-  // Handle video progress updates
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -99,7 +95,6 @@ const VideosSection = () => {
     return () => video.removeEventListener('timeupdate', updateProgress);
   }, [selectedIndex]);
 
-  // Handle controls visibility
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -131,7 +126,6 @@ const VideosSection = () => {
     };
   }, [isPlaying, isHoveringControls, selectedIndex, controlsAnim]);
 
-  // Memoized callbacks for keyboard shortcuts
   const togglePlay = useCallback(() => {
     if (videoRef.current) {
       if (isPlaying) {
@@ -177,7 +171,6 @@ const VideosSection = () => {
     document.body.style.overflow = 'auto';
   }, []);
 
-  // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedIndex === null) return;
@@ -212,7 +205,6 @@ const VideosSection = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, isPlaying, isMuted, isFullscreen, togglePlay, toggleMute, toggleFullscreen, closeModal, seek]);
 
-  // Fullscreen handling
   const handleFullscreenChange = useCallback(() => {
     setIsFullscreen(!!document.fullscreenElement);
   }, []);
@@ -289,7 +281,6 @@ const VideosSection = () => {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
         <motion.div 
           className="flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0 }}
@@ -312,7 +303,6 @@ const VideosSection = () => {
           ))}
         </motion.div>
         
-        {/* Video Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredVideos.map((video, index) => (
             <motion.div
@@ -362,7 +352,6 @@ const VideosSection = () => {
           ))}
         </div>
         
-        {/* View More Button */}
         {filteredVideos.length > 0 && (
           <motion.div 
             className="text-center mt-16"
@@ -382,7 +371,6 @@ const VideosSection = () => {
         )}
       </div>
 
-      {/* Video Modal */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
@@ -421,7 +409,6 @@ const VideosSection = () => {
                   <source src={filteredVideos[selectedIndex].src} type="video/mp4" />
                 </video>
                 
-                {/* Video overlay controls */}
                 {showControls && (
                   <motion.div
                     className="absolute inset-0 flex items-center justify-center"
@@ -441,7 +428,6 @@ const VideosSection = () => {
                   </motion.div>
                 )}
 
-                {/* Bottom controls bar */}
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 pt-8"
                   animate={controlsAnim}
@@ -480,7 +466,6 @@ const VideosSection = () => {
                     </div>
                   </div>
                   
-                  {/* Progress bar */}
                   <div 
                     className="h-2 bg-white/20 rounded-full w-full cursor-pointer relative overflow-hidden"
                     onClick={handleSeek}
@@ -495,7 +480,6 @@ const VideosSection = () => {
                 </motion.div>
               </div>
 
-              {/* Navigation arrows */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -516,7 +500,6 @@ const VideosSection = () => {
                 <ChevronRight size={40} />
               </button>
 
-              {/* Video counter */}
               <div className="absolute -bottom-16 left-0 text-white/70 text-sm">
                 Video {selectedIndex + 1} of {filteredVideos.length}
               </div>

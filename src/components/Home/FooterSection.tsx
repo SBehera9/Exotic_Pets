@@ -19,7 +19,6 @@ const FooterSection = () => {
     <footer className="bg-gradient-to-b from-green-900 to-black text-white pt-12 pb-6 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Logo and Description */}
           <div className="flex flex-col items-center md:items-start">
             <div className="mb-4">
               <Image
@@ -35,7 +34,6 @@ const FooterSection = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-5 text-green-400 border-b border-green-600 pb-2 w-full text-center md:text-left">
               Quick Links
@@ -60,7 +58,6 @@ const FooterSection = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-5 text-green-400 border-b border-green-600 pb-2 w-full text-center md:text-left">
               Contact Us
@@ -81,7 +78,6 @@ const FooterSection = () => {
             </div>
           </div>
 
-          {/* Social Media & Map */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-5 text-green-400 border-b border-green-600 pb-2 w-full text-center md:text-left">
               Find Us
@@ -115,7 +111,6 @@ const FooterSection = () => {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-12 pt-6 border-t border-gray-800 text-center">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} Exotic Pets. All rights reserved. | 

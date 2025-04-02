@@ -116,7 +116,6 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-4">
               <div className="relative">
                 <button
@@ -146,7 +145,6 @@ const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Desktop navigation */}
             <div className="hidden md:flex items-center space-x-2">
               <Link
                 href="/"
@@ -185,7 +183,6 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
         {menuOpen && (
           <div className={`md:hidden absolute top-full left-0 w-full ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-green-500 to-green-600'} rounded-b-lg overflow-hidden z-50 animate-slideDown`}>
             <div className="flex flex-col items-stretch py-2 px-4">
@@ -214,7 +211,6 @@ const Navbar: React.FC = () => {
           </div>
         )}
 
-        {/* Shopping cart sidebar */}
         {cartOpen && (
           <div className="fixed inset-0 z-50 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">

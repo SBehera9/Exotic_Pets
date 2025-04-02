@@ -23,7 +23,6 @@ function ContactUsPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Contact Info Card */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
@@ -81,7 +80,6 @@ function ContactUsPage() {
               </div>
             </div>
 
-            {/* Social Media */}
             <div className="mt-10">
               <h3 className="text-lg font-semibold text-gray-700 mb-4">Connect With Us</h3>
               <div className="flex space-x-4">
@@ -104,7 +102,6 @@ function ContactUsPage() {
             </div>
           </motion.div>
 
-          {/* Image Section */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="relative h-full min-h-96 rounded-2xl overflow-hidden shadow-lg"
