@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface PetCategory {
   title: string;
@@ -55,7 +55,7 @@ const PetCategoriesSection = () => {
             Our Companions
           </span>
           <motion.h2 
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -64,37 +64,46 @@ const PetCategoriesSection = () => {
             Meet <span className="text-green-600">Our</span> 
             <span className="text-gray-900"> Pets</span>
           </motion.h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Find your perfect pet companion from our carefully selected animals
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {petCategories.map((category, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="group relative bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md overflow-hidden hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 cursor-pointer"
               onClick={() => router.push(category.link)}
+              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <div className="relative h-60 md:h-72 overflow-hidden">
+              <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden">
                 <Image
                   src={category.imageSrc}
                   alt={category.imageAlt}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                  priority={index < 2} // Only prioritize first two images
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
-                  <p className="text-gray-200 text-sm">{category.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 text-white">
+                  <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">{category.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-200 line-clamp-2">
+                    {category.description}
+                  </p>
                 </div>
               </div>
-              <div className="absolute top-4 right-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-800 backdrop-blur-sm">
+              <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/90 text-gray-800 backdrop-blur-sm">
                   Popular
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
