@@ -7,8 +7,6 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
   Bars3Icon,
-  ChevronDownIcon,
-  ChevronUpIcon
 } from "@heroicons/react/24/outline";
 import BuyNowForm from "../Home/BuyNowForm";
 
