@@ -284,6 +284,12 @@ const VideosSection = () => {
           >
             Video <span className="text-green-600">Gallery</span>
           </motion.h2>
+          <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+          />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of beautiful moments captured on video
           </p>

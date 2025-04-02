@@ -64,11 +64,17 @@ const PetCategoriesSection = () => {
             Meet <span className="text-green-600">Our</span> 
             <span className="text-gray-900"> Pets</span>
           </motion.h2>
+          <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+          />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Find your perfect pet companion from our carefully selected animals
           </p>
         </div>
-
+        
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {petCategories.map((category, index) => (
             <motion.div

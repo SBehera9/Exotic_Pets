@@ -14,14 +14,21 @@ function ContactUsPage() {
         className="max-w-4xl mx-auto"
       >
         <div className="text-center mb-12 scroll-mt-20" id="contact-heading">
-          <motion.h1 
-            className="text-4xl font-bold text-gray-900 sm:text-5xl"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+          <motion.h2 
+            className="text-4xl font-bold text-gray-900 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Contact Us
-          </motion.h1>
+            Contact <span className="text-green-600">Us</span>
+          </motion.h2>
+          <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+          />
           <motion.p 
             className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 10 }}

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 library.add(faQuoteLeft, faChevronLeft, faChevronRight);
 
@@ -95,7 +96,12 @@ const TestimonialsSection = () => {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-2">
                         What Our Clients Say
                     </h2>
-                    <div className="w-20 h-1 bg-green-300 mx-auto mt-4"></div>
+                    <motion.div 
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        transition={{ delay: 0.3, duration: 0.8 }}
+                        className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+                    />
                 </div>
 
                 <div className="w-full max-w-4xl px-4 sm:px-6">

@@ -61,6 +61,12 @@ const PetFoodSection = () => {
             Premium <span className="text-green-600">Pet </span>
             <span className="text-gray-900"> Nutrition</span>
           </motion.h2>
+          <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+          />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             High-quality food options tailored to your pet&apos;s specific needs
           </p>

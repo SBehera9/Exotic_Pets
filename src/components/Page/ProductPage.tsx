@@ -141,6 +141,12 @@ const ProductPage: React.FC = () => {
       >
         Our <span className="text-green-600">Products</span> 
       </motion.h2>
+      <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+      />
 
       <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
         {categories.map(({ value, label }) => (
