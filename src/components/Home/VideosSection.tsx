@@ -370,13 +370,14 @@ const VideosSection = () => {
             transition={{ delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <button
-              onClick={handleViewMore}
-              className="px-6 py-2.5 sm:px-8 sm:py-3 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-lg hover:from-green-700 hover:to-green-600 transition-all font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl relative overflow-hidden group"
-            >
-              <span className="relative z-10">View All Videos</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            </button>
+         <motion.button
+            onClick={handleViewMore}
+            className="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto"
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(5, 150, 105, 0.4)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            View Full Video
+          </motion.button>
           </motion.div>
         )}
       </div>

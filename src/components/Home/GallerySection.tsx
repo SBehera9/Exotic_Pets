@@ -187,7 +187,6 @@ const GallerySection = () => {
             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(5, 150, 105, 0.4)" }}
             whileTap={{ scale: 0.95 }}
           >
-            <Plus size={20} />
             View Full Gallery
           </motion.button>
         </motion.div>
