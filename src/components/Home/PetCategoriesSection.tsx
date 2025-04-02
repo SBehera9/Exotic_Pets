@@ -107,6 +107,7 @@ const PetCategoriesSection = () => {
           ))}
         </div>
       </div>
+      <></>
     </section>
   );
 };
