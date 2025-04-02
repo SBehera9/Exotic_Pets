@@ -131,9 +131,6 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="container mx-auto py-10 px-4 bg-white min-h-screen">
-      <h2 className="text-3xl font-extrabold text-green-600 mb-8 text-center">
-        Our Products
-      </h2>
       <motion.h2 
         className="text-4xl text-center font-bold text-gray-900 mb-4"
         initial={{ opacity: 0, y: 20 }}

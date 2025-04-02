@@ -40,11 +40,10 @@ const FooterSection = () => {
             </h3>
             <ul className="space-y-3 text-center md:text-left">
               {[
-                { name: "Home", href: "#" },
-                { name: "Products", href: "/Product" },
-                { name: "Gallery", href: "#gallery" },
-                { name: "About Us", href: "#about" },
-                { name: "Contact", href: "#contact" },
+                { name: "Home", href: "/" },
+                { name: "Products", href: "/productss" },
+                { name: "Gallery", href: "/gallerypage" },
+                { name: "Contact", href: "/contactuspage" },
               ].map((item) => (
                 <li key={item.name}>
                   <a
