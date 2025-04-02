@@ -83,7 +83,6 @@ const TestimonialsSection = () => {
 
     return (
         <div className="relative w-full flex flex-col items-center px-4 overflow-hidden">
-            {/* Background with overlay */}
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed" 
                 style={{ backgroundImage: 'url("/Fish2.png")', zIndex: -2 }} />
             <div className="absolute inset-0 bg-gradient-to-r from-green-900/70 to-blue-900/70 z-[-1]" />

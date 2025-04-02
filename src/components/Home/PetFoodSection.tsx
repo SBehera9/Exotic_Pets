@@ -18,28 +18,28 @@ const petFoods: PetFood[] = [
     description: "Premium nutrition for your furry companion! Choose from high-quality dry kibble, wet food, and special diet options.",
     imageSrc: "/Dog_Food.jpeg",
     imageAlt: "Dog Food",
-    link: "/dog-food",
+    link: "/productss",
   },
   {
     title: "Bird Food",
     description: "Give your birds the best! Nutritious seed mixes, pellets, and treats to keep them happy, healthy, and full of energy.",
     imageSrc: "/Birds_Food.jpg",
     imageAlt: "Bird Food",
-    link: "/bird-food",
+    link: "/productss",
   },
   {
     title: "Cat Food",
     description: "Tasty and wholesome meals for your feline friend! From crunchy kibble to mouthwatering wet food, perfect for every cat.",
     imageSrc: "/Cat_Food.jpeg",
     imageAlt: "Cat Food",
-    link: "/cat-food",
+    link: "/productss",
   },
   {
     title: "Fish Food",
     description: "Essential nutrition for a thriving aquarium! High-quality flakes, pellets, and specialized diets for all types of fish.",
     imageSrc: "/Fish_Food.jpeg",
     imageAlt: "Fish Food",
-    link: "/fish-food",
+    link: "/productss",
   },
 ];
 

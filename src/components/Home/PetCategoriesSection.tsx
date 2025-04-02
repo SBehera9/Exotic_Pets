@@ -18,28 +18,28 @@ const petCategories: PetCategory[] = [
     description: "Loyal, loving, and full of energy! Discover a variety of dog breeds, from playful puppies to devoted companions.",
     imageSrc: "/LabradorRetriever.jpg",
     imageAlt: "Dogs",
-    link: "/dogs",
+    link: "/productss",
   },
   {
     title: "Birds",
     description: "Brighten your home with the charm of exotic birds! From melodious songbirds to vibrant parrots, find your perfect feathered friend.",
     imageSrc: "/budgies.jpg",
     imageAlt: "Birds",
-    link: "/birds",
+    link: "/productss",
   },
   {
     title: "Cats",
     description: "Graceful, independent, and affectionate! Choose from adorable kittens to majestic cats, all waiting for a loving home.",
     imageSrc: "/Cat.jpeg",
     imageAlt: "Cats",
-    link: "/cats",
+    link: "/productss",
   },
   {
     title: "Small Fish",
     description: "Transform your space with a stunning aquatic world! Explore our collection of vibrant freshwater and saltwater fish.",
     imageSrc: "/Mollies.jpg",
     imageAlt: "Small Fish",
-    link: "/fish",
+    link: "/productss",
   },
 ];
 
