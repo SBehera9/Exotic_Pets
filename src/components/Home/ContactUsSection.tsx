@@ -26,7 +26,7 @@ const ContactUsSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-green-800 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Contact <span className="text-green-600">Information</span>
           </h2>
           <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mb-4" />

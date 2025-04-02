@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Share2, ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Product {
   id: number;
@@ -132,6 +133,15 @@ const ProductPage: React.FC = () => {
       <h2 className="text-3xl font-extrabold text-green-600 mb-8 text-center">
         Our Products
       </h2>
+      <motion.h2 
+        className="text-4xl text-center font-bold text-gray-900 mb-4"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        Our <span className="text-green-600">Products</span> 
+      </motion.h2>
 
       <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
         {categories.map(({ value, label }) => (
