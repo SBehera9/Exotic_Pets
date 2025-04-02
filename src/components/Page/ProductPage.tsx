@@ -130,13 +130,14 @@ const ProductPage: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto py-10 px-4 bg-white min-h-screen">
+    <div className="container mx-auto py-10 px-4 bg-white min-h-screen mt-16"> 
       <motion.h2 
-        className="text-4xl text-center font-bold text-gray-900 mb-4"
+        className="text-4xl text-center font-bold text-gray-900 mb-4 scroll-mt-16" 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
+        id="products-heading" 
       >
         Our <span className="text-green-600">Products</span> 
       </motion.h2>

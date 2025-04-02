@@ -6,26 +6,39 @@ import { motion } from 'framer-motion';
 
 function ContactUsPage() {
   return (
-    <div className="bg-gradient-to-br from-emerald-50 to-cyan-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-br from-emerald-50 to-cyan-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-16 md:mt-20">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+        <div className="text-center mb-12 scroll-mt-20" id="contact-heading">
+          <motion.h1 
+            className="text-4xl font-bold text-gray-900 sm:text-5xl"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
             Contact Us
-          </h1>
-          <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
             Get in touch with our team for any inquiries about our exotic birds. We&apos;re here to help!
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             <h2 className="text-2xl font-bold text-gray-800 mb-8">Our Contact Information</h2>
             
@@ -105,6 +118,9 @@ function ContactUsPage() {
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="relative h-full min-h-96 rounded-2xl overflow-hidden shadow-lg"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             <Image
               src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1925&q=80"
