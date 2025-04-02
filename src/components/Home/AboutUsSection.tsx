@@ -24,8 +24,8 @@ const AboutUsSection = () => {
                     viewport={{ once: true, margin: "-100px" }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl sm:text-5xl font-bold text-emerald-900 mb-4">
-                        Our <span className="text-emerald-600">Passion</span> For <span className="text-emerald-600">Exotics</span>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                        Our <span className="text-emerald-600">Passion</span> For <span className="text-gray-900">Exotics</span>
                     </h2>
                     <motion.div 
                         initial={{ scaleX: 0 }}
