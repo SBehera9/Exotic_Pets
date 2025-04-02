@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const AboutUsSection = () => {
-    const aboutUsText = `Welcome to Exotic Birds, your premier destination for rare and beautiful pets! Founded in 2010, we've grown from a small exotic bird shop to a comprehensive exotic pet emporium. Our team of passionate experts provides exceptional care for vibrant parrots, exotic reptiles, and small mammals. We're committed to responsible pet ownership through education, high-quality supplies, and a supportive community.`;
+    const aboutUsText = `Welcome to Exotic Birds, your premier destination for rare and beautiful pets! Founded in 2020, we've grown from a small exotic bird shop to a comprehensive exotic pet emporium. Our team of passionate experts provides exceptional care for vibrant parrots, exotic reptiles, and small mammals. We're committed to responsible pet ownership through education, high-quality supplies, and a supportive community.`;
 
     const stats = [
         { value: "14+", label: "Years Experience", icon: "🦜" },
@@ -113,7 +113,7 @@ const AboutUsSection = () => {
                             className="mb-4"
                         >
                             <span className="inline-block bg-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-1.5 rounded-full shadow-sm">
-                                Since 2010
+                                Since 2020
                             </span>
                         </motion.div>
                         
@@ -154,7 +154,7 @@ const AboutUsSection = () => {
                             ))}
                         </div>
                         
-                        <div className="flex flex-col sm:flex-row gap-4">
+                        {/* <div className="flex flex-col sm:flex-row gap-4">
                             <motion.button
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
@@ -188,7 +188,7 @@ const AboutUsSection = () => {
                                 </svg>
                                 Meet Our Team
                             </motion.button>
-                        </div>
+                        </div> */}
                     </motion.div>
                 </div>
             </div>
