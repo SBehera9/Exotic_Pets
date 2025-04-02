@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Image {
   id: number;
@@ -49,7 +50,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ image, onClick, index }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
           <div className="text-white">
             <h3 className="font-semibold text-sm sm:text-lg">{image.title}</h3>
-            <span className="text-xs sm:text-sm bg-blue-500 px-2 py-1 rounded-full">{image.category}</span>
+            <span className="text-xs sm:text-sm bg-green-600 px-2 py-1 rounded-full">{image.category}</span>
           </div>
         </div>
       </div>
@@ -240,9 +241,23 @@ function GalleryPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-4 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto mt-16">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8 sm:mb-10 md:mb-12">
-          Our Awesome Gallery
-        </h1>
+      <motion.h2 
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        id="products-heading" 
+      >
+        Our <span className="text-green-600">Awesome </span>
+        <span className="text-gray-900"> Gallery</span> 
+      </motion.h2>
+      <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+      />
 
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {imageData.map((image, index) => (

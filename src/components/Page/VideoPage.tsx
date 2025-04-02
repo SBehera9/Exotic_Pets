@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Video {
   id: number;
@@ -132,7 +133,6 @@ interface VideoCardProps {
 }
 
 const VideoCard: React.FC<VideoCardProps> = ({ video, onClick, index }) => {
-  // ... (keep the VideoCard component as it is)
   return (
     <div
       className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
@@ -150,7 +150,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick, index }) => {
           <div className="text-white">
             <h3 className="font-semibold text-sm sm:text-base line-clamp-2">{video.title}</h3>
             <div className="flex justify-between items-center mt-1 sm:mt-2 text-xs sm:text-sm">
-              <span className="bg-blue-500 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">{video.category}</span>
+              <span className="bg-green-600 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">{video.category}</span>
               <span className="bg-black/70 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">{video.duration}</span>
             </div>
           </div>
@@ -362,7 +362,22 @@ function VideoPage() {
       <div className="max-w-7xl mx-auto"> {/* Removed mt-12 sm:mt-16 here as padding is now on main */}
         {/* Page Heading */}
         <div className="mb-8 sm:mb-10 text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3" >Video Gallery</h1>
+        <motion.h2 
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        id="products-heading" 
+      >
+        Video <span className="text-green-600">Gallery</span>
+      </motion.h2>
+      <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+      />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of high-quality videos
           </p>
