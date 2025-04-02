@@ -277,7 +277,7 @@ const Navbar: React.FC = () => {
                                     <div className="flex items-center border border-gray-300 rounded-md">
                                       <button
                                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                        className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                                        className="px-3 py-1 text-gray-600 hover:bg-gray-100 cursor-pointer"
                                       >
                                         -
                                       </button>
@@ -286,7 +286,7 @@ const Navbar: React.FC = () => {
                                       </span>
                                       <button
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                        className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                                        className="px-3 py-1 text-gray-600 hover:bg-gray-100 cursor-pointer"
                                       >
                                         +
                                       </button>
@@ -295,7 +295,7 @@ const Navbar: React.FC = () => {
                                     <div className="flex">
                                       <button
                                         onClick={() => removeFromCart(item.id)}
-                                        className="font-medium text-red-600 hover:text-red-500"
+                                        className="font-medium text-red-600 hover:text-red-500 cursor-pointer"
                                       >
                                         Remove
                                       </button>
@@ -321,7 +321,7 @@ const Navbar: React.FC = () => {
                         <div className="mt-6">
                           <button
                             onClick={handleCheckout}
-                            className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
+                            className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 cursor-pointer"
                           >
                             Checkout
                           </button>
@@ -329,7 +329,7 @@ const Navbar: React.FC = () => {
                         <div className="mt-4 flex justify-center text-sm text-gray-500">
                           <button
                             onClick={() => setCartOpen(false)}
-                            className="text-green-600 font-medium hover:text-green-500"
+                            className="text-green-600 font-medium hover:text-green-500 cursor-pointer"
                           >
                             Continue Shopping
                           </button>
