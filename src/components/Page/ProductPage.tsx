@@ -131,9 +131,6 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className="container mx-auto py-10 px-4 bg-white min-h-screen">
-      <h2 className="text-3xl font-extrabold text-green-600 mb-8 text-center">
-        Our Products
-      </h2>
       <motion.h2 
         className="text-4xl text-center font-bold text-gray-900 mb-4"
         initial={{ opacity: 0, y: 20 }}
@@ -208,17 +205,6 @@ const ProductPage: React.FC = () => {
                   Add to Cart
                 </button>
               </div>
-
-              <p className="text-green-600 font-bold text-lg">Rs. {product.price}</p>
-              <p className="text-gray-600 mt-1 text-sm">{product.description}</p>
-
-              {/* Add to Cart Button */}
-              <button
-                onClick={() => addToCart(product)}
-                className="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out"
-              >
-                Add to Cart
-              </button>
             </div>
           ))}
         </div>
