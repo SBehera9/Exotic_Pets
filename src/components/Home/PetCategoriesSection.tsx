@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface PetCategory {
   title: string;
@@ -53,13 +54,22 @@ const PetCategoriesSection = () => {
           <span className="inline-block px-3 py-1 text-sm font-semibold text-green-600 bg-green-100 rounded-full mb-3">
             Our Companions
           </span>
-          <h2 className="text-4xl font-bold text-gray-900 mb-3">Meet Our Pets</h2>
+          <motion.h2 
+            className="text-4xl font-bold text-gray-900 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Meet <span className="text-green-600">Our</span> 
+            <span className="text-gray-900"> Pets</span>
+          </motion.h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Find your perfect pet companion from our carefully selected animals
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {petCategories.map((category, index) => (
             <div
               key={index}

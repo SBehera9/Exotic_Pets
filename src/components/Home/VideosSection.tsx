@@ -275,8 +275,16 @@ const VideosSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl font-bold text-green-800 mb-4">Video Gallery</h2>
-          <p className="text-lg text-green-600 max-w-2xl mx-auto">
+          <motion.h2 
+            className="text-4xl font-bold text-gray-900 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Video <span className="text-green-600">Gallery</span>
+          </motion.h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of beautiful moments captured on video
           </p>
         </motion.div>

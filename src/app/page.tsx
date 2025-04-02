@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaWhatsapp, FaInstagram, FaFacebook, FaChevronUp, FaChevronDown } from "react-icons/fa";
-import AboutUsSection from "@/components/Home/AboutUsSection";
+// import AboutUsSection from "@/components/Home/AboutUsSection";
 import ContactUsSection from "@/components/Home/ContactUsSection";
 import FooterSection from "@/components/Home/FooterSection";
 import GallerySection from "@/components/Home/GallerySection";
@@ -59,7 +59,7 @@ function App() {
       <HeroSection />
       <PetCategoriesSection />
       <PetFoodSection />
-      <AboutUsSection />
+      {/* <AboutUsSection /> */}
       <GallerySection />
       <VideosSection />
       <TestimonialsSection />

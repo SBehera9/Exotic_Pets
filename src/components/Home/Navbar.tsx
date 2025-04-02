@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
           <div className="fixed inset-0 z-50 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
               <div 
-                className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+                className="absolute inset-0  transition-opacity"
                 onClick={() => setCartOpen(false)}
               ></div>
               
