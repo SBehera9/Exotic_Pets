@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
-<<<<<<< HEAD
 import AboutUsSection from "@/components/Home/AboutUsSection";
-=======
-import { FaWhatsapp, FaInstagram, FaFacebook, FaChevronUp, FaChevronDown } from "react-icons/fa";
-// import AboutUsSection from "@/components/Home/AboutUsSection";
->>>>>>> 0d50b803788f40451afd377bfb1ebf50b713e5b9
 import ContactUsSection from "@/components/Home/ContactUsSection";
 import FooterSection from "@/components/Home/FooterSection";
 import GallerySection from "@/components/Home/GallerySection";
@@ -26,7 +21,7 @@ function App() {
       <HeroSection />
       <PetCategoriesSection />
       <PetFoodSection />
-      {/* <AboutUsSection /> */}
+      <AboutUsSection />
       <GallerySection />
       <VideosSection />
       <TestimonialsSection />
