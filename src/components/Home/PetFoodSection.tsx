@@ -98,7 +98,7 @@ const PetFoodSection = () => {
               <div className="p-4 sm:p-5 md:p-6">
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-1">{food.title}</h3>
                 <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-2">{food.description}</p>
-                <button className="inline-flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors text-sm sm:text-base">
+                <button className="inline-flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors text-sm sm:text-base cursor-pointer">
                   Shop now
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

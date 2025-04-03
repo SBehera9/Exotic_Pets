@@ -5,6 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
+const handleViewMore = () => {
+  window.location.href = "/productss";
+};
+
 interface PetCategory {
   title: string;
   description: string;
@@ -94,7 +98,7 @@ const PetCategoriesSection = () => {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-                  priority={index < 2} // Only prioritize first two images
+                  priority={index < 2} 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 text-white">
@@ -105,7 +109,10 @@ const PetCategoriesSection = () => {
                 </div>
               </div>
               <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/90 text-gray-800 backdrop-blur-sm">
+                
+                <span 
+                onClick={handleViewMore}
+                className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white/90 hover:bg-green-600 text-gray-800 hover:text-white backdrop-blur-sm">
                   Popular
                 </span>
               </div>

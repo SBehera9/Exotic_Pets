@@ -226,14 +226,11 @@ const GallerySection = () => {
                 <Image
                   src={filteredImages[selectedIndex].src}
                   alt={filteredImages[selectedIndex].alt}
-                  width={1200}
-                  height={800}
-                  className="max-h-[80vh] w-auto rounded-lg shadow-2xl"
-                  style={{ objectFit: 'contain' }}
-                  priority
+                  width={700}
+                  height={400}
+                  className="w-full max-w-[900px] h-auto max-h-[80vh] object-cover rounded-lg shadow-2xl"
                 />
               </motion.div>
-
               <button
                 onClick={prevImage}
                 className="absolute top-1/2 left-2 sm:-left-12 transform -translate-y-1/2 text-white hover:text-green-400 transition-colors p-2 bg-black/30 rounded-full backdrop-blur-sm hover:bg-black/50"
