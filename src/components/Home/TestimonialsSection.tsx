@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteLeft, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 library.add(faQuoteLeft, faChevronLeft, faChevronRight);
@@ -122,7 +121,6 @@ const TestimonialsSection = () => {
                                         {testimonial.text}
                                     </p>
                                     <div className="flex items-center">
-                                       
                                         <div>
                                             <h4 className="text-white font-bold text-lg">
                                                 {testimonial.name}

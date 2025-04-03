@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
@@ -144,7 +144,6 @@ const VideosSection = () => {
 
     resetControlsTimeout();
 
-
     return () => {
       if (controlsTimeout.current) {
         clearTimeout(controlsTimeout.current);
@@ -220,7 +219,6 @@ const VideosSection = () => {
        }
 
       switch (e.key) {
-
         case 'ArrowLeft':
           seek(-5);
           break;
@@ -249,7 +247,6 @@ const VideosSection = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, togglePlay, toggleMute, toggleFullscreen, closeModal, seek]); 
 
-
   const handleFullscreenChange = useCallback(() => {
     setIsFullscreen(!!document.fullscreenElement);
   }, []);
@@ -260,7 +257,6 @@ const VideosSection = () => {
   }, [handleFullscreenChange]);
 
   const openModal = (index: number) => {
-     const actualIndex = videoFiles.indexOf(filteredVideos[index]); 
     setSelectedIndex(index); 
     document.body.style.overflow = 'hidden';
     setIsPlaying(false);
@@ -271,16 +267,13 @@ const VideosSection = () => {
     setSelectedIndex((prev) =>
       prev !== null ? (prev + 1) % filteredVideos.length : 0
     );
-    
   }, [filteredVideos.length]);
 
   const prevVideo = useCallback(() => {
     setSelectedIndex((prev) =>
       prev !== null ? (prev - 1 + filteredVideos.length) % filteredVideos.length : 0
     );
-     
   }, [filteredVideos.length]);
-
 
   const handleVideoClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation(); 
@@ -296,7 +289,6 @@ const VideosSection = () => {
     videoRef.current.currentTime = pos * videoRef.current.duration;
     setProgress(pos * 100); 
   },[]);
-
 
   const handleControlsMouseEnter = () => {
     setIsHoveringControls(true);
@@ -314,15 +306,14 @@ const VideosSection = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-    const getVideoDuration = (index: number | null): string => {
+  const getVideoDuration = (index: number | null): string => {
      if (index === null || index < 0 || index >= filteredVideos.length) return "0:00";
      const video = videoRef.current;
      if (video && video.duration && isFinite(video.duration)) {
          return formatTime(video.duration);
      }
      return filteredVideos[index].duration; 
- };
-
+  };
 
   return (
     <div className="bg-gradient-to-b from-white to-green-50 py-12 md:py-20 px-4 sm:px-6" id="videos">
@@ -389,9 +380,8 @@ const VideosSection = () => {
               whileHover={{ y: -5 }}
             >
               <div className="aspect-video relative">
-                
                 <video
-                  className="w-full h-full " 
+                  className="w-full h-full" 
                   muted
                   loop
                   playsInline 
@@ -491,7 +481,6 @@ const VideosSection = () => {
                   e.stopPropagation(); 
                   prevVideo();
                 }}
-               
                 className={`absolute top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white p-1 sm:p-2 bg-black/30 hover:bg-black/60 rounded-full transition-all z-[55] ${ 
                   isFullscreen
                     ? 'left-4 fixed -translate-x-0' 
@@ -519,8 +508,19 @@ const VideosSection = () => {
 
                 <AnimatePresence>
                 {!isPlaying && showControls && (
-                   <motion.div /* ... */ >
-                     <button /* ... */ >
+                   <motion.div 
+                     className="absolute inset-0 flex items-center justify-center bg-black/30"
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                   >
+                     <button 
+                       onClick={(e) => {
+                         e.stopPropagation();
+                         togglePlay();
+                       }}
+                       className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all"
+                     >
                         <Play size={40} className="text-white pl-1 sm:pl-2 sm:size-[60px]" />
                     </button>
                   </motion.div>
@@ -548,10 +548,22 @@ const VideosSection = () => {
 
                    <div className="flex items-center justify-between gap-3 sm:gap-4">
                       <div className="flex items-center space-x-2 sm:space-x-4">
-                        <button onClick={(e) => { e.stopPropagation(); togglePlay(); }} /* ... */ >
+                        <button 
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            togglePlay(); 
+                          }}
+                          className="text-white hover:text-green-300 transition-colors"
+                        >
                           {isPlaying ? <Pause size={20} className="sm:size-6" /> : <Play size={20} className="sm:size-6" />}
                         </button>
-                        <button onClick={(e) => { e.stopPropagation(); toggleMute(); }} /* ... */ >
+                        <button 
+                          onClick={(e) => { 
+                            e.stopPropagation(); 
+                            toggleMute(); 
+                          }}
+                          className="text-white hover:text-green-300 transition-colors"
+                        >
                           {isMuted ? <VolumeX size={20} className="sm:size-6" /> : <Volume2 size={20} className="sm:size-6" />}
                         </button>
                         <span className="text-white text-xs sm:text-sm font-medium tabular-nums">
