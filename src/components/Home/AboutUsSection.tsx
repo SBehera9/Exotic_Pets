@@ -54,7 +54,7 @@ const AboutUsSection = () => {
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
                             <div className="aspect-w-16 aspect-h-12 overflow-hidden rounded-3xl">
                                 <Image
-                                    src="/Pet.png"
+                                    src="/gif.gif"
                                     alt="Happy exotic pets"
                                     width={800}
                                     height={600}

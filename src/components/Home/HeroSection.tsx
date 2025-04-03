@@ -60,10 +60,9 @@ const HeroSection = () => {
                         backgroundAttachment: 'fixed',
                     }}
                 >
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/30"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.7))]"></div>
+                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute inset-0 bg-black/30"></div>
                 </motion.div>
             </AnimatePresence>
 

@@ -86,11 +86,11 @@ const TestimonialsSection = () => {
         <div className="relative w-full flex flex-col items-center px-4 overflow-hidden">
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed" 
                 style={{ backgroundImage: 'url("/Fish2.png")', zIndex: -2 }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-green-900/70 to-blue-900/70 z-[-1]" />
+            <div className="absolute inset-0 bg-black/50 z-[-1]" />
 
             <div className="relative py-16 sm:py-20 flex flex-col items-center w-full max-w-7xl mx-auto">
                 <div className="text-center mb-12">
-                    <span className="text-green-300 font-semibold text-sm uppercase tracking-wider">
+                    <span className="text-green-600 font-semibold text-sm uppercase tracking-wider">
                         Happy Customers
                     </span>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-2">
@@ -116,34 +116,18 @@ const TestimonialsSection = () => {
                                 <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 sm:p-10 shadow-lg border border-white/10">
                                     <FontAwesomeIcon
                                         icon="quote-left"
-                                        className="text-green-300 text-3xl opacity-30 mb-4"
+                                        className="text-green-600 text-3xl opacity-90 mb-4"
                                     />
                                     <p className="text-white text-lg sm:text-xl leading-relaxed mb-6">
                                         {testimonial.text}
                                     </p>
                                     <div className="flex items-center">
-                                        <div className="mr-4">
-                                            <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-green-300/50">
-                                                {testimonial.avatar ? (
-                                                    <Image 
-                                                        src={testimonial.avatar} 
-                                                        alt={testimonial.name}
-                                                        width={56}
-                                                        height={56}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                ) : (
-                                                    <span className="text-white text-xl font-bold">
-                                                        {testimonial.name.charAt(0)}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
+                                       
                                         <div>
                                             <h4 className="text-white font-bold text-lg">
                                                 {testimonial.name}
                                             </h4>
-                                            <p className="text-green-200 text-sm">
+                                            <p className="text-green-600 text-sm">
                                                 {testimonial.role}
                                             </p>
                                         </div>
@@ -161,7 +145,7 @@ const TestimonialsSection = () => {
                         >
                             <FontAwesomeIcon 
                                 icon="chevron-left" 
-                                className="text-white text-lg group-hover:text-green-300 transition-all" 
+                                className="text-white text-lg group-hover:text-green-600 transition-all" 
                             />
                         </button>
 
@@ -170,7 +154,7 @@ const TestimonialsSection = () => {
                                 <button
                                     key={index}
                                     onClick={() => goToIndex(index)}
-                                    className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-green-300 w-6' : 'bg-white/30'}`}
+                                    className={`w-3 h-3 rounded-full transition-all ${currentIndex === index ? 'bg-green-600 w-6' : 'bg-white/30'}`}
                                     aria-label={`Go to testimonial ${index + 1}`}
                                 />
                             ))}
@@ -183,7 +167,7 @@ const TestimonialsSection = () => {
                         >
                             <FontAwesomeIcon 
                                 icon="chevron-right" 
-                                className="text-white text-lg group-hover:text-green-300 transition-all" 
+                                className="text-white text-lg group-hover:text-green-600 transition-all" 
                             />
                         </button>
                     </div>
