@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import AboutUsSection from "@/components/Home/AboutUsSection";
 import ContactUsSection from "@/components/Home/ContactUsSection";
 import FooterSection from "@/components/Home/FooterSection";

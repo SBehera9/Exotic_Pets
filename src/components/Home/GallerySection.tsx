@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, Plus } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface GalleryImage {
@@ -193,7 +193,7 @@ const GallerySection = () => {
             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(5, 150, 105, 0.4)" }}
             whileTap={{ scale: 0.95 }}
           >
-            View Full Gallery
+            View More
           </motion.button>
         </motion.div>
       </div>

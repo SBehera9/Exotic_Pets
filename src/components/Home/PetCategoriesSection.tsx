@@ -51,9 +51,6 @@ const PetCategoriesSection = () => {
     <section className="bg-gray-50 py-12 md:py-16 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="inline-block px-3 py-1 text-sm font-semibold text-green-600 bg-green-100 rounded-full mb-3">
-            Our Companions
-          </span>
           <motion.h2 
             className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
             initial={{ opacity: 0, y: 20 }}

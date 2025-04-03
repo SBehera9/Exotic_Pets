@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaWhatsapp, FaInstagram, FaFacebook, FaChevronUp, FaChevronDown, FaCommentAlt } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaFacebook, FaChevronDown, FaCommentAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 function FloatingSocial() {

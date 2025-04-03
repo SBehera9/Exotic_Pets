@@ -382,7 +382,7 @@ const VideosSection = () => {
             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(5, 150, 105, 0.4)" }}
             whileTap={{ scale: 0.95 }}
           >
-            View Full Video
+            View More
           </motion.button>
           </motion.div>
         )}

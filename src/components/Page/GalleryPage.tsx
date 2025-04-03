@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Image {
   id: number;
@@ -70,21 +70,21 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, currentIndex, onClose, 
   const [touchEnd, setTouchEnd] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handlePrev = () => {
+  const handlePrev = React.useCallback(() => {
     if (!isAnimating) {
       setIsAnimating(true);
       onChangeIndex((currentIndex - 1 + images.length) % images.length);
       setTimeout(() => setIsAnimating(false), 300);
     }
-  };
+  }, [currentIndex, images.length, isAnimating, onChangeIndex]);
 
-  const handleNext = () => {
+  const handleNext = React.useCallback(() => {
     if (!isAnimating) {
       setIsAnimating(true);
       onChangeIndex((currentIndex + 1) % images.length);
       setTimeout(() => setIsAnimating(false), 300);
     }
-  };
+  }, [currentIndex, images.length, isAnimating, onChangeIndex]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
@@ -117,7 +117,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, currentIndex, onClose, 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, isAnimating]);
+  }, [handleNext, handlePrev, onClose]);
 
   if (!images.length) return null;
 
@@ -241,23 +241,23 @@ function GalleryPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-4 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto mt-16">
-      <motion.h2 
-        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        id="products-heading" 
-      >
-        Our <span className="text-green-600">Awesome </span>
-        <span className="text-gray-900"> Gallery</span> 
-      </motion.h2>
-      <motion.div 
+        <motion.h2 
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          id="products-heading" 
+        >
+          Our <span className="text-green-600">Awesome </span>
+          <span className="text-gray-900"> Gallery</span> 
+        </motion.h2>
+        <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
-      />
+        />
 
         <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {imageData.map((image, index) => (

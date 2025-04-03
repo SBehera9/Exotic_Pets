@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Share2, ShoppingCart } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Product {
   id: number;
@@ -75,7 +75,6 @@ const ProductPage: React.FC = () => {
   };
 
   const addToCart = (product: Product) => {
-
     if (!isClient) return;
     
     try {
@@ -91,6 +90,16 @@ const ProductPage: React.FC = () => {
   
       localStorage.setItem("cart", JSON.stringify(cart));
       window.dispatchEvent(new Event("cartUpdated"));
+      
+      // Provide visual feedback
+      const button = document.getElementById(`add-to-cart-${product.id}`);
+      if (button) {
+        button.classList.add("bg-green-700");
+        setTimeout(() => {
+          button.classList.remove("bg-green-700");
+          button.classList.add("bg-green-600");
+        }, 300);
+      }
     } catch (error) {
       console.error("Error adding to cart:", error);
       alert("Failed to add item to cart"); 
@@ -150,7 +159,7 @@ const ProductPage: React.FC = () => {
 
       <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
         {categories.map(({ value, label }) => (
-          <button
+          <motion.button
             key={value}
             className={`px-4 py-2 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-200 ${
               selectedCategory === value 
@@ -158,20 +167,25 @@ const ProductPage: React.FC = () => {
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             } whitespace-nowrap`}
             onClick={() => filterCategory(value)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             {label}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {productsToDisplay.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productsToDisplay.map((product) => (
-            <div
+            <motion.div
               key={product.id}
               className="border border-gray-200 rounded-xl shadow-md bg-white flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3 }}
             >
-
               <div className="h-48 md:h-56 w-full relative">
                 <Image 
                   src={product.imageUrl} 
@@ -205,6 +219,7 @@ const ProductPage: React.FC = () => {
                 </p>
 
                 <button
+                  id={`add-to-cart-${product.id}`}
                   onClick={() => addToCart(product)}
                   className="mt-auto flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded-lg transition-colors duration-200"
                 >
@@ -212,15 +227,18 @@ const ProductPage: React.FC = () => {
                   Add to Cart
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <motion.div 
+          className="text-center py-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
           <p className="text-gray-500 text-lg">No products found in this category.</p>
-        </div>
+        </motion.div>
       )}
-
     </div>
   );
 };

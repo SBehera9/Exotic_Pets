@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Video {
   id: number;
@@ -15,7 +15,6 @@ interface Video {
 }
 
 const videoData: Video[] = [
-  // ... (keep the videoData array as it is)
   {
     id: 1,
     title: 'Amazing Nature',
@@ -56,7 +55,7 @@ const videoData: Video[] = [
     id: 5,
     title: 'Travel Vlog',
     thumbnailUrl: '/thumbnails/travel.jpg',
-    videoUrl: '/video/Dog1.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/Dog1.mp4',
     views: '1.5M views',
     duration: '15:30',
     category: 'Travel'
@@ -65,7 +64,7 @@ const videoData: Video[] = [
     id: 6,
     title: 'Gaming Highlights',
     thumbnailUrl: '/thumbnails/gaming.jpg',
-    videoUrl: '/video/Fish.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/Fish.mp4',
     views: '4.7M views',
     duration: '22:18',
     category: 'Gaming'
@@ -74,7 +73,7 @@ const videoData: Video[] = [
     id: 7,
     title: 'DIY Projects',
     thumbnailUrl: '/thumbnails/diy.jpg',
-    videoUrl: '/video/diy.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/diy.mp4',
     views: '756K views',
     duration: '18:42',
     category: 'DIY'
@@ -83,7 +82,7 @@ const videoData: Video[] = [
     id: 8,
     title: 'Music Performance',
     thumbnailUrl: '/thumbnails/music.jpg',
-    videoUrl: '/video/music.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/music.mp4',
     views: '5.3M views',
     duration: '3:56',
     category: 'Music'
@@ -92,7 +91,7 @@ const videoData: Video[] = [
     id: 9,
     title: 'Science Experiments',
     thumbnailUrl: '/thumbnails/science.jpg',
-    videoUrl: '/video/science.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/science.mp4',
     views: '2.8M views',
     duration: '11:24',
     category: 'Science'
@@ -101,7 +100,7 @@ const videoData: Video[] = [
     id: 10,
     title: 'Art Tutorial',
     thumbnailUrl: '/thumbnails/art.jpg',
-    videoUrl: '/video/art.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/art.mp4',
     views: '1.1M views',
     duration: '25:10',
     category: 'Art'
@@ -110,7 +109,7 @@ const videoData: Video[] = [
     id: 11,
     title: 'Fitness Workout',
     thumbnailUrl: '/thumbnails/fitness.jpg',
-    videoUrl: '/video/fitness.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/fitness.mp4',
     views: '3.2M views',
     duration: '32:45',
     category: 'Fitness'
@@ -119,7 +118,7 @@ const videoData: Video[] = [
     id: 12,
     title: 'Movie Trailer',
     thumbnailUrl: '/thumbnails/movie.jpg',
-    videoUrl: '/video/movie.mp4', // Potential typo: should be /videos/?
+    videoUrl: '/videos/movie.mp4',
     views: '8.9M views',
     duration: '2:30',
     category: 'Entertainment'
@@ -208,116 +207,114 @@ const VideoModal: React.FC<VideoModalProps> = ({
   currentIndex,
   totalVideos,
 }) => {
- // ... (keep the VideoModal component as it is)
- if (!video) return null;
+  if (!video) return null;
 
- return (
-   <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-     <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col">
-       {/* Header */}
-       <div className="flex justify-between items-center bg-gray-900 text-white p-3 sm:p-4 rounded-t-lg">
-         <div>
-           <h2 className="text-lg sm:text-xl font-bold line-clamp-1">{video.title}</h2>
-           <p className="text-xs sm:text-sm text-gray-300">{video.category} • {video.views}</p>
-         </div>
-         <div className="flex items-center space-x-2 sm:space-x-4">
-           <span className="text-xs sm:text-sm text-gray-300">
-             {currentIndex + 1} / {totalVideos}
-           </span>
-           <button
-             className="p-1 sm:p-2 rounded-full hover:bg-gray-700 transition-colors"
-             onClick={onClose}
-             aria-label="Close"
-           >
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               className="h-5 w-5 sm:h-6 sm:w-6"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
-             >
-               <path
-                 strokeLinecap="round"
-                 strokeLinejoin="round"
-                 strokeWidth={2}
-                 d="M6 18L18 6M6 6l12 12"
-               />
-             </svg>
-           </button>
-         </div>
-       </div>
+  return (
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center bg-gray-900 text-white p-3 sm:p-4 rounded-t-lg">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold line-clamp-1">{video.title}</h2>
+            <p className="text-xs sm:text-sm text-gray-300">{video.category} • {video.views}</p>
+          </div>
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <span className="text-xs sm:text-sm text-gray-300">
+              {currentIndex + 1} / {totalVideos}
+            </span>
+            <button
+              className="p-1 sm:p-2 rounded-full hover:bg-gray-700 transition-colors"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 sm:h-6 sm:w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-       {/* Video Content */}
-       <div className="relative flex-grow bg-black flex items-center justify-center">
-         <video
-           controls
-           autoPlay
-           className="w-full h-full object-contain"
-           // Add a key to force re-render when video changes
-           key={video.id}
-         >
-           <source src={video.videoUrl} type="video/mp4" />
-           Your browser does not support the video tag.
-         </video>
+        {/* Video Content */}
+        <div className="relative flex-grow bg-black flex items-center justify-center">
+          <video
+            controls
+            autoPlay
+            className="w-full h-full object-contain"
+            key={video.id}
+          >
+            <source src={video.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
 
-         {/* Navigation Arrows */}
-         {hasPrev && (
-           <button
-             onClick={onPrev}
-             className="absolute left-2 sm:left-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
-             aria-label="Previous Video"
-           >
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               className="h-6 w-6 sm:h-8 sm:w-8"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
-             >
-               <path
-                 strokeLinecap="round"
-                 strokeLinejoin="round"
-                 strokeWidth={2}
-                 d="M15 19l-7-7 7-7"
-               />
-             </svg>
-           </button>
-         )}
+          {/* Navigation Arrows */}
+          {hasPrev && (
+            <button
+              onClick={onPrev}
+              className="absolute left-2 sm:left-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
+              aria-label="Previous Video"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 sm:h-8 sm:w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+          )}
 
-         {hasNext && (
-           <button
-             onClick={onNext}
-             className="absolute right-2 sm:right-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
-             aria-label="Next Video"
-           >
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               className="h-6 w-6 sm:h-8 sm:w-8"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
-             >
-               <path
-                 strokeLinecap="round"
-                 strokeLinejoin="round"
-                 strokeWidth={2}
-                 d="M9 5l7 7-7 7"
-               />
-             </svg>
-           </button>
-         )}
-       </div>
+          {hasNext && (
+            <button
+              onClick={onNext}
+              className="absolute right-2 sm:right-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
+              aria-label="Next Video"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 sm:h-8 sm:w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
 
-       {/* Footer */}
-       <div className="bg-gray-900 text-white p-2 sm:p-3 text-xs sm:text-sm rounded-b-lg">
-         <div className="flex justify-between items-center">
-           <span>Duration: {video.duration}</span>
-           <span>Video ID: {video.id}</span>
-         </div>
-       </div>
-     </div>
-   </div>
- );
+        {/* Footer */}
+        <div className="bg-gray-900 text-white p-2 sm:p-3 text-xs sm:text-sm rounded-b-lg">
+          <div className="flex justify-between items-center">
+            <span>Duration: {video.duration}</span>
+            <span>Video ID: {video.id}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 function VideoPage() {
@@ -334,50 +331,46 @@ function VideoPage() {
   const nextVideo = useCallback(() => {
     setSelectedVideoIndex((prevIndex) => {
       if (prevIndex === null || prevIndex >= videoData.length - 1) {
-        return prevIndex; // Stay on last or if null
+        return prevIndex;
       }
       return prevIndex + 1;
     });
-  }, []); // No dependencies needed if using functional update
+  }, []);
 
   const prevVideo = useCallback(() => {
     setSelectedVideoIndex((prevIndex) => {
       if (prevIndex === null || prevIndex <= 0) {
-        return prevIndex; // Stay on first or if null
+        return prevIndex;
       }
       return prevIndex - 1;
     });
-  }, []); // No dependencies needed if using functional update
+  }, []);
 
   const hasNext = selectedVideoIndex !== null && selectedVideoIndex < videoData.length - 1;
   const hasPrev = selectedVideoIndex !== null && selectedVideoIndex > 0;
   const selectedVideo = selectedVideoIndex !== null ? videoData[selectedVideoIndex] : null;
 
-  // --- CHANGE IS HERE ---
-  // Increased top padding from pt-4 to pt-24 (or adjust as needed based on navbar height)
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-      {/* --- END OF CHANGE --- */}
-
-      <div className="max-w-7xl mx-auto"> {/* Removed mt-12 sm:mt-16 here as padding is now on main */}
+      <div className="max-w-7xl mx-auto">
         {/* Page Heading */}
         <div className="mb-8 sm:mb-10 text-center">
-        <motion.h2 
-        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        id="products-heading" 
-      >
-        Video <span className="text-green-600">Gallery</span>
-      </motion.h2>
-      <motion.div 
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
-      />
+          <motion.h2 
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            id="products-heading" 
+          >
+            Video <span className="text-green-600">Gallery</span>
+          </motion.h2>
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+          />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of high-quality videos
           </p>
@@ -392,7 +385,6 @@ function VideoPage() {
       </div>
 
       {/* Video Modal */}
-      {/* Conditionally render modal to ensure video element is fresh */}
       {selectedVideo && (
         <VideoModal
           video={selectedVideo}
