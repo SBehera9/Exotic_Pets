@@ -30,7 +30,7 @@ const FooterSection = () => {
               />
             </div>
             <p className="text-gray-300 text-center md:text-left text-sm leading-relaxed">
-              Your trusted source for exotic pets and premium pet care products since 2010.
+              Your trusted source for exotic pets and premium pet care products since 2020.
             </p>
           </div>
 
