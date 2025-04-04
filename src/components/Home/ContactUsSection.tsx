@@ -19,7 +19,6 @@ const ContactUsSection = () => {
       viewport={{ once: true }}
     >
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
         <motion.div
           className="text-center mb-8 sm:mb-12"
           initial={{ y: -30, opacity: 0 }}
@@ -41,7 +40,6 @@ const ContactUsSection = () => {
           </p>
         </motion.div>
 
-        {/* Contact Information Cards */}
         <motion.div
           className="grid grid-cols-2 gap-3 sm:gap-6"
           initial={{ opacity: 0, y: 30 }}
@@ -49,7 +47,6 @@ const ContactUsSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {/* Address */}
           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 sm:p-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="bg-green-100 p-2 sm:p-3 rounded-full mb-3">
               <FontAwesomeIcon icon="map-marker-alt" className="text-green-600 w-4 h-4 sm:w-5 sm:h-5" />
@@ -60,7 +57,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Phone */}
           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 sm:p-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="bg-green-100 p-2 sm:p-3 rounded-full mb-3">
               <FontAwesomeIcon icon="phone" className="text-green-600 w-4 h-4 sm:w-5 sm:h-5" />
@@ -72,7 +68,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 sm:p-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="bg-green-100 p-2 sm:p-3 rounded-full mb-3">
               <FontAwesomeIcon icon="envelope" className="text-green-600 w-4 h-4 sm:w-5 sm:h-5" />
@@ -84,7 +79,6 @@ const ContactUsSection = () => {
             </div>
           </div>
 
-          {/* Business Hours */}
           <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4 sm:p-6 flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="bg-green-100 p-2 sm:p-3 rounded-full mb-3">
               <FontAwesomeIcon icon="clock" className="text-green-600 w-4 h-4 sm:w-5 sm:h-5" />

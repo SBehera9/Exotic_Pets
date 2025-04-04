@@ -15,7 +15,6 @@ interface Product {
   quantity?: number;
 }
 
-// Helper function to get cart items from localStorage
 const getCartItems = (): Product[] => {
   if (typeof window === "undefined") return [];
   try {

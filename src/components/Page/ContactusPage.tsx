@@ -40,7 +40,6 @@ function ContactUsPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Image Section - Order first on mobile, second on desktop */}
           <motion.div 
               whileHover={{ scale: 1.02 }}
               className="relative w-full h-96 lg:h-auto rounded-2xl overflow-hidden shadow-lg order-first lg:order-last"
@@ -64,7 +63,6 @@ function ContactUsPage() {
               </div>
             </motion.div>
 
-          {/* Contact Section - Order second on mobile, first on desktop */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 order-last lg:order-first"

@@ -212,7 +212,6 @@ const VideoModal: React.FC<VideoModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col">
-        {/* Header */}
         <div className="flex justify-between items-center bg-gray-900 text-white p-3 sm:p-4 rounded-t-lg">
           <div>
             <h2 className="text-lg sm:text-xl font-bold line-clamp-1">{video.title}</h2>
@@ -245,7 +244,6 @@ const VideoModal: React.FC<VideoModalProps> = ({
           </div>
         </div>
 
-        {/* Video Content */}
         <div className="relative flex-grow bg-black flex items-center justify-center">
           <video
             controls
@@ -257,7 +255,6 @@ const VideoModal: React.FC<VideoModalProps> = ({
             Your browser does not support the video tag.
           </video>
 
-          {/* Navigation Arrows */}
           {hasPrev && (
             <button
               onClick={onPrev}
@@ -305,7 +302,6 @@ const VideoModal: React.FC<VideoModalProps> = ({
           )}
         </div>
 
-        {/* Footer */}
         <div className="bg-gray-900 text-white p-2 sm:p-3 text-xs sm:text-sm rounded-b-lg">
           <div className="flex justify-between items-center">
             <span>Duration: {video.duration}</span>
@@ -353,7 +349,6 @@ function VideoPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Page Heading */}
         <div className="mb-8 sm:mb-10 text-center">
           <motion.h2 
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
@@ -376,7 +371,6 @@ function VideoPage() {
           </p>
         </div>
 
-        {/* Video Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {videoData.map((video, index) => (
             <VideoCard key={video.id} video={video} onClick={openModal} index={index} />
@@ -384,7 +378,6 @@ function VideoPage() {
         </div>
       </div>
 
-      {/* Video Modal */}
       {selectedVideo && (
         <VideoModal
           video={selectedVideo}
