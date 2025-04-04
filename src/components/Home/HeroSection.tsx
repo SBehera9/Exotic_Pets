@@ -22,7 +22,7 @@ const HeroSection = () => {
                 setDirection(1);
                 setCurrentImage((prev) => (prev + 1) % images.length);
             }
-        }, 3000);
+        }, 2500);
 
         return () => clearInterval(interval);
     }, [isHovering, isAnimating]);
@@ -181,7 +181,7 @@ const HeroSection = () => {
                         variants={itemVariants}
                         className="text-base sm:text-lg md:text-xl text-gray-100 max-w-md sm:max-w-lg md:max-w-xl mx-auto leading-relaxed"
                     >
-                        Discover the world`&apos;`s most <span className="text-green-300 font-medium">rare and beautiful</span> pets, carefully curated for discerning owners.
+                        Discover the world&apos;s most <span className="text-green-300 font-medium">rare and beautiful</span> pets, carefully curated for discerning owners.
                     </motion.p>
                 </motion.div>
             </div>

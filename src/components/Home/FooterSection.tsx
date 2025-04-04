@@ -22,7 +22,7 @@ const FooterSection = () => {
           <div className="flex flex-col items-center md:items-start">
             <div className="mb-4">
               <Image
-                src="/logo.png"
+                src="/Logo.png"
                 alt="Exotic Pets Logo"
                 width={160}
                 height={160}
