@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -9,6 +10,7 @@ import {
   Bars3Icon,
 } from "@heroicons/react/24/outline";
 import BuyNowForm from "../Home/BuyNowForm";
+
 
 interface CartItem {
   id: number;
@@ -26,6 +28,8 @@ const Navbar: React.FC = () => {
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -184,7 +188,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {menuOpen && (
-          <div className={`md:hidden absolute top-full left-0 w-full ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-green-500 to-green-600'} rounded-b-lg overflow-hidden z-50 animate-slideDown`}>
+          <div className={`md:hidden absolute top-full left-0 w-full ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-green-600 to-white'} rounded-b-lg overflow-hidden z-50 animate-slideDown`}>
             <div className="flex flex-col items-stretch py-2 px-4">
               <Link
                 href="/"
@@ -244,7 +248,9 @@ const Navbar: React.FC = () => {
                             <p className="mt-1 text-gray-500">Start adding some products to your cart</p>
                             <div className="mt-6">
                               <button
-                                onClick={() => setCartOpen(false)}
+                                onClick={() => {setCartOpen(false);
+                                  router.push("/productss");
+                                }}
                                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700"
                               >
                                 Continue Shopping
@@ -328,7 +334,9 @@ const Navbar: React.FC = () => {
                         </div>
                         <div className="mt-4 flex justify-center text-sm text-gray-500">
                           <button
-                            onClick={() => setCartOpen(false)}
+                            onClick={() => {setCartOpen(false);
+                              router.push("/productss");
+                            }}
                             className="text-green-600 font-medium hover:text-green-500 cursor-pointer"
                           >
                             Continue Shopping
