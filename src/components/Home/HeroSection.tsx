@@ -56,7 +56,7 @@ const HeroSection = () => {
                     transition={springTransition}
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{
-                        backgroundImage: `url(${images[currentImage]})`,
+                        backgroundImage: url(${images[currentImage]}),
                         backgroundAttachment: 'fixed',
                     }}
                 >
@@ -94,18 +94,18 @@ const HeroSection = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="mt-12 flex flex-row items-center justify-center gap-4"
                     >
-                    <button className="relative px-10 py-4 bg-gradient-to-r from-white to-green-600 text-green-900 font-semibold rounded-full hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 group overflow-hidden">
-                        <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                    <button className="relative px-7 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-white to-green-600 text-green-900 font-semibold rounded-full hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 group overflow-hidden">
+                        <span className="relative z-10 group-hover:text-white transition-colors duration-300 text-[10px] sm:text-[17px]">
                             Browse Collection
                         </span>
                         <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                         <span className="absolute top-0 left-0 w-full h-0.5 bg-white/30 group-hover:h-full group-hover:bg-white/10 transition-all duration-700 origin-bottom"></span>
                     </button>
 
-                        <button className="flex items-center gap-2 px-8 py-4 bg-transparent text-white font-medium rounded-full border-2 border-white/30 hover:border-white/50 hover:bg-white/10 transition-all duration-300 group">
-                            <span>How It Works</span>
+                        <button className="flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 bg-transparent text-white font-medium rounded-full border-2 border-white/30 hover:border-white/50 hover:bg-white/10 transition-all duration-300 group">
+                            <span className="text-[10px] sm:text-[17px]">How It Works</span>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
@@ -120,7 +120,7 @@ const HeroSection = () => {
                         <button
                             key={i}
                             onClick={() => navigate(i > currentImage ? 1 : -1)}
-                            className={`h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'w-8 bg-green-400' : 'w-4 bg-white/30 hover:bg-white/50'}`}
+                            className={h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'w-8 bg-green-400' : 'w-4 bg-white/30 hover:bg-white/50'}}
                         />
                     ))}
                 </div>

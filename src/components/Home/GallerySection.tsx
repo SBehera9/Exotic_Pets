@@ -147,7 +147,7 @@ const GallerySection = () => {
               />
               
               <AnimatePresence>
-                {isHovering === index && (
+                {isHovering === index && selectedIndex === null && (  // <-- Hide when modal is open
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4"
                     initial={{ opacity: 0 }}
@@ -248,19 +248,7 @@ const GallerySection = () => {
               </button>
 
               <div className="absolute bottom-6 left-0 right-0 text-center">
-                <div className="inline-flex items-center bg-black/50 text-white text-sm sm:text-base px-4 py-2 rounded-full backdrop-blur-sm">
-                  <span className="font-medium">
-                    {filteredImages[selectedIndex].alt}
-                  </span>
-                  {filteredImages[selectedIndex].category && (
-                    <span className="mx-2">•</span>
-                  )}
-                  {filteredImages[selectedIndex].category && (
-                    <span className="text-green-300">
-                      {filteredImages[selectedIndex].category}
-                    </span>
-                  )}
-                </div>
+                
                 <div className="mt-2 text-white/80 text-sm">
                   {selectedIndex + 1} / {filteredImages.length}
                 </div>
