@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Image from "next/image";
-import { Share2, ShoppingCart, CheckCircle } from "lucide-react"; // Added CheckCircle
+import { Share2, ShoppingCart, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Product {
@@ -17,7 +17,7 @@ interface Product {
 
 // Helper function to get cart items from localStorage
 const getCartItems = (): Product[] => {
-  if (typeof window === "undefined") return []; // Guard against SSR
+  if (typeof window === "undefined") return [];
   try {
     const cartString = localStorage.getItem("cart");
     return cartString ? JSON.parse(cartString) : [];
@@ -31,7 +31,6 @@ const ProductPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [productsToDisplay, setProductsToDisplay] = useState<Product[]>([]);
   const [isClient, setIsClient] = useState(false);
-  // --- New State: Store IDs of items currently in the cart ---
   const [cartItemIds, setCartItemIds] = useState<Set<number>>(new Set());
 
   const PRODUCT_DATA = useMemo(() => ({
@@ -70,49 +69,41 @@ const ProductPage: React.FC = () => {
     ...PRODUCT_DATA.fish
   ], [PRODUCT_DATA]);
 
-  // --- New Function: Update the set of cart item IDs ---
-  const updateCartStatus = () => {
+  const updateCartStatus = useCallback(() => {
     if (!isClient) return;
     const currentCart = getCartItems();
     const idsInCart = new Set(currentCart.map(item => item.id));
     setCartItemIds(idsInCart);
-  };
+  }, [isClient]);
 
   useEffect(() => {
-    // This effect now runs only once on mount to set isClient
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    // This effect depends on isClient and updates cart status initially
-    // and sets up the listener
     if (isClient) {
-        updateCartStatus(); // Initial check
-        window.addEventListener('cartUpdated', updateCartStatus);
+      updateCartStatus();
+      window.addEventListener('cartUpdated', updateCartStatus);
 
-        // Cleanup listener on component unmount
-        return () => {
-            window.removeEventListener('cartUpdated', updateCartStatus);
-        };
+      return () => {
+        window.removeEventListener('cartUpdated', updateCartStatus);
+      };
     }
-  }, [isClient]); // Depend on isClient
+  }, [isClient, updateCartStatus]);
 
   useEffect(() => {
-    // Filter products based on category
     if (selectedCategory === "all") {
       setProductsToDisplay(ALL_PRODUCTS);
     } else if (selectedCategory === "petFood") {
-       setProductsToDisplay(
+      setProductsToDisplay(
         ALL_PRODUCTS.filter((p): p is Product => p.category === "petFood")
       );
-    }
-    else {
+    } else {
       setProductsToDisplay(
         ALL_PRODUCTS.filter((p): p is Product => p.category === selectedCategory && p.category !== "petFood")
       );
     }
   }, [selectedCategory, ALL_PRODUCTS]);
-
 
   const filterCategory = (category: string) => {
     setSelectedCategory(category);
@@ -121,35 +112,28 @@ const ProductPage: React.FC = () => {
   const addToCart = (product: Product) => {
     if (!isClient) return;
 
-    // --- Prevent adding if already in cart ---
     if (cartItemIds.has(product.id)) {
-        console.log("Item already in cart");
-        return; // Do nothing if already in cart
+      console.log("Item already in cart");
+      return;
     }
 
     try {
-      const cart = getCartItems(); // Use helper
-      // No need to check for existingItem here anymore if the button is disabled,
-      // but keeping it doesn't hurt (belt and suspenders)
+      const cart = getCartItems();
       const existingItem = cart.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // This case shouldn't be reachable if the button is disabled,
-        // but handle it just in case
-         existingItem.quantity = (existingItem.quantity || 1) + 1;
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
       } else {
         cart.push({ ...product, quantity: 1 });
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-      window.dispatchEvent(new Event("cartUpdated")); // This will trigger updateCartStatus
+      window.dispatchEvent(new Event("cartUpdated"));
 
-      // Provide visual feedback (optional, as button state changes now)
       const button = document.getElementById(`add-to-cart-${product.id}`);
       if (button) {
-        button.classList.add("bg-green-700"); // Quick flash
+        button.classList.add("bg-green-700");
         setTimeout(() => {
-          // The button style will update based on the new cart state anyway
           button.classList.remove("bg-green-700");
         }, 300);
       }
@@ -160,10 +144,9 @@ const ProductPage: React.FC = () => {
   };
 
   const shareProduct = async (product: Product) => {
-    // ... (shareProduct logic remains the same)
     if (!isClient) return;
 
-    const productUrl = `${window.location.origin}/product/${product.id}`; // Adjust if you have actual product pages
+    const productUrl = `${window.location.origin}/product/${product.id}`;
     const shareText = `🛒 Check out this product: ${product.name} \n💰 Price: Rs. ${product.price} \n📄 ${product.description} \n🔗 ${productUrl}`;
 
     try {
@@ -174,21 +157,16 @@ const ProductPage: React.FC = () => {
           url: productUrl,
         });
       } else {
-        // Fallback for browsers without navigator.share (e.g., desktop)
         const encodedText = encodeURIComponent(shareText);
         const whatsappUrl = `https://wa.me/?text=${encodedText}`;
-        // Or prompt user to copy
-        // await navigator.clipboard.writeText(shareText);
-        // alert('Link copied to clipboard! You can paste it in your app.');
-        window.open(whatsappUrl, "_blank"); // Open WhatsApp Web/Desktop
+        window.open(whatsappUrl, "_blank");
       }
     } catch (error) {
       console.error("Error sharing:", error);
-      // Avoid alerting for AbortError if the user cancels the share dialog
       if (error instanceof DOMException && error.name === 'AbortError') {
-          console.log('Share action cancelled by user.');
+        console.log('Share action cancelled by user.');
       } else {
-          alert("Failed to share product.");
+        alert("Failed to share product.");
       }
     }
   };
@@ -215,10 +193,10 @@ const ProductPage: React.FC = () => {
         Our <span className="text-green-600">Products</span>
       </motion.h2>
       <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+        className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
       />
 
       <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
@@ -242,76 +220,74 @@ const ProductPage: React.FC = () => {
       {productsToDisplay.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productsToDisplay.map((product) => {
-             // --- Check if this product is in the cart ---
-             const isInCart = isClient && cartItemIds.has(product.id);
+            const isInCart = isClient && cartItemIds.has(product.id);
 
-             return (
-                <motion.div
-                  key={product.id}
-                  className="border border-gray-200 rounded-xl shadow-md bg-white flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="h-48 md:h-56 w-full relative">
-                    <Image
-                      src={product.imageUrl}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={product.id <= 4} // Adjust priority as needed
-                    />
-                  </div>
+            return (
+              <motion.div
+                key={product.id}
+                className="border border-gray-200 rounded-xl shadow-md bg-white flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="h-48 md:h-56 w-full relative">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={product.id <= 4}
+                  />
+                </div>
 
-                  <div className="flex flex-col flex-grow p-4">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
-                        {product.name}
-                      </h3>
-                      <button
-                        onClick={() => shareProduct(product)}
-                        className="p-1 text-gray-500 hover:text-green-600 transition-colors"
-                        aria-label="Share product"
-                      >
-                        <Share2 size={18} />
-                      </button>
-                    </div>
-
-                    <p className="text-green-600 font-bold text-lg mb-2">
-                      Rs. {product.price.toLocaleString()}
-                    </p>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {product.description}
-                    </p>
-
+                <div className="flex flex-col flex-grow p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
+                      {product.name}
+                    </h3>
                     <button
-                      id={`add-to-cart-${product.id}`}
-                      onClick={() => addToCart(product)}
-                      // --- Conditionally disable and style the button ---
-                      disabled={isInCart}
-                      className={`mt-auto flex items-center justify-center gap-2 w-full font-medium py-2 rounded-lg transition-all duration-200 text-white ${
-                        isInCart
-                          ? 'bg-gray-400 cursor-not-allowed' // Disabled style
-                          : 'bg-green-600 hover:bg-green-700' // Enabled style
-                      }`}
-                      aria-live="polite" // Announce changes for screen readers
+                      onClick={() => shareProduct(product)}
+                      className="p-1 text-gray-500 hover:text-green-600 transition-colors"
+                      aria-label="Share product"
                     >
-                      {isInCart ? (
-                        <>
-                          <CheckCircle size={18} /> In Cart
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingCart size={18} /> Add to Cart
-                        </>
-                      )}
+                      <Share2 size={18} />
                     </button>
                   </div>
-                </motion.div>
+
+                  <p className="text-green-600 font-bold text-lg mb-2">
+                    Rs. {product.price.toLocaleString()}
+                  </p>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    {product.description}
+                  </p>
+
+                  <button
+                    id={`add-to-cart-${product.id}`}
+                    onClick={() => addToCart(product)}
+                    disabled={isInCart}
+                    className={`mt-auto flex items-center justify-center gap-2 w-full font-medium py-2 rounded-lg transition-all duration-200 text-white ${
+                      isInCart
+                        ? 'bg-gray-400 cursor-not-allowed'
+                        : 'bg-green-600 hover:bg-green-700'
+                    }`}
+                    aria-live="polite"
+                  >
+                    {isInCart ? (
+                      <>
+                        <CheckCircle size={18} /> In Cart
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart size={18} /> Add to Cart
+                      </>
+                    )}
+                  </button>
+                </div>
+              </motion.div>
             );
-        })}
+          })}
         </div>
       ) : (
         <motion.div

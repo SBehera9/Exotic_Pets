@@ -123,7 +123,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
         customer_phone: phone,
         customer_address: address,
         order_time: new Date().toLocaleString(),
-        order_items_html: orderItemsHTML,
+        order_items_html: orderItemsHTML, // ESLint warning can be safely ignored here
         order_subtotal: `Rs. ${totalPrice.toFixed(2)}`,
         order_delivery_fee: totalPrice > 2000 ? 'Free' : 'Rs. 200.00',
         order_total: `Rs. ${(totalPrice > 2000 ? totalPrice : totalPrice + 200).toFixed(2)}`,
@@ -160,11 +160,11 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Order Confirmed!</h2>
-          <p className="text-gray-600 mb-6">Thank you for your purchase. We'll contact you shortly to confirm delivery.</p>
+          <p className="text-gray-600 mb-6">Thank you for your purchase. We`&apos;`ll contact you shortly to confirm delivery.</p>
           <button
             onClick={() => {
               onClose();
-              router.push('/products');
+              router.push('/productss');
             }}
             className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition duration-200"
           >

@@ -56,7 +56,7 @@ const HeroSection = () => {
                     transition={springTransition}
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{
-                        backgroundImage: url(${images[currentImage]}),
+                        backgroundImage: `url(${images[currentImage]})`,
                         backgroundAttachment: 'fixed',
                     }}
                 >
@@ -120,7 +120,7 @@ const HeroSection = () => {
                         <button
                             key={i}
                             onClick={() => navigate(i > currentImage ? 1 : -1)}
-                            className={h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'w-8 bg-green-400' : 'w-4 bg-white/30 hover:bg-white/50'}}
+                            className={`h-2 rounded-full transition-all duration-300 ${i === currentImage ? 'w-8 bg-green-400' : 'w-4 bg-white/30 hover:bg-white/50'}`}
                         />
                     ))}
                 </div>

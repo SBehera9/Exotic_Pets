@@ -104,13 +104,13 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-white to-green-600'}}>
+      <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-white to-green-600'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <Link href="/" aria-label="Go to homepage">
                 <Image
-                  className={h-16 w-auto transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16'}}
+                  className={`h-16 w-auto transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16'}`}
                   src="/Logo.png"
                   alt="Exotic Birds"
                   width={120}
@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setCartOpen(!cartOpen)}
-                  className={relative p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}}
+                  className={`relative p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}`}
                   aria-label="Shopping cart"
                 >
                   <ShoppingCartIcon className="h-6 w-6" />
@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}}
+                className={`p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}`}
                 aria-label="Open menu"
               >
                 {menuOpen ? (
@@ -152,19 +152,19 @@ const Navbar: React.FC = () => {
             <div className="hidden md:flex items-center space-x-2">
               <Link
                 href="/"
-                className={px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}}
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}`}
               >
                 Home
               </Link>
               <Link
                 href="/productss"
-                className={px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}}
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}`}
               >
                 Products
               </Link>
               <Link
                 href="/contactuspage"
-                className={px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}}
+                className={`px-4 py-2 rounded-lg text-lg font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:bg-green-50 hover:text-green-600' : 'text-white hover:bg-white/10'}`}
               >
                 Contact Us
               </Link>
@@ -172,7 +172,7 @@ const Navbar: React.FC = () => {
               <div className="relative ml-2">
                 <button
                   onClick={() => setCartOpen(!cartOpen)}
-                  className={relative p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}}
+                  className={`relative p-2 rounded-full ${isScrolled ? 'bg-green-100 text-green-600 hover:bg-green-200' : 'bg-white/20 text-white hover:bg-white/30'}`}
                   aria-label="Shopping cart"
                 >
                   <ShoppingCartIcon className="h-6 w-6" />
@@ -188,25 +188,25 @@ const Navbar: React.FC = () => {
         </div>
 
         {menuOpen && (
-          <div className={md:hidden absolute top-full left-0 w-full ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-green-600 to-white'} rounded-b-lg overflow-hidden z-50 animate-slideDown}>
+          <div className={`md:hidden absolute top-full left-0 w-full ${isScrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-green-600 to-white'} rounded-b-lg overflow-hidden z-50 animate-slideDown`}>
             <div className="flex flex-col items-stretch py-2 px-4">
               <Link
                 href="/"
-                className={py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}}
+                className={`py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}`}
                 onClick={() => setMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/productss"
-                className={py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}}
+                className={`py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}`}
                 onClick={() => setMenuOpen(false)}
               >
                 Products
               </Link>
               <Link
                 href="/contactuspage"
-                className={py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}}
+                className={`py-3 px-4 rounded-lg text-lg font-medium ${isScrolled ? 'text-gray-700 hover:bg-green-50' : 'text-white hover:bg-white/10'}`}
                 onClick={() => setMenuOpen(false)}
               >
                 Contact Us
