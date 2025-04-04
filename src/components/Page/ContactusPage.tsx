@@ -40,9 +40,34 @@ function ContactUsPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Image Section - Order first on mobile, second on desktop */}
+          <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="relative w-full h-96 lg:h-auto rounded-2xl overflow-hidden shadow-lg order-first lg:order-last"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <Image
+                src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1925&q=80"
+                alt="Colorful exotic bird"
+                fill
+                className="object-cover w-full h-full"
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent flex items-end p-6">
+                <div>
+                  <h3 className="text-white text-2xl font-bold mb-2">Exotic Birds Paradise</h3>
+                  <p className="text-white/90">Discover the beauty of nature&apos;s most colorful creatures</p>
+                </div>
+              </div>
+            </motion.div>
+
+          {/* Contact Section - Order second on mobile, first on desktop */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
+            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 order-last lg:order-first"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -118,28 +143,6 @@ function ContactUsPage() {
                     <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
                   </svg>
                 </a>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="relative h-full min-h-96 rounded-2xl overflow-hidden shadow-lg"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1925&q=80"
-              alt="Colorful exotic bird"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent flex items-end p-6">
-              <div>
-                <h3 className="text-white text-2xl font-bold mb-2">Exotic Birds Paradise</h3>
-                <p className="text-white/90">Discover the beauty of nature&apos;s most colorful creatures</p>
               </div>
             </div>
           </motion.div>

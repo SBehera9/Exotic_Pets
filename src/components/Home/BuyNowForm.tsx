@@ -142,7 +142,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
         localStorage.removeItem("cart");
         window.dispatchEvent(new Event("cartUpdated"));
         onClose();
-        router.push('/products');
+        router.push('/productss');
       }, 1500);
     } catch (error) {
       console.error("Email sending error:", error);
@@ -276,7 +276,7 @@ const BuyNowForm: NextPage<BuyNowFormProps> = ({
                   setErrors({...errors, firstName: ''});
                 }}
                 className={`w-full border ${errors.firstName ? 'border-red-400' : 'border-gray-300'} rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition shadow-sm`}
-                placeholder="John Doe"
+                placeholder="Enter Name"
               />
               {errors.firstName && (
                 <p className="text-red-500 text-xs mt-1.5 flex items-center">
