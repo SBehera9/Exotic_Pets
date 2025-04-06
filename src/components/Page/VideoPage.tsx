@@ -1,397 +1,613 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { X, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
+import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import Image from 'next/image';
-import { motion } from "framer-motion";
 
-interface Video {
+type VideoItem = {
   id: number;
+  src: string;
+  thumbnail: string;
   title: string;
-  thumbnailUrl: string;
-  videoUrl: string;
-  views?: string;
-  duration?: string;
-  category?: string;
-}
+  duration: string;
+  views: string;
+};
 
-const videoData: Video[] = [
+const videoData: VideoItem[] = [
   {
     id: 1,
-    title: 'Amazing Nature',
-    thumbnailUrl: '/thumbnails/nature.jpg',
-    videoUrl: '/videos/Bird.mp4',
-    views: '1.2M views',
-    duration: '4:32',
-    category: 'Nature'
+    src: '/video/Dog.mp4',
+    thumbnail: '/thumbnails/dog.jpg',
+    title: 'Happy Puppy Playtime',
+    duration: '0:32',
+    views: '1.2M'
   },
   {
     id: 2,
-    title: 'Space Exploration',
-    thumbnailUrl: '/thumbnails/space.jpg',
-    videoUrl: '/videos/Bird1.mp4',
-    views: '856K views',
-    duration: '8:15',
-    category: 'Science'
+    src: '/video/Cat.mp4',
+    thumbnail: '/thumbnails/cat.jpg',
+    title: 'Curious Kitten Adventures',
+    duration: '0:28',
+    views: '890K'
   },
   {
     id: 3,
-    title: 'Cooking Delights',
-    thumbnailUrl: '/thumbnails/cooking.jpg',
-    videoUrl: '/videos/Cat.mp4',
-    views: '3.4M views',
-    duration: '12:45',
-    category: 'Food'
+    src: '/video/Bird.mp4',
+    thumbnail: '/thumbnails/bird.jpg',
+    title: 'Colorful Parrot Singing',
+    duration: '0:45',
+    views: '2.4M'
   },
   {
     id: 4,
-    title: 'Tech Review',
-    thumbnailUrl: '/thumbnails/tech.jpg',
-    videoUrl: '/videos/dog.mp4',
-    views: '2.1M views',
-    duration: '9:22',
-    category: 'Technology'
+    src: '/video/Fish.mp4',
+    thumbnail: '/thumbnails/fish.jpg',
+    title: 'Aquarium Relaxation',
+    duration: '1:15',
+    views: '1.8M'
   },
   {
     id: 5,
-    title: 'Travel Vlog',
-    thumbnailUrl: '/thumbnails/travel.jpg',
-    videoUrl: '/videos/Dog1.mp4',
-    views: '1.5M views',
-    duration: '15:30',
-    category: 'Travel'
+    src: '/video/Bird1.mp4',
+    thumbnail: '/thumbnails/bird1.jpg',
+    title: 'Eagle Soaring',
+    duration: '0:52',
+    views: '3.1M'
   },
   {
     id: 6,
-    title: 'Gaming Highlights',
-    thumbnailUrl: '/thumbnails/gaming.jpg',
-    videoUrl: '/videos/Fish.mp4',
-    views: '4.7M views',
-    duration: '22:18',
-    category: 'Gaming'
+    src: '/video/Dog1.mp4',
+    thumbnail: '/thumbnails/dog1.jpg',
+    title: 'Golden Retriever Beach Day',
+    duration: '0:38',
+    views: '2.7M'
   },
   {
     id: 7,
-    title: 'DIY Projects',
-    thumbnailUrl: '/thumbnails/diy.jpg',
-    videoUrl: '/videos/diy.mp4',
-    views: '756K views',
-    duration: '18:42',
-    category: 'DIY'
+    src: '/video/Cat1.mp4',
+    thumbnail: '/thumbnails/cat1.jpg',
+    title: 'Sleepy Cat Nap',
+    duration: '1:05',
+    views: '1.5M'
   },
   {
     id: 8,
-    title: 'Music Performance',
-    thumbnailUrl: '/thumbnails/music.jpg',
-    videoUrl: '/videos/music.mp4',
-    views: '5.3M views',
-    duration: '3:56',
-    category: 'Music'
+    src: '/video/Fish1.mp4',
+    thumbnail: '/thumbnails/fish1.jpg',
+    title: 'Coral Reef Exploration',
+    duration: '1:30',
+    views: '2.1M'
   },
   {
     id: 9,
-    title: 'Science Experiments',
-    thumbnailUrl: '/thumbnails/science.jpg',
-    videoUrl: '/videos/science.mp4',
-    views: '2.8M views',
-    duration: '11:24',
-    category: 'Science'
+    src: '/video/Dog2.mp4',
+    thumbnail: '/thumbnails/dog2.jpg',
+    title: 'Border Collie Herding',
+    duration: '0:45',
+    views: '3.5M'
   },
   {
     id: 10,
-    title: 'Art Tutorial',
-    thumbnailUrl: '/thumbnails/art.jpg',
-    videoUrl: '/videos/art.mp4',
-    views: '1.1M views',
-    duration: '25:10',
-    category: 'Art'
+    src: '/video/Bird2.mp4',
+    thumbnail: '/thumbnails/bird2.jpg',
+    title: 'Hummingbird Feeding',
+    duration: '0:40',
+    views: '1.9M'
   },
   {
     id: 11,
-    title: 'Fitness Workout',
-    thumbnailUrl: '/thumbnails/fitness.jpg',
-    videoUrl: '/videos/fitness.mp4',
-    views: '3.2M views',
-    duration: '32:45',
-    category: 'Fitness'
+    src: '/video/Cat2.mp4',
+    thumbnail: '/thumbnails/cat2.jpg',
+    title: 'Playful Kittens',
+    duration: '0:50',
+    views: '2.8M'
   },
   {
     id: 12,
-    title: 'Movie Trailer',
-    thumbnailUrl: '/thumbnails/movie.jpg',
-    videoUrl: '/videos/movie.mp4',
-    views: '8.9M views',
-    duration: '2:30',
-    category: 'Entertainment'
+    src: '/video/Fish2.mp4',
+    thumbnail: '/thumbnails/fish2.jpg',
+    title: 'Deep Sea Creatures',
+    duration: '1:20',
+    views: '1.7M'
   },
 ];
 
-interface VideoCardProps {
-  video: Video;
-  onClick: (video: Video, index: number) => void;
-  index: number;
-}
+const VideoPage = () => {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isHoveringControls, setIsHoveringControls] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const controlsAnim = useAnimationControls();
 
-const VideoCard: React.FC<VideoCardProps> = ({ video, onClick, index }) => {
-  return (
-    <div
-      className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
-      onClick={() => onClick(video, index)}
-    >
-      <div className="relative w-full aspect-video">
-        <Image
-          src={video.thumbnailUrl}
-          alt={video.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-          <div className="text-white">
-            <h3 className="font-semibold text-sm sm:text-base line-clamp-2">{video.title}</h3>
-            <div className="flex justify-between items-center mt-1 sm:mt-2 text-xs sm:text-sm">
-              <span className="bg-green-600 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">{video.category}</span>
-              <span className="bg-black/70 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">{video.duration}</span>
-            </div>
-          </div>
-        </div>
-        <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-1.5 py-0.5 rounded">
-          {video.views}
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 sm:h-8 sm:w-8 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || selectedIndex === null) return;
 
-interface VideoModalProps {
-  video: Video | null;
-  onClose: () => void;
-  onNext: () => void;
-  onPrev: () => void;
-  hasNext: boolean;
-  hasPrev: boolean;
-  currentIndex: number;
-  totalVideos: number;
-}
+    const updateProgress = () => {
+      setProgress((video.currentTime / video.duration) * 100 || 0);
+    };
 
-const VideoModal: React.FC<VideoModalProps> = ({
-  video,
-  onClose,
-  onNext,
-  onPrev,
-  hasNext,
-  hasPrev,
-  currentIndex,
-  totalVideos,
-}) => {
-  if (!video) return null;
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => {
+      setIsPlaying(false);
+    };
 
-  return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-6xl max-h-[90vh] flex flex-col">
-        <div className="flex justify-between items-center bg-gray-900 text-white p-3 sm:p-4 rounded-t-lg">
-          <div>
-            <h2 className="text-lg sm:text-xl font-bold line-clamp-1">{video.title}</h2>
-            <p className="text-xs sm:text-sm text-gray-300">{video.category} • {video.views}</p>
-          </div>
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <span className="text-xs sm:text-sm text-gray-300">
-              {currentIndex + 1} / {totalVideos}
-            </span>
-            <button
-              className="p-1 sm:p-2 rounded-full hover:bg-gray-700 transition-colors"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 sm:h-6 sm:w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
+    video.addEventListener('timeupdate', updateProgress);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('ended', handleEnded);
 
-        <div className="relative flex-grow bg-black flex items-center justify-center">
-          <video
-            controls
-            autoPlay
-            className="w-full h-full object-contain"
-            key={video.id}
-          >
-            <source src={video.videoUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+    video.play().catch(error => {
+      console.log("Autoplay prevented:", error);
+      setIsPlaying(false);
+    });
+    video.muted = isMuted;
 
-          {hasPrev && (
-            <button
-              onClick={onPrev}
-              className="absolute left-2 sm:left-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
-              aria-label="Previous Video"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-          )}
+    return () => {
+      video.removeEventListener('timeupdate', updateProgress);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, [selectedIndex, isMuted]);
 
-          {hasNext && (
-            <button
-              onClick={onNext}
-              className="absolute right-2 sm:right-4 bg-black/50 hover:bg-black/70 text-white p-2 sm:p-3 rounded-full transition-colors"
-              aria-label="Next Video"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 sm:h-8 sm:w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          )}
-        </div>
+  useEffect(() => {
+    if (selectedIndex === null) return;
 
-        <div className="bg-gray-900 text-white p-2 sm:p-3 text-xs sm:text-sm rounded-b-lg">
-          <div className="flex justify-between items-center">
-            <span>Duration: {video.duration}</span>
-            <span>Video ID: {video.id}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+    const hideControls = () => {
+      if (isPlaying && !isHoveringControls && !videoRef.current?.paused) {
+        controlsAnim.start({ opacity: 0, y: 20 });
+        setShowControls(false);
+      }
+    };
 
-function VideoPage() {
-  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
+    const resetControlsTimeout = () => {
+      controlsAnim.start({ opacity: 1, y: 0 });
+      setShowControls(true);
+      if (controlsTimeout.current) {
+        clearTimeout(controlsTimeout.current);
+      }
+      if (isPlaying && !videoRef.current?.paused) {
+        controlsTimeout.current = setTimeout(hideControls, 3000);
+      }
+    };
 
-  const openModal = (video: Video, index: number) => {
-    setSelectedVideoIndex(index);
-  };
+    const modalElement = modalRef.current;
+    if (modalElement) {
+      modalElement.addEventListener('mousemove', resetControlsTimeout);
+    }
 
-  const closeModal = () => {
-    setSelectedVideoIndex(null);
+    resetControlsTimeout();
+
+    return () => {
+      if (controlsTimeout.current) {
+        clearTimeout(controlsTimeout.current);
+      }
+      if (modalElement) {
+        modalElement.removeEventListener('mousemove', resetControlsTimeout);
+      }
+    };
+  }, [isPlaying, isHoveringControls, selectedIndex, controlsAnim]);
+
+  const togglePlay = useCallback(() => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    if (videoRef.current) {
+      const newMutedState = !videoRef.current.muted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+    }
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!modalRef.current) return;
+
+    const isInFullscreen = !!document.fullscreenElement;
+
+    if (!isInFullscreen) {
+      modalRef.current.requestFullscreen?.().catch(err => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }, []);
+
+  const seek = useCallback((seconds: number) => {
+    if (!videoRef.current) return;
+    const newTime = videoRef.current.currentTime + seconds;
+    videoRef.current.currentTime = Math.max(0, Math.min(newTime, videoRef.current.duration));
+  }, []);
+
+  const closeModal = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    setSelectedIndex(null);
+    setIsPlaying(false);
+    setProgress(0);
+    setIsFullscreen(false);
+    document.body.style.overflow = 'auto';
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      }
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          seek(-5);
+          break;
+        case 'ArrowRight':
+          seek(5);
+          break;
+        case 'm':
+        case 'M':
+          toggleMute();
+          break;
+        case 'f':
+        case 'F':
+          toggleFullscreen();
+          break;
+        case 'Escape':
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            closeModal();
+          }
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, togglePlay, toggleMute, toggleFullscreen, closeModal, seek]);
+
+  const handleFullscreenChange = useCallback(() => {
+    setIsFullscreen(!!document.fullscreenElement);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, [handleFullscreenChange]);
+
+  const openModal = (index: number) => {
+    setSelectedIndex(index);
+    document.body.style.overflow = 'hidden';
+    setIsPlaying(false);
+    setProgress(0);
   };
 
   const nextVideo = useCallback(() => {
-    setSelectedVideoIndex((prevIndex) => {
-      if (prevIndex === null || prevIndex >= videoData.length - 1) {
-        return prevIndex;
-      }
-      return prevIndex + 1;
-    });
+    setSelectedIndex((prev) =>
+      prev !== null ? (prev + 1) % videoData.length : 0
+    );
   }, []);
 
   const prevVideo = useCallback(() => {
-    setSelectedVideoIndex((prevIndex) => {
-      if (prevIndex === null || prevIndex <= 0) {
-        return prevIndex;
-      }
-      return prevIndex - 1;
-    });
+    setSelectedIndex((prev) =>
+      prev !== null ? (prev - 1 + videoData.length) % videoData.length : 0
+    );
   }, []);
 
-  const hasNext = selectedVideoIndex !== null && selectedVideoIndex < videoData.length - 1;
-  const hasPrev = selectedVideoIndex !== null && selectedVideoIndex > 0;
-  const selectedVideo = selectedVideoIndex !== null ? videoData[selectedVideoIndex] : null;
+  const handleVideoClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    togglePlay();
+  }, [togglePlay]);
+
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!videoRef.current || !videoRef.current.duration) return;
+
+    const progressBar = e.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    videoRef.current.currentTime = pos * videoRef.current.duration;
+    setProgress(pos * 100);
+  }, []);
+
+  const handleControlsMouseEnter = () => {
+    setIsHoveringControls(true);
+  };
+
+  const handleControlsMouseLeave = () => {
+    setIsHoveringControls(false);
+  };
+
+  const formatTime = (time: number) => {
+    if (isNaN(time) || time === Infinity) return "0:00";
+    const totalSeconds = Math.floor(time);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
+  const getVideoDuration = (index: number | null): string => {
+    if (index === null || index < 0 || index >= videoData.length) return "0:00";
+    const video = videoRef.current;
+    if (video && video.duration && isFinite(video.duration)) {
+      return formatTime(video.duration);
+    }
+    return videoData[index].duration;
+  };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-gradient-to-b from-white to-green-50 py-12 md:py-20 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 sm:mb-10 text-center">
-          <motion.h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 text-center scroll-mt-16" 
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.h2
+            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 md:mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            id="products-heading" 
           >
             Video <span className="text-green-600">Gallery</span>
           </motion.h2>
-          <motion.div 
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
           />
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our collection of high-quality videos
+            Explore our collection of beautiful moments captured on video
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {videoData.map((video, index) => (
-            <VideoCard key={video.id} video={video} onClick={openModal} index={index} />
+            <motion.div
+              key={video.id}
+              className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer group"
+              onClick={() => openModal(index)}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="aspect-video relative">
+                <Image
+                  src={video.thumbnail}
+                  alt={video.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-between p-3 sm:p-4 pointer-events-none">
+                  <div className="flex justify-end items-start">
+                    <span className="bg-black/60 text-white text-[10px] sm:text-xs px-2 py-1 rounded flex items-center">
+                      {video.views}
+                    </span>
+                  </div>
+                  <div className="space-y-0.5">
+                    <h3 className="text-white font-bold text-xs sm:text-sm md:text-base line-clamp-2 leading-tight">
+                      {video.title}
+                    </h3>
+                    <div className="flex items-center text-green-200 text-[10px] sm:text-xs">
+                      <span>{video.duration}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/90 rounded-full flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform shadow-lg">
+                    <Play size={16} className="text-green-600 pl-1 sm:size-5" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
-      </div>
 
-      {selectedVideo && (
-        <VideoModal
-          video={selectedVideo}
-          onClose={closeModal}
-          onNext={nextVideo}
-          onPrev={prevVideo}
-          hasNext={hasNext}
-          hasPrev={hasPrev}
-          currentIndex={selectedVideoIndex || 0}
-          totalVideos={videoData.length}
-        />
-      )}
+        <AnimatePresence>
+          {selectedIndex !== null && (
+            <motion.div
+              ref={modalRef}
+              className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 px-4 backdrop-blur-sm"
+              onClick={closeModal}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ backgroundColor: isFullscreen ? 'black' : undefined }}
+            >
+              <motion.div
+                className={`relative flex items-center justify-center ${
+                  isFullscreen
+                    ? 'w-screen h-screen max-w-none max-h-none'
+                    : 'w-full max-w-6xl max-h-[90vh]'
+                }`}
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <button
+                  onClick={closeModal}
+                  className={`absolute text-white/80 hover:text-white p-1 sm:p-2 transition-all z-[60] ${
+                    isFullscreen
+                      ? 'top-4 right-4 fixed'
+                      : '-top-10 right-0 sm:top-0 sm:-right-12'
+                  }`}
+                  aria-label="Close video player"
+                >
+                  <X size={28} className="sm:size-9" />
+                </button>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevVideo();
+                  }}
+                  className={`absolute top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white p-1 sm:p-2 bg-black/30 hover:bg-black/60 rounded-full transition-all z-[55] ${
+                    isFullscreen
+                      ? 'left-4 fixed -translate-x-0'
+                      : 'left-0 -translate-x-full mx-2'
+                  }`}
+                  aria-label="Previous video"
+                >
+                  <ChevronLeft size={20} className="sm:size-8" />
+                </button>
+
+                <div className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden shadow-2xl">
+                  <video
+                    key={videoData[selectedIndex].src}
+                    ref={videoRef}
+                    className="w-full h-full object-contain cursor-pointer"
+                    controls={false}
+                    onClick={handleVideoClick}
+                    onDoubleClick={toggleFullscreen}
+                    playsInline
+                    preload="auto"
+                  >
+                    <source src={videoData[selectedIndex].src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+
+                  <AnimatePresence>
+                    {!isPlaying && showControls && (
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center bg-black/30"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            togglePlay();
+                          }}
+                          className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all"
+                        >
+                          <Play size={40} className="text-white pl-1 sm:pl-2 sm:size-[60px]" />
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 sm:p-4 pt-6 sm:pt-8 z-10"
+                    animate={controlsAnim}
+                    initial={{ opacity: 1, y: 0 }}
+                    onMouseEnter={handleControlsMouseEnter}
+                    onMouseLeave={handleControlsMouseLeave}
+                  >
+                    <div
+                      className="h-1.5 sm:h-2 bg-white/20 hover:h-2 sm:hover:h-2.5 rounded-full w-full cursor-pointer relative group mb-2 sm:mb-3 transition-all duration-200"
+                      onClick={handleSeek}
+                    >
+                      <div
+                        className="h-full bg-green-500 absolute top-0 left-0 rounded-full pointer-events-none"
+                        style={{ width: `${progress}%` }}
+                      >
+                        <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 bg-white rounded-full absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 sm:gap-4">
+                      <div className="flex items-center space-x-2 sm:space-x-4">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            togglePlay();
+                          }}
+                          className="text-white hover:text-green-300 transition-colors"
+                        >
+                          {isPlaying ? <Pause size={20} className="sm:size-6" /> : <Play size={20} className="sm:size-6" />}
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleMute();
+                          }}
+                          className="text-white hover:text-green-300 transition-colors"
+                        >
+                          {isMuted ? <VolumeX size={20} className="sm:size-6" /> : <Volume2 size={20} className="sm:size-6" />}
+                        </button>
+                        <span className="text-white text-xs sm:text-sm font-medium tabular-nums">
+                          {formatTime(videoRef.current?.currentTime ?? 0)} / {getVideoDuration(selectedIndex)}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2 sm:space-x-4">
+                        <span className="text-white text-xs sm:text-sm font-medium hidden md:block truncate max-w-[150px] lg:max-w-[300px]">
+                          {selectedIndex !== null ? videoData[selectedIndex].title : ''}
+                        </span>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
+                          className="text-white hover:text-green-300 transition-colors"
+                          aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                        >
+                          {isFullscreen ? <Minimize size={20} className="sm:size-6" /> : <Maximize size={20} className="sm:size-6" />}
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextVideo();
+                  }}
+                  className={`absolute top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white p-1 sm:p-2 bg-black/30 hover:bg-black/60 rounded-full transition-all z-[55] ${
+                    isFullscreen
+                      ? 'right-4 fixed translate-x-0'
+                      : 'right-0 translate-x-full mx-2'
+                  }`}
+                  aria-label="Next video"
+                >
+                  <ChevronRight size={20} className="sm:size-8" />
+                </button>
+
+                <div className={`absolute text-white/70 text-xs sm:text-sm whitespace-nowrap ${
+                  isFullscreen
+                    ? 'bottom-4 left-1/2 transform -translate-x-1/2 fixed'
+                    : '-bottom-8 left-1/2 transform -translate-x-1/2'
+                }`}>
+                  Video {selectedIndex !== null ? selectedIndex + 1 : 0} of {videoData.length}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </main>
   );
-}
+};
 
 export default VideoPage;
