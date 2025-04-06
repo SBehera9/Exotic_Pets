@@ -199,7 +199,8 @@ const ProductPage: React.FC = () => {
       />
 
       <div className="flex justify-start sm:justify-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
-        {categories.map(({ value, label }) => (
+     
+       {categories.map(({ value, label }) => (
           <motion.button
             key={value}
             className={`px-4 py-2 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-200 ${

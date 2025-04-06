@@ -161,7 +161,7 @@ const HeroSection = () => {
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             />
 
-            <div className="relative z-10 flex h-full flex-col items-center justify-end pb-16 sm:pb-20 md:pb-24 text-center px-4">
+            <div className="relative z-10 flex h-full flex-col items-center justify-end pb-52 md:pb-24 text-center px-4">
                 <motion.div
                     initial="hidden"
                     animate="visible"
