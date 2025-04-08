@@ -359,17 +359,17 @@ const VideoPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-green-50 py-12 md:py-20 px-4 sm:px-6">
+    <main className="min-h-screen bg-gradient-to-b from-white to-green-50 py-8 md:py-12 px-3 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 md:mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -381,24 +381,24 @@ const VideoPage = () => {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="w-32 h-1.5 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-8"
+            className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 mx-auto rounded-full mb-6"
           />
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our collection of beautiful moments captured on video
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
           {videoData.map((video, index) => (
             <motion.div
               key={video.id}
-              className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer group"
+              className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg cursor-pointer group"
               onClick={() => openModal(index)}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true, amount: 0.2 }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -3 }}
             >
               <div className="aspect-video relative">
                 <Image
@@ -406,26 +406,26 @@ const VideoPage = () => {
                   alt={video.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                  sizes="(max-width: 640px) 33vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-between p-3 sm:p-4 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-between p-2 sm:p-3 pointer-events-none">
                   <div className="flex justify-end items-start">
-                    <span className="bg-black/60 text-white text-[10px] sm:text-xs px-2 py-1 rounded flex items-center">
+                    <span className="bg-black/60 text-white text-[8px] sm:text-[10px] px-1 py-0.5 sm:px-2 sm:py-1 rounded">
                       {video.views}
                     </span>
                   </div>
                   <div className="space-y-0.5">
-                    <h3 className="text-white font-bold text-xs sm:text-sm md:text-base line-clamp-2 leading-tight">
+                    <h3 className="text-white font-bold text-[10px] sm:text-xs md:text-sm line-clamp-2 leading-tight">
                       {video.title}
                     </h3>
-                    <div className="flex items-center text-green-200 text-[10px] sm:text-xs">
+                    <div className="flex items-center text-green-200 text-[8px] sm:text-[10px]">
                       <span>{video.duration}</span>
                     </div>
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/90 rounded-full flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform shadow-lg">
-                    <Play size={16} className="text-green-600 pl-1 sm:size-5" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/90 rounded-full flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform shadow-md">
+                    <Play size={12} className="text-green-600 pl-0.5 sm:size-4" />
                   </div>
                 </div>
               </div>
@@ -437,7 +437,7 @@ const VideoPage = () => {
           {selectedIndex !== null && (
             <motion.div
               ref={modalRef}
-              className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 px-4 backdrop-blur-sm"
+              className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 px-3 sm:px-4 backdrop-blur-sm"
               onClick={closeModal}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -462,11 +462,11 @@ const VideoPage = () => {
                   className={`absolute text-white/80 hover:text-white p-1 sm:p-2 transition-all z-[60] ${
                     isFullscreen
                       ? 'top-4 right-4 fixed'
-                      : '-top-10 right-0 sm:top-0 sm:-right-12'
+                      : '-top-8 right-0 sm:top-0 sm:-right-10'
                   }`}
                   aria-label="Close video player"
                 >
-                  <X size={28} className="sm:size-9" />
+                  <X size={24} className="sm:size-8" />
                 </button>
 
                 <button
@@ -477,14 +477,14 @@ const VideoPage = () => {
                   className={`absolute top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white p-1 sm:p-2 bg-black/30 hover:bg-black/60 rounded-full transition-all z-[55] ${
                     isFullscreen
                       ? 'left-4 fixed -translate-x-0'
-                      : 'left-0 -translate-x-full mx-2'
+                      : 'left-0 -translate-x-full mx-1 sm:mx-2'
                   }`}
                   aria-label="Previous video"
                 >
-                  <ChevronLeft size={20} className="sm:size-8" />
+                  <ChevronLeft size={18} className="sm:size-7" />
                 </button>
 
-                <div className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden shadow-2xl">
+                <div className="relative aspect-video w-full rounded-lg sm:rounded-xl overflow-hidden shadow-xl">
                   <video
                     key={videoData[selectedIndex].src}
                     ref={videoRef}
@@ -512,35 +512,35 @@ const VideoPage = () => {
                             e.stopPropagation();
                             togglePlay();
                           }}
-                          className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all"
+                          className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all"
                         >
-                          <Play size={40} className="text-white pl-1 sm:pl-2 sm:size-[60px]" />
+                          <Play size={32} className="text-white pl-1 sm:pl-2 sm:size-[50px]" />
                         </button>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 sm:p-4 pt-6 sm:pt-8 z-10"
+                    className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 sm:p-3 pt-4 sm:pt-6 z-10"
                     animate={controlsAnim}
                     initial={{ opacity: 1, y: 0 }}
                     onMouseEnter={handleControlsMouseEnter}
                     onMouseLeave={handleControlsMouseLeave}
                   >
                     <div
-                      className="h-1.5 sm:h-2 bg-white/20 hover:h-2 sm:hover:h-2.5 rounded-full w-full cursor-pointer relative group mb-2 sm:mb-3 transition-all duration-200"
+                      className="h-1.5 sm:h-2 bg-white/20 hover:h-2 sm:hover:h-2.5 rounded-full w-full cursor-pointer relative group mb-1 sm:mb-2 transition-all duration-200"
                       onClick={handleSeek}
                     >
                       <div
                         className="h-full bg-green-500 absolute top-0 left-0 rounded-full pointer-events-none"
                         style={{ width: `${progress}%` }}
                       >
-                        <div className="h-2.5 w-2.5 sm:h-3 sm:w-3 bg-white rounded-full absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                        <div className="h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white rounded-full absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 sm:gap-4">
-                      <div className="flex items-center space-x-2 sm:space-x-4">
+                    <div className="flex items-center justify-between gap-2 sm:gap-3">
+                      <div className="flex items-center space-x-1 sm:space-x-3">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -548,7 +548,7 @@ const VideoPage = () => {
                           }}
                           className="text-white hover:text-green-300 transition-colors"
                         >
-                          {isPlaying ? <Pause size={20} className="sm:size-6" /> : <Play size={20} className="sm:size-6" />}
+                          {isPlaying ? <Pause size={18} className="sm:size-5" /> : <Play size={18} className="sm:size-5" />}
                         </button>
                         <button
                           onClick={(e) => {
@@ -557,14 +557,14 @@ const VideoPage = () => {
                           }}
                           className="text-white hover:text-green-300 transition-colors"
                         >
-                          {isMuted ? <VolumeX size={20} className="sm:size-6" /> : <Volume2 size={20} className="sm:size-6" />}
+                          {isMuted ? <VolumeX size={18} className="sm:size-5" /> : <Volume2 size={18} className="sm:size-5" />}
                         </button>
                         <span className="text-white text-xs sm:text-sm font-medium tabular-nums">
                           {formatTime(videoRef.current?.currentTime ?? 0)} / {getVideoDuration(selectedIndex)}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-2 sm:space-x-4">
-                        <span className="text-white text-xs sm:text-sm font-medium hidden md:block truncate max-w-[150px] lg:max-w-[300px]">
+                      <div className="flex items-center space-x-1 sm:space-x-3">
+                        <span className="text-white text-xs sm:text-sm font-medium hidden sm:block truncate max-w-[120px] md:max-w-[200px] lg:max-w-[300px]">
                           {selectedIndex !== null ? videoData[selectedIndex].title : ''}
                         </span>
                         <button
@@ -572,7 +572,7 @@ const VideoPage = () => {
                           className="text-white hover:text-green-300 transition-colors"
                           aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
                         >
-                          {isFullscreen ? <Minimize size={20} className="sm:size-6" /> : <Maximize size={20} className="sm:size-6" />}
+                          {isFullscreen ? <Minimize size={18} className="sm:size-5" /> : <Maximize size={18} className="sm:size-5" />}
                         </button>
                       </div>
                     </div>
@@ -587,17 +587,17 @@ const VideoPage = () => {
                   className={`absolute top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white p-1 sm:p-2 bg-black/30 hover:bg-black/60 rounded-full transition-all z-[55] ${
                     isFullscreen
                       ? 'right-4 fixed translate-x-0'
-                      : 'right-0 translate-x-full mx-2'
+                      : 'right-0 translate-x-full mx-1 sm:mx-2'
                   }`}
                   aria-label="Next video"
                 >
-                  <ChevronRight size={20} className="sm:size-8" />
+                  <ChevronRight size={18} className="sm:size-7" />
                 </button>
 
                 <div className={`absolute text-white/70 text-xs sm:text-sm whitespace-nowrap ${
                   isFullscreen
                     ? 'bottom-4 left-1/2 transform -translate-x-1/2 fixed'
-                    : '-bottom-8 left-1/2 transform -translate-x-1/2'
+                    : '-bottom-6 sm:-bottom-7 left-1/2 transform -translate-x-1/2'
                 }`}>
                   Video {selectedIndex !== null ? selectedIndex + 1 : 0} of {videoData.length}
                 </div>

@@ -8,10 +8,10 @@ const AboutUsSection = () => {
     const aboutUsText = `Welcome to Exotic Birds, your premier destination for rare and beautiful pets! Founded in 2020, we've grown from a small exotic bird shop to a comprehensive exotic pet emporium. Our team of passionate experts provides exceptional care for vibrant parrots, exotic reptiles, and small mammals. We're committed to responsible pet ownership through education, high-quality supplies, and a supportive community.`;
 
     const stats = [
-        { value: "14+", label: "Years Experience", icon: "🦜" },
-        { value: "5000+", label: "Happy Customers", icon: "😊" },
-        { value: "200+", label: "Exotic Species", icon: "🐍" },
-        { value: "24/7", label: "Expert Support", icon: "📞" }
+        { value: "14+", label: "Years Experience" },
+        { value: "5000+", label: "Happy Customers" },
+        { value: "200+", label: "Exotic Species" },
+        { value: "24/7", label: "Expert Support" }
     ];
 
     return (
@@ -144,9 +144,6 @@ const AboutUsSection = () => {
                                     viewport={{ once: true }}
                                     className="bg-white p-4 rounded-xl shadow-sm border border-emerald-50 hover:border-emerald-100 transition-all duration-300 hover:shadow-md group"
                                 >
-                                    <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
-                                        {stat.icon}
-                                    </div>
                                     <h4 className="font-bold text-emerald-700 text-2xl mb-1">{stat.value}</h4>
                                     <p className="text-gray-600 text-sm">{stat.label}</p>
                                 </motion.div>
