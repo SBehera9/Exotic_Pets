@@ -180,7 +180,7 @@ const ProductPage: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto py-10 px-4 bg-white min-h-screen mt-16">
+    <div className="bg-gradient-to-br from-emerald-50 to-cyan-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-16 md:mt-20">
       <motion.h2
         className="text-4xl text-center font-bold text-gray-900 mb-4 scroll-mt-16"
         initial={{ opacity: 0, y: 20 }}

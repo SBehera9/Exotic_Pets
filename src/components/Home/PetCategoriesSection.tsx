@@ -52,7 +52,7 @@ const PetCategoriesSection = () => {
   const router = useRouter();
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16 w-full">
+    <section className="bg-gradient-to-br from-emerald-50 to-cyan-50 py-12 md:py-16 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <motion.h2 

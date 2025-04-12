@@ -316,7 +316,7 @@ const VideosSection = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-white to-green-50 py-12 md:py-20 px-4 sm:px-6" id="videos">
+    <div className="bg-gradient-to-br from-emerald-50 to-cyan-50 py-12 md:py-20 px-4 sm:px-6" id="videos">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-12 md:mb-16"
