@@ -145,7 +145,7 @@ const ProductPage: React.FC = () => {
   const shareProduct = async (product: Product) => {
     if (!isClient) return;
 
-    const productUrl = `${window.location.origin}/productss/${product.id}`;
+    const productUrl = `${window.location.origin}/productss`;
     const shareText = `🛒 Check out this product: ${product.name} \n💰 Price: Rs. ${product.price} \n📄 ${product.description} \n🔗 ${productUrl}`;
 
     try {
